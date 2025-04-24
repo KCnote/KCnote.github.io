@@ -7,13 +7,22 @@ tags: [Introduction]
 ---
 
 ### G'Day Mate
-hi, mate. I'm kang.
+hi, mate. I'm kang. 
+
+### EXPERIENCE
+Library Developer Research esp. Computer Vision  
+FourthLogic Inc.  
+🗓️ 04/2020 - 08/2024    📍 18 Teheran-ro 20-gil, Gangnam
+
 
 ### EDUCATION
-Bachelor of Statistics and Economy
-University of Seoul
+Bachelor of Statistics and Economy  
+University of Seoul  
 🗓️ 03/2013 - 08/2019  📍 Seoul, Republic of Korea
 
+Master of Artificial Intelligence(NLP) (Incompleted)  
+Korea University  
+🗓️ 09/2019 - 02/2020  📍 Seoul, Republic of Korea
 
 
 ### PATENT
