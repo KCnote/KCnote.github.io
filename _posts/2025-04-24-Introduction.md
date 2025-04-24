@@ -10,8 +10,10 @@ tags: [Introduction]
 hi, mate. I'm kang. 
 
 ### EXPERIENCE
+'''
 Library Developer Research esp. Computer Vision  
 FourthLogic Inc.  
+'''
 🗓️ 04/2020 - 08/2024    📍 18 Teheran-ro 20-gil, Gangnam
 
 ➥  Developed Advanced Computer Vision Systems, esp. Match systems.  
@@ -27,18 +29,22 @@ FourthLogic Inc.
 ➥  keep coding convention
 ➥  smooth communication
 
-
+# 수치화된 정보에 대한 편향석 분석, 적은 샘플로 다량의 모수정보를 추정, 다양한 테스트, 빠른 처리 대응을 위한 코드 디자인 방식,
 
 
 
 ### EDUCATION
-Bachelor of Statistics and Economy  
+'''
+Bachelor of Statistics (Minor Economy)  
 University of Seoul  
 🗓️ 03/2013 - 08/2019  📍 Seoul, Republic of Korea
+'''
 
+'''
 Master of Artificial Intelligence(NLP) (Incompleted)  
 Korea University  
 🗓️ 09/2019 - 02/2020  📍 Seoul, Republic of Korea
+'''
 
 
 ### PATENT
@@ -60,3 +66,11 @@ Korea University
    [e.g., “Method for Detecting Geometric Pattern in Image”]  
 ➥  Korean Patent No. 10-2021-0075951   
    [e.g., “Method for Detecting Pattern in Image”]  
+
+### Key Achievement
+
+
+### PASSIONS
+
+
+
