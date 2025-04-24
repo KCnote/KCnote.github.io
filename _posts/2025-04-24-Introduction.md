@@ -14,6 +14,22 @@ Library Developer Research esp. Computer Vision
 FourthLogic Inc.  
 🗓️ 04/2020 - 08/2024    📍 18 Teheran-ro 20-gil, Gangnam
 
+➥  Developed Advanced Computer Vision Systems, esp. Match systems.  
+    Overcoming tradeoff between speed and accuracy, make it the world-wide-best high performace in terms of speed and accuracy.  
+    this model is more better than halcon, then i achieved the patent in US.
+    For instance, 300x300 learned image, 5000x5000 image needed to find, processing speed is under 5ms, over 99.9% accuracy.  
+
+➥  Designed clean, maintainable, stable, api designed, recycling systems  
+➥  parallel systems  
+➥  Data analysis perspective, bias, 
+➥  high attention to business
+➥  challenge to cleaning code systems
+➥  keep coding convention
+➥  smooth communication
+
+
+
+
 
 ### EDUCATION
 Bachelor of Statistics and Economy  
