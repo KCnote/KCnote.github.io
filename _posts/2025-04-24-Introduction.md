@@ -7,7 +7,7 @@ tags: [Introduction]
 ---
 
 ### G'Day Mate
-hi, mate. I'm kang. 
+hi, mate. I'm kang. I graduate the university of seoul, Seoul, Republic of Korea. My Major is statistics and Minor is economy. I was student council president in unversity. So i have experienced to make smooth communications and find the new best choice for members. Gathering the opinion and dicuss the issues. The difference of position with members is usually making problem to reach the result. So First I communicate my opinion of this issues and then I usually take the opinions from the middle managers who should gather their opinion from lower group. 
 
 ### EXPERIENCE
 ```
