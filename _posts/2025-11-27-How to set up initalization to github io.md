@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Who am I?"
+title: "How to set up initalization to github io?"
 date: 2025-11-27 12:00:00 +0900
-categories: [Introduction]
-tags: [Introduction]
+categories: [github]
+tags: [github]
 ---
 
 # How to set up initalization to github io
