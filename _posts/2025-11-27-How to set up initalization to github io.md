@@ -2,13 +2,18 @@
 layout: post
 title: "How to set up initalization to github io?"
 date: 2025-11-27 12:00:00 +0900
+author: kang
 categories: [github]
 tags: [github]
+pin: false
+math: true
+mermaid: true
 ---
 
 # How to set up initalization to github io
 
 * CHECK <span style="color:brown">_config.yml</span> FILE
+
 ```
 title: note blog.title
 tagline: subtitle of title
@@ -26,7 +31,6 @@ social:
   email: user@email.com
   links:
     - https://github.com/username
-
 ```
 
 * REVISE GITHUB SETTING "PAGES"
