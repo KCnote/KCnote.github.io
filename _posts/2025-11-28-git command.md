@@ -14,7 +14,7 @@ mermaid: true
 
 * CHECK <span style="color:brown">PATH</span> and <span style="color:brown">STATUS</span>
   -
-  ``` C++
+  ``` cpp
   # 'ls' = list of files in current directory
   # 'ls' -a = show with hidden files
   # 'ls' -l = show with detail of files
@@ -23,7 +23,7 @@ mermaid: true
   # 'ls -la' = 'ls -a' + 'ls -l'
   ```
 
-  ``` C++
+  ``` cpp
   # ' - '  = current directory is home directory
   # 'pwd' = show current directory
   # 'cd ..' = go to parent directory
@@ -34,7 +34,7 @@ mermaid: true
 
 * REGIST <span style="color:brown">GIT.INFO</span>
   -
-  ``` C++ 
+  ``` cpp 
   # 'git config --global user.name "WORK"' = assign the user name, in this case name is WORK
   # 'git config --global user.email "WORK@gmail.com"' = assign the user.email, in this case user email is 'WORK@gmail.com'
   # 'git config --global --list' = show current global user info
@@ -42,8 +42,10 @@ mermaid: true
 
 * COMMAND <span style="color:brown">GIT.BASH</span>
   - 
+
   * INIT, STAGING and COMMIT
-  ``` C++ Re
+
+  ``` cpp Re
   # 'git init' = make git initalization files
   # 'git version' = current git version
   # 'git status' = show current git status
@@ -55,13 +57,13 @@ mermaid: true
   ```
 
   * COMPARE BEFORE and AFTER
-  ``` C++
+  ``` cpp
   # 'git diff' = what is difference of lastest commit and now
   # 'git diff HEAD origin/main' = show what is difference between HEAD(local) and origin/main(remote)
   ```
 
   * GET BACK to the before
-  ``` C++
+  ``` cpp
   # 'git restore .' = remove the modified files right after commit
   # 'git restore --staged .' = cancel the staging
   # 'git restore hello.txt' = get hello.txt back to before unmodified
@@ -73,7 +75,7 @@ mermaid: true
   ```
 
   * BRANCH
-  ``` C++
+  ``` cpp
   # 'git branch' = confirm branch status
   # 'git branch "name"' = make branch named name
   # 'git switch "branch.name"' = switch the branch X to branch.name
@@ -82,7 +84,7 @@ mermaid: true
   ```
 
   * MANANGEMENT
-  ``` C++
+  ``` cpp
   # 'git log' = show commit history until now`
   # 'git log --oneline' = show commit history until now using brief oneline
   # 'git log --oneline --branches' = show the branches status
@@ -92,7 +94,7 @@ mermaid: true
   # 'git cherry-pick "commit hash value of other branch"' = cherry pick a specific commit
   ```
   * MANAGEMENT WITH REOMOTE
-  ``` C++
+  ``` cpp
   # 'git remote add origin "HTTPS address"' = connect remote origin
   # 'git remote -v' = show remote status
   # 'git push -u origin main' = push remote repository from local at the just first time
@@ -102,7 +104,7 @@ mermaid: true
   ```
 
   * [ADVANCED] SSH
-  ``` C++
+  ``` cpp
   # 'ssh-keygen -t ed25519 -C "user@email.com"' = generate ssh key
   # 'eval "$(ssh-agent -s)"' = automatically verify ssh system on environment valuable
   # 'ssh-add ~/.ssh/id_ed25519' = regist id_ed25519 files in RAM for verification
@@ -110,7 +112,7 @@ mermaid: true
   ```
 
   * [Extra] functions
-  ``` C++
+  ``` cpp
   # 'clear' = clear the screen of git bash
   # 'mkdir test' = make new folder, the name is 'test' folder
   # 're -r test' = remove folder of name that is test. even it will be delete all of files in 'test' folder
@@ -119,7 +121,7 @@ mermaid: true
   ```
 
   * [Extra, not command] 
-  ```C++
+  ```cpp
   # '.gitignore' file = manage files when we adjust version
   ```
 
