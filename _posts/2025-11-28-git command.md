@@ -45,7 +45,7 @@ mermaid: true
 
   * INIT, STAGING and COMMIT
 
-  ``` cpp Re
+  ``` cpp
   # 'git init' = make git initalization files
   # 'git version' = current git version
   # 'git status' = show current git status
