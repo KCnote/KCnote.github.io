@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Recursion"
-date: 2025-12-01 12:00:00 +0900
+date: 2025-11-30 12:00:00 +0900
 author: kang
 categories: [algorithm, recursion]
 tags: [algorithm, recursion]
