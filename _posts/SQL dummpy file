@@ -1,0 +1,836 @@
+---
+layout: post
+title: "LeetCode 49. Group Anagrams"
+date: 2025-12-19 00:00:00 +0900
+author: kang
+categories: [leetcode, medium]
+tags: [coding test, medium, leetcode]
+pin: false
+math: true
+mermaid: true
+---
+
+
+
+## SQL - Structured Query Language
+DataBase = set of data
+DBMS = Database management systems = It's software that manage database
+1. can access with everyone at the same time.
+2. can access tons of data
+
+DBMS        Company
+MySQL       Oracle
+MariaDB     MariaDB
+PostgreSQL  PostgreSQL
+Oracle  Oracle
+SQL Server  Microsoft
+DB2         IBM
+Access      Microsoft
+SQLite      SQLite
+
+
+Hierarchical DBMS - old
+Network DBMS 
+Relational DBMS(RDBMS) - usual, table(row, column)
+
+Standard SQL
+
+Database modeling - design the table schema -> deep understanding if we need
+Project - real to move into computer systems
+waterfall model
+1. Requirements Analysis
+2. System Design
+3. Implementation (or Coding)
+4. Integration and Testing
+5. Deployment
+6. Maintenance
+
+PK - primary key
+NN - not null
+
+
+put into database in table schemas
+
+index - when we search, for performance if there are a lot of data we use
+view - virtual table, seem like function.
+Stored Procedure - seem like function.
+
+SELECT ~ FROM ~ WHERE
+
+USE sys;
+SELECT * FROM market_db.member WHERE mem_name = '김철수';
+SELECT value_1, value_2 FROM member;
+SELECT member_id FROM member WHERE height >= 180 AND member_cnt > 6;
+SELECT member_id FROM member WHERE height >= 180 OR member_cnt > 6;
+SELECT member_id FROM member WHERE height >= 180 AND height <= 190;
+SELECT member_id FROM member WHERE height BETWEEN 180 AND 190;
+SELECT member_id FROM member WHERE addr = 'harrisdale' OR addr = 'cockburn' OR addr = 'success';
+SELECT member_id FROM member WHERE addr IN('harrisdale', 'cockburn', 'success');
+SELECT * FROM member WHERE member_name LIKE '김%';
+SELECT * FROM member WHERE member_name LIKE '__철수';
+
+aggregate functions
+SUM()
+AVG()
+MIN()
+MAX()
+COUNT()
+COUNT(DISTINCT)
+
+SELECT * FROM member WHERE height >= 160 ORDER BY member_cnt;
+SELECT * FROM member WHERE height >= 160 ORDER BY member_cnt DESC;
+SELECT * FROM member WHERE height >= 160 ORDER BY member_cnt DESC, debut_date ASC;
+SELECT * FROM member LIMIT 3;
+SELECT * FROM member WHERE height >= 160 ORDER BY member_cnt DESC, debut_date ASC LIMIT 3;
+SELECT * FROM member WHERE height >= 160 ORDER BY member_cnt DESC, debut_date ASC LIMIT 3, 2;
+SELECT DISTINCT addr FROM member;
+SELECT member_id, SUM(amount) FROM buy GROUP BY member_id;
+SELECT member_id, "member id", SUM(amount) "balance" FROM buy GROUP BY member_id;
+SELECT member_id, "member id", SUM(price*amount) "balance" FROM buy GROUP BY member_id;
+SELECT AVG(amount) FROM buy;
+SELECT member_id, AVG(amount) "average of count" FROM buy GROUP BY mem_id;
+SELECT COUNT(*) FROM member;
+SELECT COUNT(phone1) "Member with contact information" FROM member;
+SELECT member_id "member id", SUM(price*amount) "balance" FROM buy GROUP BY member_id HAVING SUM(price*amount) > 1000;
+SELECT member_id "member id", SUM(price*amount) "balance" FROM buy GROUP by member_id HAVING SUM(price*amount) > 1000 ORDER BY SUM(price*amount) DESC;
+
+SELECT mem_id, SUM(price * amount) AS total
+FROM buy
+WHERE price >= 50          -- 개별 조건
+GROUP BY mem_id
+HAVING total >= 200;       -- 집계 조건
+
+CREATE TABLE table_name (id INT, name CHAR(4));
+INSERT INTO table_name(id, name) VALUE (2, 'bugs');
+CREATE TABLE table_name(id, INT AUTO_INCREMENT PRIMARY KEY, name CHAR(4), age INT);
+ALTER TABLE table_name AUTO_INCREMENT=100;
+SET @@auto_increment_increment=3;
+INSERT INTO table_name VALUES (1, 'kim', 15);
+
+SELECT COUNT(*) FROM world.city;
+DESC word.city;
+CREATE TABLE city_popul (city_name CHAR(35), population INT);
+INSERT INTO city_popul SELECT Name, Population FROM world.city;
+
+UPDATE city_popul SET city_name = 'seoul' WHERE city_name = "Seoul";
+UPDATE city_popul SET city_name = 'new_york', population = 0 WHERE city_name = 'NewYork';
+UPDATE ciy_popul SET population = population / 10000; -> All data is updated.
+
+DELETE FROM city_popul WHERE city_name LIKE 'New%';
+DELETE FROM city_popul WHERE city_name LIKE 'New%' LIMITE 5;
+
+TINYINT, SMALLINT, INT, BIGINT
+TINYINT UNSIGNED
+
+CHAR
+VARCHAR
+
+TEXT
+LONGTEXT
+
+BLOB (Binary Long Object)
+LONGBLOB
+
+FLOAT
+DOUBLE
+
+DATE
+TIME
+DATETIME
+
+
+SET @value_name = 10;
+SET @txt = '가수 이름 ->';
+SET @txt, mem_name FROM member WHERE height > @height;
+SET @txt, mem_name FROM member WHERE height > @height LIMIT @count;
+
+SET @count = 3;
+PREPARE mySQL FROM 'SELECT mem_name, heigh FROM member ORDER BY heigh LIMIT ?';
+EXECUTE mySQL USING @count;
+
+type converstion - explicit conversion, implicit conversion.
+SELECT CAST(AVG(price) AS SIGNED) 'average of price' FROMbuy;
+SELECT CONVERT(AVG(price), SIGNED) 'average of price' FROMbuy;
+
+SELECT CAST('2022@12@12' AS DATE);
+SELECT CAST('2022%12%12' AS DATE);
+SELECT CAST('2022/12/12' AS DATE);
+SELECT CAST('2022$12$12' AS DATE);
+
+SELECT num, CONCAT(CAST(price AS CHAR), 'X', CAST(amount AS CHAR), '=') '가격x수량', price*amount '구매액' FROM buy
+
+SELECT '100' + '200';
+SELECT 1 + '2mega';
+
+
+Join Table
+-inner join
+SELECT * 
+    FROM buy INNER 
+        JOIN member 
+        ON buy.mem_id member.mem_id 
+    WHERE buy.id = 'GRL';
+
+SELECT buy.mem_id, mem_name, prod_name, addr, CONcAT(phone1, phone2) AS 'contact'
+    FROM buy
+        INNER JOIN member
+        ON buy.mem_id = member.mem_id;
+
+-outer join
+SELECT B.mem_id, M.mem_name, B.prod_name, M.addr, CONCAT(M.phone1, M.phone2)
+    FROM member M
+        LEFT OUTER JOIN buy B
+        ON M.mem_id = B.mem_id
+    ORDER BY M.mem_id;
+
+-cross join
+SELECT *
+    FROM buy
+        CROSS JOIN member;
+
+-self join
+USE employ_table;
+SELECT A.emp "employee", B.emp "Superior", B.phone "contact of superior"
+    FROM emp_table A
+        INNER JOIN emp_table B
+            ON A.manager = B.emp;
+
+-if
+DROP PROCEDURE IF EXISTS ifProc;
+DELIMITER $$
+CREATE PROCEDURE ifProc()
+BEGIN
+    IF 100 = 100 THEN
+        SELECT 'it is same';
+    END IF;
+END $$
+DELIMITER;
+CALL ifProc();
+
+-if else
+DROP PROCEDURE IF EXISTS ifProc;
+DELIMITER $$
+CREATE PROCEDURE ifProc()
+BEGIN
+    DECLARE num INT;
+        SET num = 200;
+    IF num = 100 THEN
+        SELECT 'it is 100.';
+    ELSE
+        SELECT 'it is not 100.';
+    END IF;
+END $$
+DELIMITER;
+CALL ifProc();
+
+-case
+DROP PROCEDURE IF EXISTS ifProc;
+DELIMITER $$
+CREATE PROCEDURE ifProc()
+BEGIN
+    DECLARE point INT;
+    DECLARE credit CHAR(1);
+    SET point = 88;
+
+    CASE
+        WHEN point >= 90 THEN
+            SET credit = 'A';
+        WHEN point >= 80 THEN
+            SET credit = 'B';
+        WHEN point >= 70 THEN
+            SET credit = 'C';
+        WHEN point >= 60 THEN
+            SET credit = 'D';
+        ELSE
+            SET credit = 'F';
+    END IF;
+END $$
+DELIMITER;
+CALL ifProc();
+
+SELECT M.mem_id, M.mem_name, SUM(price*amount) "balance",
+        CASE
+            WHEN (SUM(price*amount) >= 1500) THEN 'A grade'
+            WHEN (SUM(price*amount) >= 1000) THEN 'B grade'
+            WHEN (SUM(price*amount) >= 1) THEN 'Normal'
+            ELSE 'None'
+        END 'member grade'
+    FROM buy B
+        RIGHT OUTER JOIN member M
+        ON B.mem_id = M.mem_id
+    GROUP BY M.mem_id
+    ORDER BY SUM(price*amount) DESC;
+
+-while
+DROP PROCEDURE IF EXISTS ifProc;
+DELIMITER $$
+CREATE PROCEDURE ifProc()
+BEGIN
+    DECLARE i INT;
+    DECLARE j INT;
+    SET i = 0;
+    SET j = 0;
+
+    WHILE(i <= 100) DO
+        SET j = j + i;
+        SET i = i + 1;
+    END WHILE;
+
+    SELECT 'sum of 1 to 100 =', j;
+END $$
+DELIMITER ;
+CALL ifProc();
+
+-ITERATE, LEAVE
+DROP PROCEDURE IF EXISTS ifProc;
+DELIMITER $$
+CREATE PROCEDURE ifProc()
+BEGIN
+    DECLARE i INT;
+    DECLARE j INT;
+    SET i = 0;
+    SET j = 0;
+
+    myWhile:
+    WHILE(i <= 100) DO
+        IF (i $ 4 = 0) THEN
+            SET i = i +1;
+            ITERATE myWhile;
+        END IF
+        SET j = j + 1;
+        If(j > 1000) THEN
+            LEAVE myWhile;
+        END if
+        SET i = i + 1;
+    END WHILE;
+
+    SELECT 'sum of 1 to 100 =', j;
+END $$
+DELIMITER ;
+CALL ifProc();
+
+-PREPARE, EXECUTE
+DROP TABLE IF EXISTS gate_table;
+CREATE TABLE gate_table (id INT AUTO_INCREMENT PRIMARY KEY, entry_time DATTIME);
+
+SET @curDate = CURRENT_TIMESTAMP();
+
+PREPARE myQuery FROM 'INSERT INTO gate_table VALUES(NULL, ?)';
+EXECUTE myQuery USING @curDate;
+DEALLOCATE PREPARE myQuery;
+
+SELECT * FROM gate_table;
+
+
+-Foreign Key
+FOREIGN KEY(mem_id) REFERENCES member(mem_id)
+
+Constraint
+PRIMARY KEY
+DEFAULT
+
+DESCRIBE member;
+
+FOREIGN KEY -> alter detail is impossible for safe
+ -> UPDATE member SET mem_id = 'PINK' WHERE mem_id = 'BNK'; -> impossible
+ -> ON UPDATE CASCADE
+ -> ON DELETE CASCADE
+
+ALTER TABLE buy
+    ADD CONSTRAINT
+    FOREIGN KEY(mem_id) REFERENCES member(mem_id);
+
+ALTER TABLE buy
+    ADD CONSTRAINT
+    FOREIGN KEY(mem_id) REFERENCES member(mem_id)
+    ON UPDATE CASCADE;
+    ON DELETE CASCADE;
+
+UNIQUE
+ -> similar PRIMARY KEY but allow NULL
+
+
+-CHECK
+ALTER TABLE member
+    ADD CONSTRAINT
+    CHECK (phone1 IN ('02','031','053'));
+
+ALTER TABLE member
+    ALTER COLUMN phone1 SET DEFAULT '02';
+
+- NOT NULL
+
+
+
+VIEW
+- for security
+
+
+CREATE VIEW v_member
+AS
+    SELECDT mem_id, mem_name, addr FROM member;
+
+SELECT * FROM v_member;
+
+SELECT mem_name, add FROM v_member
+    WHERE addr IN ('경기','서울');
+
+CREATE VIEW v_viewtest1
+AS
+    SELECT B.mem_id 'Member ID', M.mem_name AS 'Member Name', B.prod_name "Product Name", CONCAT(M.phone1, M.phone2) AS "Office Phone"
+    FROM buy B
+        INNER JOIN member M
+        ON B.mem_id = M.mem_id;
+
+SELECT DISTINCT `Member ID`, `Member Name` FROM v_viewtest1; - should use backtick(Grave accent)
+
+ALTER VIEW v_viewtest1
+AS
+    SELECT B.mem_id '회원 아이디', M.mem_name AS '회원 이름', B.prod_name "제품 이름", CONCAT(M.phone1, M.phone2) AS "연락처"
+        FROM buy B
+            INNER JOIN member M
+            ON B.mem_id = M.mem_id;
+
+SELECT DISTINCT `회원 아이디`, `회원 이름` FROM v_viewest1; - should use backtick(Grave accent)
+
+CREATE OR REPLACE VIEW v_viewtest2
+AS
+    SELECT mem_id, mem_name, addr FROM member;
+
+SHOW CREATE VIEW v_viewtest1;
+
+ ALTER VIEW v_height167
+ AS
+    SELECT * FROM member WHERE height >= 167
+        WITH CHECK OPTION;
+
+INSERT INTO v_height167 VALUES('TOB',NULL, 140) -> impossible
+
+-INDEX
+
+too much index -> more worse than not using index
+when we make index, it need space
+
+clustred index -> primary key -> automatically to be sorted
+secondary index
+
+SHOW INDEX FROM table1;
+
+CREATE TABLE table
+(
+    col1 INT PRIMARY KEY, -> clustered index
+    col1 INT UNIQUE, -> secondary index
+    col2 INT UNIQUE -> secondary index
+);
+
+
+
+DROP TABLE IF EXISTS buy, member;
+
+CREATE TABLE member
+(
+    mem_id      CHAR(8),
+    mem_name    VARCHAR(10),
+    mem_number  INT,
+    addr        CHAR(2)
+);
+
+INSERT INTO member VALUES ('TWC', '트와이스', 9, '서울');
+INSERT INTO member VALUES ('BLK', '블랙핑크', 4, '경남');
+INSERT INTO member VALUES ('WMN', '여자친구', 6, '경기');
+INSERT INTO member VALUES ('OMY', '오마이걸', 7, '서울');
+
+SELECT * FROM member;
+
+ALTER TABLE member
+    ADD CONSTRAINT
+    PRIMARY KEY (mem_id);
+
+SELECT * FROM member;
+
+ALTER TABLE member DROP PRIMARY KEY;   -- 기본 키 제거
+
+ALTER TABLE member
+    ADD CONSTRAINT
+    PRIMARY KEY (mem_name);
+
+SELECT * FROM member;
+
+INSERT INTO member VALUES ('GRL', '소녀시대', 8, '서울');
+
+SELECT * FROM member;
+
+index structure -> balanced tree
+
+Full Table Scan -> all search
+
+beacuse of page split, INSERT, UPDATE, DELETE performance is getting worse
+
+UNIQUE -> there exists another page for index
+PRIMARY KEY -> The data is sorted and it is index itself.
+
+
+SHOW TABLE STATUS LIKE 'member';
+
+CREATE INDEX idx_member_addr
+    ON member (addr);
+
+CREATE UNIQUE INDEX idx_member_addr
+    ON member (addr);
+
+ANAYLSZE TABLE member;
+
+
+SELECT mem_id, mem_name FROM member; -> not use index
+SELECT mem_id, mem_name FROM member WHERE mem_name = 'pink'; -> use index
+SELECT mem_id, mem_name FROM member WHERE mem_cnt * 2 < 10 > ; -> not use index
+SELECT mem_id, mem_name FROM member WHERE mem_cnt < 10 / 2 > ; -> use index
+
+ALTER TABLE member
+    DROP PRIMARY KEY;
+
+
+- search the connect of foreign and primary key and remove foreign and then primary
+SELECT table_name, constraint_name
+    FROM information_schema.referential_constraints
+    WHERE constraint_schema = 'market_db';
+
+ALTER TABLE buy
+    DROP FOREIGN KEY buy_ibfk_1;
+ALTER TABLE member
+    DROP PRIMARY KEY
+
+
+DROP PROCEDURE IF EXISTS Proc;
+DELIMITER $$
+CREATE PROCEDURE Proc(IN userName VARCHAR(10), IN cnt INT)
+BEGIN
+    SELECT * FROM member WHERE mem_name = userName AND cnt = 5;
+END $$
+DELIMITER;
+CALL Proc('pink', 5);
+
+DROP PROCEDURE IF EXISTS Proc;
+DELIMITER $$
+CREATE PROCEDURE Proc(IN userName VARCHAR(10), OUT cnt INT)
+BEGIN
+    SELECT MAX(id) INTO cnt FROM member WHERE mem_name = userName;
+END $$
+DELIMITER;
+CALL Proc('pink', @myValue);
+
+
+DROP PROCEDURE IF EXISTS Proc;
+DELIMITER $$
+CREATE PROCEDURE Proc(IN userName VARCHAR(10), OUT cnt INT)
+BEGIN
+    INSERT INT noTable VALUES(NULL)
+    SELECT MAX(id) INTO cnt FROM noTable WHERE mem_name = userName;
+END $$
+DELIMITER;
+CALL Proc('pink', @myValue);
+-> even though the notable is not existing yet, it is also possible but when we call the procedure it must exist that time.
+
+
+
+DROP PROCEDURE IF EXISTS dynamic_proc;
+DELIMITER $$
+
+CREATE PROCEDURE dynamic_proc(
+    IN tableName VARCHAR(20)
+)
+BEGIN
+    SET @sqlQuery = CONCAT('SELECT * FROM ', tableName);
+    PREPARE myQuery FROM @sqlQuery;
+    EXECUTE myQuery;
+    DEALLOCATE PREPARE myQuery;
+END $$
+
+DELIMITER ;
+
+CALL dynamic_proc('member');
+
+-stored function
+
+DROP FUNCTION IF EXISTS calcYearFunc;
+DELIMITER $$
+CREATE FUNCTION calcYearFunc(dYear INT)
+    RETURN INT
+BEGIN
+    DECLARE runYear INT;
+    SET runYear = YEAR(CURDATE()) - dYear;
+    RETURN runYear;
+END $$
+DELIMITER ;
+
+SELECT calcYearFunc(2010) AS "Years of Acitivity";
+Select calcYearFun(2007) INTO @YearsAct;
+
+-Cursor
+
+``` sql
+DROP PROCEDURE IF EXISTS cursor_proc;
+DELIMITER $$
+CREATE PROCEDURE cursor_proc()
+BEGIN
+    DECLARE memNumber INT;
+    DECLARE cnt INT DEFAULT;
+    DECLARE totNumber INT DEFAULT;
+    DECLARE endOfRow BOOLENAN DEFAULT FALSE;
+
+    DECLARE memberCursor CURSOR FOR
+        SELECT mem_number FROM member;
+
+    DECLARE CONTINUE HANDLER
+        FOR NOT FOUND SET endOfRow = TRUE;
+
+    OPEN memberCuror;
+
+    cursor_loop: LOOP
+        FETCH memberCursor INTO memNumber;
+
+        IF endOfRow THEN
+            LEAVE cursor_loop;
+        END IF;
+
+        SET cnt = cnt + 1;
+        SET totNumber = totNumber + memNumber;
+    END LOOP cursor_loop;
+
+    SELECT (totNumber/cnt) AS 'Average member count';
+
+    CLOSE memberCurosr;
+END $$
+DELIMITER ;
+
+CALL cursor_proc();
+```
+
+
+DML : Data Manipuation Language
+
+
+``` sql
+CREATE TABLE singer (SELECT mem_id, mem_name, mem_number, addr FROM member);
+
+DROP TABLE IF EXISTS backup_singer;
+CREATE TABLE backup_singer
+(
+    mem_id     CHAR(8)     NOT NULL,
+    mem_name   VARCHAR(10) NOT NULL,
+    mem_number INT         NOT NULL,
+    addr       CHAR(2)     NOT NULL,
+    modType    CHAR(2),    -- 변경된 타입. '수정' 또는 '삭제'
+    modDate    DATE,       -- 변경된 날짜
+    modUser    VARCHAR(30) -- 변경한 사용자
+);
+
+DROP TRIGGER IF EXISTS singer_updateTrg;
+DELIMITER $$
+CREATE TRIGGER singer_updateTrg   -- 트리거 이름
+    AFTER UPDATE                  -- 변경 후에 작동하도록 지정
+    ON singer                     -- 트리거를 부착할 테이블
+    FOR EACH ROW
+BEGIN
+    INSERT INTO backup_singer
+    VALUES ( OLD.mem_id, OLD.mem_name, OLD.mem_number,
+             OLD.addr, '수정', CURDATE(), CURRENT_USER() );
+END $$
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS singer_deleteTrg;
+DELIMITER $$
+CREATE TRIGGER singer_deleteTrg   -- 트리거 이름
+    AFTER DELETE                  -- 삭제 후에 작동하도록 지정
+    ON singer                     -- 트리거를 부착할 테이블
+    FOR EACH ROW
+BEGIN
+    INSERT INTO backup_singer
+    VALUES ( OLD.mem_id, OLD.mem_name, OLD.mem_number,
+             OLD.addr, '삭제', CURDATE(), CURRENT_USER() );
+END $$
+DELIMITER ;
+
+UPDATE singer SET addr = '영국' WHERE mem_id = 'BLK';
+DELETE FROM singer WHERE mem_number >= 7;
+
+SELECT * FROM backup_singer;
+
+TRUNCATE TABLE singer;
+
+SELECT * FROM backup_singer;
+```
+
+PYYTON to MYSQL 
+CREATE DROP - automatically commit
+INSERT UPDATE DELETE - Manual commit
+
+
+import pymysql
+
+conn = pymysql.connect(host = '127.0.0.1', user = 'root', password = '0000', db = 'soloDB', charset = 'utf8')
+cur = conn.cursor()
+cur.execute("DROP TABLE IF EXISTS userTable")
+cur.execute("CREATE TABLE userTable (id char(4), userName char(15), email char(30), birthyear int)")
+cur.execute("INSERT INTO userTable VALUES('hong','홍지윤','hong@naver.com',1996)")
+cur.execute("INSERT INTO userTable VALUES('kim','김태연','kim@naver.com',2011)")
+cur.execute("INSERT INTO userTable VALUES('star','별사랑','star@naver.com',1990)")
+cur.execute("INSERT INTO userTable VALUES('yang','양지은','yang@naver.com',1993)")
+conn.commit()
+
+
+import pymysql
+
+conn, cur = None, None
+data1, data2, data3, data4 = "", "", "", ""
+sql = ""
+
+conn = pymysql.connect(host='127.0.0.1', user='root', password='0000', db='soloDB', charset='utf8')
+cur = conn.cursor()
+
+while (True):
+    data1 = input("사용자 ID ==> ")
+    if data1 == "":
+        break
+    data2 = input("사용자 이름 ==> ")
+    data3 = input("사용자 이메일 ==> ")
+    data4 = input("사용자 출생연도 ==> ")
+    sql = "INSERT INTO userTable VALUES('" + data1 + "','" + data2 + "','" + data3 + "','" + data4 + "')"
+    cur.execute(sql)
+
+conn.commit()
+conn.close()
+
+
+
+import pymysql
+
+con, cur = None, None
+data1, data2, data3, data4 = "", "", "", ""
+row = None
+
+conn = pymysql.connect(host='127.0.0.1', user='root', password='0000', db='soloDB', charset='utf8')
+cur = conn.cursor()
+
+cur.execute("SELECT * FROM userTable")
+
+print("사용자ID    사용자이름    이메일    출생연도")
+print("---------------------------------------------")
+
+while (True):
+    row = cur.fetchone()
+    if row == None:
+        break
+    data1 = row[0]
+    data2 = row[1]
+    data3 = row[2]
+    data4 = row[3]
+    print("%5s  %15s  %20s  %d" % (data1, data2, data3, data4))
+
+conn.close()
+
+
+
+from tkinter import *
+from tkinter import messagebox
+
+def clickButton() :
+    messagebox.showinfo("Click", "Close Please")
+
+root = Tk()
+root.title("GUI")
+root.geometry("640x480")
+
+label1 = Label(root, text = "MySQL")
+label2 = Label(root, text = "Try and Do it", font = ("Arial", 10), bg= "blue", fg = "white")
+label1.pack()
+label2.pack()
+
+button1 = Button(root, text = "Click me", command = clickButton)
+button1.pack(expand = YES)
+
+root.mainloop()
+
+import pymysql
+from tkinter import *
+from tkinter import messagebox
+
+## 메인 코드부
+def insertData():
+    con, cur = None, None
+    data1, data2, data3, data4 = "", "", "", ""
+    sql = ""
+
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='0000', db='soloDB', charset='utf8')
+    cur = conn.cursor()
+
+    data1 = edt1.get(); data2 = edt2.get(); data3 = edt3.get(); data4 = edt4.get()
+    sql = "INSERT INTO userTable VALUES('" + data1 + "','" + data2 + "','" + data3 + "','" + data4 + "')"
+    cur.execute(sql)
+
+    conn.commit()
+    conn.close()
+
+    messagebox.showinfo('성공', '데이터 입력 성공')
+
+def selectData():
+    strData1, strData2, strData3, strData4 = [], [], [], []
+
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='0000', db='soloDB', charset='utf8')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM userTable")
+
+    strData1.append("사용자 ID");   strData2.append("사용자 이름")
+    strData3.append("사용자 이메일"); strData4.append("사용자 출생연도")
+    strData1.append("-----------"); strData2.append("-----------")
+    strData3.append("-----------"); strData4.append("-----------")
+
+    while (True):
+        row = cur.fetchone()
+        if row == None:
+            break
+        strData1.append(row[0]); strData2.append(row[1])
+        strData3.append(row[2]); strData4.append(row[3])
+
+    listData1.delete(0, listData1.size() - 1); listData2.delete(0, listData2.size() - 1)
+    listData3.delete(0, listData3.size() - 1); listData4.delete(0, listData4.size() - 1)
+
+    for item1, item2, item3, item4 in zip(strData1, strData2, strData3, strData4):
+        listData1.insert(END, item1); listData2.insert(END, item2)
+        listData3.insert(END, item3); listData4.insert(END, item4)
+
+    conn.close()
+
+root = Tk()
+root.geometry("600x300")
+root.title("완전한 GUI 응용 프로그램")
+
+edtFrame = Frame(root)
+edtFrame.pack()
+listFrame = Frame(root)
+listFrame.pack(side=BOTTOM, fill=BOTH, expand=1)
+
+edt1 = Entry(edtFrame, width=10)
+edt1.pack(side=LEFT, padx=10, pady=10)
+edt2 = Entry(edtFrame, width=10)
+edt2.pack(side=LEFT, padx=10, pady=10)
+edt3 = Entry(edtFrame, width=10)
+edt3.pack(side=LEFT, padx=10, pady=10)
+edt4 = Entry(edtFrame, width=10)
+edt4.pack(side=LEFT, padx=10, pady=10)
+
+btnInsert = Button(edtFrame, text="입력", command=insertData)
+btnInsert.pack(side=LEFT, padx=10, pady=10)
+btnSelect = Button(edtFrame, text="조회", command=selectData)
+btnSelect.pack(side=LEFT, padx=10, pady=10)
+
+listData1 = Listbox(listFrame, bg='white')
+listData1.pack(side=LEFT, fill=BOTH, expand=1)
+listData2 = Listbox(listFrame, bg='white')
+listData2.pack(side=LEFT, fill=BOTH, expand=1)
+listData3 = Listbox(listFrame, bg='white')
+listData3.pack(side=LEFT, fill=BOTH, expand=1)
+listData4 = Listbox(listFrame, bg='white')
+listData4.pack(side=LEFT, fill=BOTH, expand=1)
+
+root.mainloop()
