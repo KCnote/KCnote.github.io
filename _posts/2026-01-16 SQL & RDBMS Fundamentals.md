@@ -39,6 +39,8 @@ This section covers:
 
 ## 2. What is a Database and DBMS?
 
+![DB-vs-DBMS](/assets/img/develop/2026-01-16-DB-vs-DBMS.png)
+
 ### Database
 
 A **database** is an organized collection of data stored and accessed **electronically**.
