@@ -177,6 +177,8 @@ Databases are a core part of system architecture.
 
 The Waterfall model shows where database design fits.
 
+![Waterfall-DB-Design](/assets/img/develop/2026-01-16-Waterfall-DB-Design.png)
+
 1. **Requirements Analysis**
 2. **System Design**
 3. **Implementation (Coding)**
