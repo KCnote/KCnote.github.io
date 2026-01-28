@@ -9,7 +9,7 @@ pin: false
 math: true
 mermaid: true
 
-------------------------------------------------------------------------
+---
 
 # 🧠 Memory Address Space & Cache
 
