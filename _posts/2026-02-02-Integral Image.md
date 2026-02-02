@@ -71,7 +71,7 @@ Where:
 
 ```mermaid
 flowchart TB
-  subgraph Rect["Rectangle Sum: D - B - C + A"]
+  subgraph Rect["Sum: D - B - C + A"]
     A["A (x1-1, y1-1)"] --- B["B (x2, y1-1)"]
     A --- C["C (x1-1, y2)"]
     C --- D["D (x2, y2)"]
