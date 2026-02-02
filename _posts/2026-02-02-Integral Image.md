@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Thread"
-date: 2026-01-29 00:00:00 +0900
+title: "Integral Image"
+date: 2026-02-02 00:00:00 +0900
 author: kang
 categories: [Computer Vision, Image Processing]
-tags: [Integral Image, Summed Area Table, Computer Vision, Feature Extraction, Haar-like Features, Dynamic Programming]
+tags: [Integral Image, Summed Area Table, Computer Vision, Feature Extraction, Haar-like Features, Dynamic Programming, Image Processing]
 pin: false
 math: true
 mermaid: true
