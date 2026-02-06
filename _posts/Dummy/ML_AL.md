@@ -30,16 +30,18 @@ Unsupervised learning: given a list of examples without label. a model learns pa
 
 Usually Difficulty level : Unsupervised learning > Supervised learning
 
+parametric/non-parametric method that can be characterized
+
+parametric: assume a functional form and predict parameters
+non-parametric: not assume a functional form, get as close to the data points as possible witout being too rough or wiggly -> So need to large-scale dataset
+
+
 -Supervised learning
 step1. design the form of our model (ex. y = ax, inference object : a)
 step2. define the goal of model
 step3. find the parameters that best achieves the goal with training data.
 step4. given an unseen x, estimate its label \hat{y}, --> computing.
 
-parametric/non-parametric method that can be characterized
-
-parametric: assume a functional form and predict parameters
-non-parametric: not assume a functional form, get as close to the data points as possible witout being too rough or wiggly -> So need to large-scale dataset
 
 >Step 2.
 mean-squared prediction error 
@@ -1715,3 +1717,3049 @@ Each fold is used **exactly once** as validation.
 - Common choices:
   - K = 5
   - K = 10
+
+
+
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+-----------------------
+# Classification
+
+## Qualitative Variables
+
+- **Qualitative variables** take values in an **unordered set** $C$.
+
+Examples:
+
+- Eye color:
+  $$
+  \text{eye color} \in \{\text{brown}, \text{blue}, \text{green}\}
+  $$
+
+- Email type:
+  $$
+  \text{email} \in \{\text{spam}, \text{ham}\}
+  $$
+
+---
+
+## Classification Task
+
+- Given:
+  - a **feature vector** $$\mathbf{x}$$
+  - a **qualitative response** $$y$$ taking values in a set $$C$$
+
+- The goal of **classification** is to learn a function:
+
+  $$
+  f(\mathbf{x}) \in C
+  $$
+
+- That is, the function $$f$$ takes the feature vector $$\mathbf{x}$$ as input and predicts the corresponding class label $$y$$.
+
+---
+
+## Probabilistic Interpretation
+
+- In many cases, we are more interested in estimating **class probabilities** rather than just predicting a single class.
+
+- That is, we want to estimate:
+
+  $$
+  P(y = c \mid \mathbf{x}) \quad \text{for each } c \in C
+  $$
+
+---
+
+## Example: Fraud Detection
+
+- For example, in insurance:
+  - It is often **more valuable** to estimate the probability that a claim is fraudulent
+  - than to simply classify it as **fraudulent** or **not fraudulent**
+
+- Probabilistic outputs allow:
+  - risk-based decision making
+  - threshold tuning
+  - cost-sensitive classification
+
+
+# Can We Use Linear Regression for Classification?
+
+## Binary Coding for Default Classification
+
+Suppose for the **Default** classification task, we encode the response variable as:
+
+$$
+y =
+\begin{cases}
+0 & \text{if No} \\
+1 & \text{if Yes}
+\end{cases}
+$$
+
+---
+
+## Question
+
+Can we simply perform a **linear regression** of $y$ on $\mathbf{x}$ and classify as **Yes** if:
+
+$$
+\hat{y} > 0.5
+$$
+
+---
+
+## Observations
+
+- In the case of a **binary outcome**, linear regression may sometimes perform reasonably well as a classifier.
+- It can be shown to be related to **Linear Discriminant Analysis (LDA)** in certain settings.
+- Since in the population:
+
+$$
+\mathbb{E}[y \mid \mathbf{x}] = P(y = 1 \mid \mathbf{x})
+$$
+
+we might think regression is suitable for this task.
+
+---
+
+## Limitation of Linear Regression for Classification
+
+However, **linear regression has a major drawback**:
+
+- It may produce predicted probabilities **less than 0** or **greater than 1**.
+- This makes it **inappropriate for modeling probabilities** directly.
+- This limitation motivates the use of **Logistic Regression** for classification problems.
+
+---
+
+# Problems with Linear Regression for Classification
+
+## Multiclass Classification Issue
+
+Consider using **linear regression** for a classification problem where the response variable has three or more possible categories.
+
+Example (medical diagnosis based on symptoms):
+
+$$
+y =
+\begin{cases}
+1 & \text{if stroke} \\
+2 & \text{if drug overdose} \\
+3 & \text{if epileptic seizure}
+\end{cases}
+$$
+
+---
+
+## Why This Is Problematic
+
+- This numeric coding **implicitly introduces an ordering** among the classes.
+- It suggests that:
+
+$$
+\text{difference(stroke, drug overdose)} = \text{difference(drug overdose, epileptic seizure)}
+$$
+
+- However, in reality, **these categories are not ordinal** and such numeric distances are meaningless.
+- Linear regression therefore imposes an **incorrect structure** on the classification problem.
+
+---
+
+## Conclusion
+
+- Linear regression is **not appropriate** for multiclass classification.
+- Proper approaches include:
+  - Multinomial Logistic Regression
+  - Softmax-based classifiers
+  - Linear Discriminant Analysis (LDA)
+  - Other probabilistic classification methods
+
+---
+
+# Problem Setting
+
+## Binary Classification Setup
+
+For simplicity, we start with a **binary classification** setting:
+
+$$
+\mathbf{x} \in \mathbb{R}^d, \quad y \in \{0, 1\}
+$$
+
+---
+
+## Modeling Class Probability
+
+Let us consider the probability $p$ that an example belongs to **class 1**.
+
+- We want to model:
+
+$$
+p = P(y = 1 \mid \mathbf{x})
+$$
+
+- Suppose we compute a **linear regression score** $s$.
+- Our goal is to find a function that:
+  - takes $s$ as input
+  - outputs a valid probability $p$
+
+---
+
+## Desired Properties
+
+The mapping from $s$ to $p$ should behave as follows:
+
+- $p$ is **close to 1** if $s$ is large
+- $p$ is **close to 0** if $s$ is very small (large negative)
+- $p$ is **close to 0.5** if $s$ is near 0
+
+---
+
+## Sigmoid (Logistic) Function
+
+The **sigmoid function** satisfies all of these properties:
+
+$$
+\sigma(s) = \frac{1}{1 + e^{-s}}
+$$
+
+- Maps any real value $s \in (-\infty, +\infty)$ to a probability in $(0,1)$
+- Smooth and monotonic
+- Forms the basis of **Logistic Regression**
+
+---
+
+
+# Logistic Regression
+
+## Probability for Class 1
+
+- Since the model output lies in the range **[0, 1]**, it can be interpreted as a **probability**.
+- The probability that an input feature vector $\mathbf{x}$ belongs to **class 1** is:
+
+$$
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+## Probability for Class 0 (Negative Class)
+
+- Because this is a **binary classification** problem, the probabilities must sum to 1:
+
+$$
+P(y = 1 \mid \mathbf{x}) + P(y = 0 \mid \mathbf{x}) = 1
+$$
+
+- Therefore, the probability of the negative class (class 0) is:
+
+$$
+P(y = 0 \mid \mathbf{x}) = 1 - P(y = 1 \mid \mathbf{x})
+$$
+
+- Substituting the logistic function:
+
+$$
+P(y = 0 \mid \mathbf{x})
+= 1 - \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+= \frac{1}{1 + e^{\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+## Interpretation
+
+- This model is called **logistic regression**
+- It models the **conditional distribution**:
+
+$$
+P(y \mid \mathbf{x})
+$$
+
+- Despite its name, logistic regression is a **classification method**, because:
+  - The target variable $y$ is **discrete**
+  - The output represents **class probabilities**, not continuous values
+
+---
+
+# Logistic Regression — Interpretation
+
+## Model Form
+
+The logistic regression model estimates the probability of class 1 as:
+
+$$
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x)}}
+$$
+
+where:
+- $\beta_0$ is the intercept
+- $\beta_1$ is the coefficient for feature $x$
+
+---
+
+## Coefficient Interpretation
+
+Suppose we estimated:
+
+- $\hat{\beta}_0 = -10.6513$
+- $\hat{\beta}_1 = 0.0055$ (for **balance**)
+
+Then:
+
+- Since $\hat{\beta}_1 > 0$, an **increase in balance increases the probability of default**.
+- At a high level, this interpretation is similar to **linear regression** (positive coefficient → positive association).
+
+---
+
+## Log-Odds Interpretation
+
+Logistic regression is fundamentally a **linear model in log-odds space**.
+
+The log-odds (logit) is defined as:
+
+$$
+\log \left( \frac{p}{1 - p} \right)
+$$
+
+Logistic regression assumes this quantity has a **linear relationship** with the input:
+
+$$
+\log \left( \frac{P(y=1 \mid x)}{1 - P(y=1 \mid x)} \right) = \beta_0 + \beta_1 x
+$$
+
+---
+
+## Meaning of the Coefficient
+
+- A **one-unit increase in $x$** increases the **log-odds** of class 1 by $\beta_1$.
+- In this example:
+
+$$
+\text{Increase in log-odds of default} = 0.0055 \text{ per unit increase in balance}
+$$
+
+This is the precise interpretation of logistic regression coefficients.
+
+---
+
+## Key Insight
+
+- Logistic regression is **linear in log-odds**, not in probability.
+- The sigmoid function converts this linear log-odds into a **valid probability between 0 and 1**.
+- This is why logistic regression is suitable for classification.
+
+---
+# MLE of Logistic Regression
+
+## Objective
+
+- Logistic regression estimates parameters **β** by **maximizing the conditional distribution**:
+
+$$
+P(y \mid \mathbf{x})
+$$
+
+- The goal is to find the **Maximum Likelihood Estimator (MLE)** of the parameter vector $\boldsymbol{\beta}$.
+
+---
+
+## Likelihood Function
+
+For a binary response $y_i \in \{0,1\}$, the model defines:
+
+$$
+P(y_i = 1 \mid \mathbf{x}_i) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}
+$$
+
+and
+
+$$
+P(y_i = 0 \mid \mathbf{x}_i) = 1 - P(y_i = 1 \mid \mathbf{x}_i)
+$$
+
+---
+
+## Likelihood of the Dataset
+
+Given $n$ independent observations $\{(\mathbf{x}_i, y_i)\}_{i=1}^n$, the likelihood function is:
+
+$$
+\mathcal{L}(\boldsymbol{\beta})
+= \prod_{i: y_i = 1} P(y_i \mid \mathbf{x}_i)
+  \prod_{i: y_i = 0} \left(1 - P(y_i \mid \mathbf{x}_i)\right)
+$$
+
+This likelihood represents the probability of observing the given zeros and ones in the dataset.
+
+---
+
+## Maximum Likelihood Estimation
+
+- We choose $\boldsymbol{\beta}$ to **maximize** the likelihood:
+
+$$
+\hat{\boldsymbol{\beta}} = \arg\max_{\boldsymbol{\beta}} \; \mathcal{L}(\boldsymbol{\beta})
+$$
+
+- Equivalently, we often maximize the **log-likelihood** for numerical stability and convenience.
+
+---
+
+## Key Idea
+
+- Logistic regression does **not** minimize squared error.
+- Instead, it maximizes the likelihood of the observed class labels.
+- This leads naturally to the **log-loss / cross-entropy loss** used in classification.
+
+---
+
+# MLE of Logistic Regression — Log-Likelihood Derivation
+
+## Likelihood Function
+
+For binary outcomes $y_i \in \{0,1\}$, the likelihood function of logistic regression is:
+
+$$
+\mathcal{L}(\boldsymbol{\beta})
+= \prod_{i: y_i = 1} p(y_i \mid \mathbf{x}_i)
+  \prod_{i: y_i = 0} \left(1 - p(y_i \mid \mathbf{x}_i)\right)
+$$
+
+where
+
+$$
+p(y_i = 1 \mid \mathbf{x}_i) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}
+$$
+
+---
+
+## Log-Likelihood
+
+Taking the logarithm of the likelihood:
+
+$$
+\log \mathcal{L}(\boldsymbol{\beta})
+= \log \prod_{i: y_i = 1} p(y_i \mid \mathbf{x}_i)
++ \log \prod_{i: y_i = 0} \left(1 - p(y_i \mid \mathbf{x}_i)\right)
+$$
+
+Using the property $\log \prod = \sum \log$, we obtain:
+
+$$
+= \sum_{i: y_i = 1} \log p(y_i \mid \mathbf{x}_i)
++ \sum_{i: y_i = 0} \log \left(1 - p(y_i \mid \mathbf{x}_i)\right)
+$$
+
+---
+
+## Unified Expression
+
+We can write both cases in a single summation:
+
+$$
+\log \mathcal{L}(\boldsymbol{\beta})
+= \sum_{i=1}^{n}
+\left[
+y_i \log p(y_i \mid \mathbf{x}_i)
++ (1 - y_i) \log \left(1 - p(y_i \mid \mathbf{x}_i)\right)
+\right]
+$$
+
+---
+
+## Substituting the Logistic Function
+
+Substituting:
+
+$$
+p(y_i \mid \mathbf{x}_i) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}
+$$
+
+gives:
+
+$$
+\log \mathcal{L}(\boldsymbol{\beta})
+= \sum_{i=1}^{n}
+\left[
+- y_i \log \left(1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}\right)
+- (1 - y_i) \log \left(1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i}\right)
+\right]
+$$
+
+---
+
+## Key Takeaway
+
+- Logistic regression parameters are estimated by **maximizing the log-likelihood**.
+- The resulting objective is **concave**, ensuring a unique global optimum.
+- The negative log-likelihood corresponds to the **binary cross-entropy loss**.
+
+---
+
+# MLE of Logistic Regression — No Closed-Form Solution
+
+## Maximum Likelihood Estimator for $\boldsymbol{\beta}$
+
+From the previous derivation, the log-likelihood is:
+
+$$
+\log \mathcal{L}(\boldsymbol{\beta})
+= \sum_{i=1}^{n}
+\left[
+- y_i \log(1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i})
+- (1 - y_i) \log(1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i})
+\right]
+$$
+
+---
+
+## Optimality Condition
+
+To find the MLE, we set the gradient to zero:
+
+$$
+\frac{\partial}{\partial \boldsymbol{\beta}} \log \mathcal{L}(\boldsymbol{\beta}) = 0
+$$
+
+This leads to the following equation:
+
+$$
+- \sum_{i=1}^{n} \frac{\mathbf{x}_i y_i}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}
+- \sum_{i=1}^{n} \frac{\mathbf{x}_i (1 - y_i)}{1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i}}
+= 0
+$$
+
+---
+
+## No Closed-Form Solution
+
+- Unlike **linear regression**, this equation **cannot be solved analytically**.
+- There is **no closed-form solution** for $\boldsymbol{\beta}$.
+
+---
+
+## What Do We Do Instead?
+
+We must use **numerical optimization methods**, such as:
+
+- Gradient Descent
+- Stochastic Gradient Descent (SGD)
+- Newton–Raphson / Iteratively Reweighted Least Squares (IRLS)
+- Quasi-Newton methods (e.g., BFGS, L-BFGS)
+
+These methods iteratively update $\boldsymbol{\beta}$ to maximize the log-likelihood.
+
+---
+
+## Key Insight
+
+- Logistic regression is **convex**, so optimization converges to a **unique global optimum**.
+- Even without a closed-form solution, the model is **efficiently solvable** in practice.
+
+---
+
+# Optimization
+
+## What is Optimization?
+
+According to Wikipedia:
+
+> **Mathematical optimization** (or mathematical programming) is the selection of a **best element**,
+> with regard to **some criterion**, from some set of available alternatives.
+
+---
+
+## Key Components of Optimization
+
+Every optimization problem consists of the following elements:
+
+### 1. Candidates (Alternatives)
+- A set of possible solutions
+- Examples:
+  - Model parameters
+  - Actions
+  - Decisions
+
+---
+
+### 2. Criterion (Objective Function)
+- A function that measures how good a candidate is
+- Commonly written as:
+
+$$
+\mathcal{L}(\hat{y}, y)
+$$
+
+or
+
+$$
+J(\theta)
+$$
+
+- Examples:
+  - Loss function
+  - Cost function
+  - Likelihood function
+
+---
+
+### 3. Best Element
+
+- The goal is to find the element that **minimizes** or **maximizes** the criterion:
+
+$$
+\theta^* = \arg\min_{\theta} J(\theta)
+$$
+
+or
+
+$$
+\theta^* = \arg\max_{\theta} J(\theta)
+$$
+
+---
+
+## Optimization in Machine Learning
+
+In machine learning:
+
+- The **alternatives** are model parameters
+- The **criterion** is usually a loss function
+- Optimization is the process of learning parameters that best fit the data
+
+Examples:
+- Linear regression → minimize squared error
+- Logistic regression → maximize likelihood (or minimize cross-entropy)
+
+---
+
+# Primitive Ideas in Optimization
+
+Before using advanced optimization algorithms, several simple and intuitive strategies can be considered.
+
+---
+
+## Basic Approaches
+
+### 1. Exhaustive Search
+- Try **all possible combinations** of parameters
+- Guarantees finding the global optimum
+- Computationally expensive and usually impractical for large problems
+
+---
+
+### 2. Random Search
+- Randomly sample candidate solutions
+- Often surprisingly effective in high-dimensional spaces
+- Simple but not guaranteed to find the optimum
+
+---
+
+### 3. Visualization
+- Visualize the objective function (when possible)
+- Helps understand:
+  - Shape of the loss surface
+  - Local minima / maxima
+  - Convexity / non-convexity
+
+---
+
+### 4. Greedy Search
+- Optimize **one variable at a time**
+- Iteratively improve the objective
+- Simple but may get stuck in local optima
+
+---
+
+## Key Insight
+
+These primitive ideas help build intuition for more advanced optimization methods such as:
+
+- Gradient Descent
+- Stochastic Gradient Descent (SGD)
+- Newton’s Method
+- Convex Optimization Techniques
+
+---
+# Following the Slope — Gradient Descent
+
+## Objective
+
+We have a **cost function** (or loss function) $\mathcal{L}(\boldsymbol{\beta})$ that we want to **minimize**.
+
+$$
+\min_{\boldsymbol{\beta}} \; \mathcal{L}(\boldsymbol{\beta})
+$$
+
+---
+
+## Core Idea
+
+At the current parameter value $\boldsymbol{\beta}$:
+
+1. Compute the **gradient** of the loss:
+   
+   $$
+   \nabla_{\boldsymbol{\beta}} \mathcal{L}(\boldsymbol{\beta})
+   $$
+
+2. Take a **small step in the direction of the negative gradient**.
+
+3. Repeat until convergence.
+
+---
+
+## Update Rule
+
+The standard **gradient descent update** is:
+
+$$
+\boldsymbol{\beta}^{(t+1)}
+=
+\boldsymbol{\beta}^{(t)}
+-
+\eta \, \nabla_{\boldsymbol{\beta}} \mathcal{L}(\boldsymbol{\beta}^{(t)})
+$$
+
+where:
+
+- $\eta$ = learning rate (step size)
+- $\nabla_{\boldsymbol{\beta}} \mathcal{L}(\boldsymbol{\beta})$ = gradient
+- Iteratively moves toward the **minimum of the loss function**
+
+---
+
+## Why Follow the Negative Gradient?
+
+- The gradient points in the direction of **steepest increase**.
+- Moving in the **negative gradient direction** gives the **steepest decrease**.
+- This leads the parameters toward the **minimum** of the function.
+
+---
+
+## Interpretation
+
+- Gradient is the **best linear approximation** of the function at a point.
+- Each update improves the parameter slightly.
+- Starting from a random initial value, repeated updates move toward the minimum.
+
+---
+
+## Key Insight
+
+Gradient descent is the foundation of most machine learning optimization methods, including:
+
+- Linear Regression
+- Logistic Regression
+- Neural Networks
+- Deep Learning
+
+---
+# Gradient Descent
+
+## Update Equation (Vector Form)
+
+The gradient descent update rule in vector notation is:
+
+$$
+\boldsymbol{\beta}^{\text{new}} = \boldsymbol{\beta}^{\text{old}} - \alpha \, \nabla_{\boldsymbol{\beta}} \mathcal{L}(\boldsymbol{\beta})
+$$
+
+where:
+
+- $\alpha$ = learning rate (step size)
+- $\nabla_{\boldsymbol{\beta}} \mathcal{L}(\boldsymbol{\beta})$ = gradient of the loss
+- Moves parameters in the direction of **steepest decrease**
+
+---
+
+## Update Equation (Single Parameter)
+
+For a single parameter $\beta_i$:
+
+$$
+\beta_i^{\text{new}} = \beta_i^{\text{old}} - \alpha \, \frac{\partial}{\partial \beta_i} \mathcal{L}(\boldsymbol{\beta})
+$$
+
+- If slope $< 0$ → parameter increases
+- If slope $> 0$ → parameter decreases
+
+---
+
+## Pseudocode
+
+```python
+beta = rand(vector)
+
+while True:
+    beta_grad = evaluate_gradient(L, data, beta)
+    beta = beta - alpha * beta_grad
+
+    if norm(beta_grad) <= threshold:
+        break
+```
+
+---
+
+## Intuition
+
+- The gradient indicates the direction of **steepest ascent**
+- Moving in the **negative gradient** direction reduces the loss
+- Iteratively updating parameters leads toward a **minimum**
+
+---
+
+## Notes
+
+- Proper choice of learning rate $\alpha$ is critical:
+  - Too small → slow convergence
+  - Too large → divergence or oscillation
+- Convergence is often detected when the gradient norm becomes very small
+
+---
+
+# Gradient Descent: Potential Problems
+
+Gradient descent is a powerful optimization method, but it has several limitations and challenges.
+
+---
+
+## 1. Non-Convex Surface
+
+- The loss surface may **not be convex**.
+- This means:
+  - There may be **multiple local minima**
+  - There may be **saddle points**
+- The gradient can be **zero even when not at the global minimum**.
+
+---
+
+## 2. Requires Differentiable Cost Function
+
+Gradient descent works only when the cost function is **differentiable**.
+
+- Some loss functions (e.g., **0/1 loss**) are **not differentiable**.
+- In practice, we often use a **smooth surrogate loss**, such as:
+  - Logistic loss
+  - Cross-entropy loss
+  - Squared error loss
+
+---
+
+## 3. Slow Convergence
+
+- Gradient descent can be **slow**, especially for large datasets.
+- The gradient is computed using **all data samples**, so updates use the **average gradient**.
+- For very large datasets:
+  - Computing gradients over all data points can be **computationally expensive**.
+  - Convergence to a (local) minimum may take a long time.
+
+---
+
+## Practical Improvements
+
+To address these issues, modern optimization methods are often used:
+
+- Stochastic Gradient Descent (SGD)
+- Mini-batch Gradient Descent
+- Momentum
+- Adam / RMSProp
+- Second-order methods (Newton, Quasi-Newton)
+
+---
+
+# Stochastic Gradient Descent (SGD)
+
+## Core Idea
+
+Instead of computing gradients using **all training examples**, compute them using only a **randomly sampled subset** of the data.
+
+---
+
+## Variants
+
+### 1. Pure Stochastic Gradient Descent
+- Update parameters using **one single sample at a time**
+- Fast updates but very noisy gradients
+
+---
+
+### 2. Mini-batch Gradient Descent (Most Common)
+
+- Use a **mini-batch** of samples to estimate the gradient
+- Typical batch sizes:
+  
+  $$
+  32, 64, 128, 256, \dots, 8192
+  $$
+
+- The optimal batch size depends on:
+  - The problem
+  - The dataset
+  - Hardware constraints (especially memory)
+
+---
+
+## Effect of Batch Size
+
+- When the mini-batch is **small**:
+  - Doubling the batch size significantly stabilizes the gradient estimate
+- When the mini-batch becomes **large**:
+  - Improvement becomes smaller
+  - Computational cost increases roughly linearly
+  - This is known as **diminishing returns**
+
+---
+
+## Advantages of SGD
+
+- Much faster than full gradient descent for large datasets
+- Allows scalable training on massive data
+- Often helps escape shallow local minima or saddle points due to noise
+
+---
+
+## Practical Notes
+
+- Mini-batch SGD is the **standard method** in deep learning
+- Often combined with:
+  - Momentum
+  - Adam
+  - RMSProp
+  - Learning rate scheduling
+
+---
+
+# Revised Supervised Learning Framework
+
+## Overview
+
+Machine learning is a **data-driven approach**.  
+Rather than manually specifying rules, we design a model and let data determine the best parameters.
+
+---
+
+## Step-by-Step Framework
+
+### Step 1. Model Design
+- Humans design the **form of the model**
+- Example (logistic regression):
+
+$$
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+### Step 2. Define the Learning Goal
+- Define what the model should achieve
+- Typically:
+
+$$
+y \approx f(\mathbf{x})
+$$
+
+as accurately as possible
+
+---
+
+### Step 3. Learn Parameters from Training Data
+
+Given training data:
+
+$$
+\{(\mathbf{x}_i, y_i)\}_{i=1}^{n}
+$$
+
+we aim to find the **best parameters** $\boldsymbol{\beta}$.
+
+#### Step 3-1. Prediction
+- Feed training input $\mathbf{x}$ into the model
+- Obtain a prediction $\hat{y}$
+
+---
+
+#### Step 3-2. Loss Evaluation
+- Compare the prediction $\hat{y}$ with the ground-truth label $y$
+- Measure how good or bad the prediction is using a **loss function**
+
+> This comparison step defines the **loss function**.
+
+For logistic regression, this loss is known as **log-loss** (cross-entropy):
+
+$$
+\ell(y, \hat{y})
+=
+- y \log \hat{y}
+- (1 - y) \log (1 - \hat{y})
+$$
+
+---
+
+#### Step 3-3. Parameter Update
+- Update parameters $\boldsymbol{\beta}$ to reduce the loss
+- Typically done using **gradient descent** or its variants
+
+---
+
+#### Step 3-4. Iteration
+- Repeat prediction → loss computation → parameter update
+- Continue until:
+
+$$
+\hat{y} \approx y
+$$
+
+for most training samples
+
+---
+
+### Step 4. Inference (Prediction on Unseen Data)
+
+- Given a new, unseen input $\mathbf{x}$
+- Estimate its label $\hat{y}$ by computing:
+
+$$
+P(y \mid \mathbf{x})
+$$
+
+---
+
+## Key Insight
+
+- The **loss function** connects prediction and optimization
+- Model training is essentially:
+  - **Minimizing loss**
+  - **Learning parameters from data**
+- Logistic regression uses **log-loss** as its optimization objective
+
+---
+
+# Extension of Logistic Regression
+
+## Logistic Regression Model
+
+The logistic regression model for binary classification is:
+
+$$
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+For a single input variable, this becomes:
+
+$$
+P(y = 1 \mid x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x)}}
+$$
+
+Example coefficient interpretation:
+
+- Intercept: $\beta_0 = -10.6513$
+- Balance coefficient: $\beta_1 = 0.0055$
+
+---
+
+## Limitation of Basic Logistic Regression
+
+So far, we assumed:
+
+- Only **one input variable** $x$
+- A **binary classification** problem with **two classes** (positive and negative)
+
+---
+
+## Extension Questions
+
+Can logistic regression be extended to:
+
+- Multiple input variables (**$p > 1$ features**)?
+- Multi-class classification (**$K > 2$ classes**)?
+
+---
+
+## Yes — Logistic Regression Can Be Extended
+
+### Multiple Input Variables
+
+For multiple features:
+
+$$
+\mathbf{x} = (x_1, x_2, \dots, x_p)
+$$
+
+the model becomes:
+
+$$
+P(y = 1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+where:
+
+$$
+\boldsymbol{\beta} = (\beta_0, \beta_1, \dots, \beta_p)
+$$
+
+---
+
+### Multi-Class Classification
+
+For more than two classes ($K > 2$), logistic regression is extended using:
+
+- **Multinomial Logistic Regression**
+- **Softmax Function**
+
+The probability of class $k$ is:
+
+$$
+P(y = k \mid \mathbf{x}) =
+\frac{e^{\boldsymbol{\beta}_k^T \mathbf{x}}}
+{\sum_{j=1}^{K} e^{\boldsymbol{\beta}_j^T \mathbf{x}}}
+$$
+
+---
+
+## Key Insight
+
+- Logistic regression naturally extends to **multiple features**
+- Multi-class problems are handled using **softmax / multinomial logistic regression**
+- This forms the foundation of many modern classification models
+
+---
+
+# Logistic Regression with 2+ Variables
+
+## Linear Model for Log-Odds
+
+Similarly to the linear regression case, logistic regression builds a **linear model for the log-odds**.
+
+The log-odds (logit) is defined as:
+
+$$
+\log \left( \frac{p(\mathbf{x}; \boldsymbol{\beta})}{1 - p(\mathbf{x}; \boldsymbol{\beta})} \right)
+$$
+
+For $p$ input variables, we model this quantity linearly as:
+
+$$
+\log \left( \frac{p(\mathbf{x}; \boldsymbol{\beta})}{1 - p(\mathbf{x}; \boldsymbol{\beta})} \right)
+=
+\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p
+$$
+
+---
+
+## Number of Parameters
+
+- The model contains **$p + 1$ parameters**:
+  - $\beta_0$ : intercept
+  - $\beta_1, \ldots, \beta_p$ : feature coefficients
+- Here, $p$ is the number of input variables (features)
+
+---
+
+## Probability Form
+
+By applying the sigmoid function, we obtain the probability form:
+
+$$
+p(\mathbf{x}; \boldsymbol{\beta})
+=
+\frac{e^{\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p}}
+{1 + e^{\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p}}
+$$
+
+---
+
+## Vector Notation
+
+Using vector notation:
+
+$$
+\mathbf{x} = (1, x_1, x_2, \ldots, x_p)
+$$
+
+$$
+\boldsymbol{\beta} = (\beta_0, \beta_1, \ldots, \beta_p)
+$$
+
+the model can be written compactly as:
+
+$$
+P(y = 1 \mid \mathbf{x})
+=
+\frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+> Here, both $\mathbf{x}$ and $\boldsymbol{\beta}$ are **$(p+1)$-dimensional**.
+
+---
+
+## Key Insight
+
+- Logistic regression naturally generalizes to **any number of input variables**
+- The model form remains unchanged; only the **dimension of $\mathbf{x}$ and $\boldsymbol{\beta}$ increases**
+- This formulation is the foundation for high-dimensional classification models
+
+---
+
+# Logistic Regression with 3+ Classes
+
+This document presents a **step-by-step derivation** showing how binary logistic regression naturally extends to **multi-class classification**, leading to the **softmax function**.
+
+---
+
+## 1. Review: Binary Logistic Regression
+
+Binary (2-class) logistic regression can be written in two equivalent forms.
+
+### 1.1 Log-Odds (Logit) Form
+
+The log-odds are linearly related to the input:
+
+$$
+\log \left( \frac{p(y=1 \mid \mathbf{x})}{1 - p(y=1 \mid \mathbf{x})} \right)
+= \boldsymbol{\beta}^T \mathbf{x}
+$$
+
+---
+
+### 1.2 Probability (Sigmoid) Form
+
+The conditional probabilities are modeled using the sigmoid function:
+
+$$
+p(y=1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+$$
+p(y=0 \mid \mathbf{x}) = \frac{1}{1 + e^{\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+## 2. The Multi-Class Challenge
+
+Now suppose we have **three classes instead of two**.
+
+- We cannot directly combine:
+  
+$$
+p(y=0 \mid \mathbf{x}), \; p(y=1 \mid \mathbf{x}), \; p(y=2 \mid \mathbf{x})
+$$
+
+- The sigmoid formulation is inherently **binary**
+- A new formulation is required
+
+---
+
+## 3. Introducing a Common Denominator
+
+To prepare for multi-class extension, we rewrite the binary case using a **shared denominator**.
+
+### 3.1 Rewriting \( p(y=1 \mid x) \)
+
+Multiply numerator and denominator by  
+$$
+e^{\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}
+$$
+
+$$
+p(y=1 \mid \mathbf{x})
+=
+\frac{e^{\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}}
+{e^{\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}} + e^{-\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+### 3.2 Rewriting \( p(y=0 \mid x) \)
+
+Similarly, multiply numerator and denominator by  
+$$
+e^{-\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}
+$$
+
+$$
+p(y=0 \mid \mathbf{x})
+=
+\frac{e^{-\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}}
+{e^{\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}} + e^{-\frac{1}{2}\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+---
+
+## 4. Renaming Parameters (Score Interpretation)
+
+Define new parameters:
+
+$$
+\boldsymbol{\beta}_1' = \frac{1}{2}\boldsymbol{\beta},
+\quad
+\boldsymbol{\beta}_0' = -\frac{1}{2}\boldsymbol{\beta}
+$$
+
+Then:
+
+$$
+p(y=1 \mid \mathbf{x}) =
+\frac{e^{\boldsymbol{\beta}_1'^T \mathbf{x}}}
+{e^{\boldsymbol{\beta}_0'^T \mathbf{x}} + e^{\boldsymbol{\beta}_1'^T \mathbf{x}}}
+$$
+
+$$
+p(y=0 \mid \mathbf{x}) =
+\frac{e^{\boldsymbol{\beta}_0'^T \mathbf{x}}}
+{e^{\boldsymbol{\beta}_0'^T \mathbf{x}} + e^{\boldsymbol{\beta}_1'^T \mathbf{x}}}
+$$
+
+Interpretation:
+- Each class has a **linear score**
+- Probabilities are obtained by **normalizing exponentiated scores**
+
+---
+
+## 5. Natural Extension to 3+ Classes
+
+For **K classes**, define a score for each class:
+
+$$
+s_i = \boldsymbol{\beta}_i^T \mathbf{x}
+$$
+
+The probability of class \( i \) is:
+
+$$
+p(y=i \mid \mathbf{x})
+=
+\frac{e^{s_i}}
+{e^{s_1} + e^{s_2} + \cdots + e^{s_K}}
+=
+\frac{e^{s_i}}{\sum_{j=1}^{K} e^{s_j}}
+$$
+
+This is known as the **Softmax Function**.
+
+---
+
+## 6. Probability Validity
+
+The softmax function satisfies all probability requirements:
+
+- **Non-negativity**:
+  
+$$
+0 \le p(y=i \mid \mathbf{x}) \le 1
+$$
+
+- **Normalization**:
+
+$$
+\sum_{i=1}^{K} p(y=i \mid \mathbf{x}) = 1
+$$
+
+---
+
+## 7. Key Takeaways
+
+- Sigmoid is a **special case of softmax** with \( K=2 \)
+- Softmax provides a **principled extension** of logistic regression
+- Each class has its own parameter vector
+- Widely used in:
+  - Multinomial logistic regression
+  - Neural networks
+  - Deep learning classifiers
+
+---
+
+# Summary of Logistic Regression
+
+## Maximum Likelihood Estimation (MLE)
+
+Logistic regression learns parameters by **maximizing the conditional likelihood**:
+
+$$
+\hat{\boldsymbol{\beta}} = \arg\max_{\boldsymbol{\beta}} \sum_{i=1}^{n} \log p(y_i \mid \mathbf{x}_i)
+$$
+
+This is called the **conditional log-likelihood**.
+
+---
+
+## Expanding the Likelihood
+
+Using the logistic model:
+
+$$
+p(y=1 \mid \mathbf{x}) = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+$$
+p(y=0 \mid \mathbf{x}) = \frac{1}{1 + e^{\boldsymbol{\beta}^T \mathbf{x}}}
+$$
+
+the objective becomes:
+
+$$
+\hat{\boldsymbol{\beta}} =
+\arg\max_{\boldsymbol{\beta}}
+\sum_{i=1}^{N}
+\left[
+y_i \log \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}
++ (1 - y_i) \log \frac{1}{1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i}}
+\right]
+$$
+
+---
+
+## Equivalent Minimization Form
+
+Maximizing the log-likelihood is equivalent to **minimizing the negative log-likelihood**:
+
+$$
+\hat{\boldsymbol{\beta}} =
+\arg\min_{\boldsymbol{\beta}}
+\sum_{i=1}^{N}
+\left[
+- y_i \log(1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i})
+- (1 - y_i) \log(1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i})
+\right]
+$$
+
+---
+
+## Log-Loss (Binary Cross-Entropy)
+
+The objective above is known as the **log-loss** (or **binary cross-entropy**):
+
+$$
+\ell(\boldsymbol{\beta})
+=
+\sum_{i=1}^{N}
+\left[
+- y_i \log(1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i})
+- (1 - y_i) \log(1 + e^{\boldsymbol{\beta}^T \mathbf{x}_i})
+\right]
+$$
+
+---
+
+## Key Insight
+
+- Logistic regression **maximizes conditional likelihood**
+- Equivalent to **minimizing log-loss**
+- Optimization is typically done using:
+  - Gradient descent
+  - Stochastic gradient descent
+  - Newton / quasi-Newton methods
+
+---
+
+--------------------------------------
+----------
+# Classification Problem
+
+## Problem Definition
+
+Given a feature vector **x** and a qualitative response **y** taking values in a set **C**,  
+the classification task is to build a function:
+
+$$
+f(\mathbf{x})
+$$
+
+that takes the feature vector **x** as input and predicts its label **y**, i.e.,
+
+$$
+f(\mathbf{x}) \in C
+$$
+
+---
+
+## Training Data Assumption
+
+We usually assume that we have **n training samples** drawn from some probability distribution:
+
+$$
+p(\mathbf{x}, y)
+$$
+
+$$
+(\mathbf{x}^{(i)}, y^{(i)}), \quad i = 1, \dots, n
+$$
+
+These samples are assumed to be **i.i.d.**
+
+---
+
+## What Does i.i.d. Mean?
+
+**i.i.d. = independent and identically distributed**
+
+This assumption has two parts:
+
+### 1. Independent
+Each sample is independent of the others:
+
+$$
+p((\mathbf{x}^{(1)}, y^{(1)}), \dots, (\mathbf{x}^{(n)}, y^{(n)}))
+= \prod_{i=1}^{n} p(\mathbf{x}^{(i)}, y^{(i)})
+$$
+
+- Knowing one sample gives **no information** about another
+- Simplifies likelihood and optimization
+
+---
+
+### 2. Identically Distributed
+All samples come from the **same underlying distribution**:
+
+$$
+(\mathbf{x}^{(1)}, y^{(1)}) \sim p(\mathbf{x}, y), \; \dots, \; (\mathbf{x}^{(n)}, y^{(n)}) \sim p(\mathbf{x}, y)
+$$
+
+- Training and test data are assumed to follow the **same distribution**
+- This is critical for **generalization**
+
+---
+
+## Classification as Function Approximation
+
+Classification can be viewed as **function approximation**:
+
+$$
+\mathbf{x} \rightarrow y
+$$
+
+We approximate this mapping using:
+
+$$
+f(\mathbf{x})
+$$
+
+---
+
+## Binary Classification Setup
+
+In this course, we focus on **binary classification**, where:
+
+$$
+y \in \{+1, -1\}
+$$
+
+---
+
+## Key Insight
+
+- Classification learns a mapping from input **x** to label **y**
+- Training data are assumed to be **i.i.d.**
+- The i.i.d. assumption enables:
+  - Likelihood factorization
+  - Statistical learning theory
+  - Reliable generalization
+
+---
+
+
+# Risk & Bayes Classifier
+
+## Risk = Expected Loss
+
+Risk is defined as the **expected loss** of a classifier.
+
+$$
+R(f) = \mathbb{E}_{p(x,y)}[\mathcal{L}(y, f(x))]
+$$
+
+$$
+R(f) = \sum_x \sum_y p(x,y)\mathcal{L}(y, f(x))
+$$
+
+The **Bayes classifier** is the classifier that minimizes this risk:
+
+$$
+f^* = \arg\min_f \; \mathbb{E}_{p(x,y)}[\mathcal{L}(y, f(x))]
+$$
+
+$$
+f^*(x) = \arg\min_{\hat{y}} \; \mathbb{E}_{p(y|x)}[\mathcal{L}(y, \hat{y})]
+= \arg\min_{\hat{y}} \sum_y p(y|x)\mathcal{L}(y, \hat{y})
+$$
+
+---
+
+## Binary Classification Case
+
+Assume:
+
+$$
+y \in \{+1, -1\}
+$$
+
+Then:
+
+$$
+f^*(x) = \arg\min_{\hat{y}} \sum_y p(y|x)\mathcal{L}(y, \hat{y})
+$$
+
+Expanding:
+
+$$
+f^*(x) =
+\arg\min_{\hat{y}} \big[
+p(y=1|x)\mathcal{L}(1,\hat{y})
++
+p(y=-1|x)\mathcal{L}(-1,\hat{y})
+\big]
+$$
+
+Decision rule:
+
+- If $$p(y=1|x) > p(y=-1|x)$$ → predict **+1**
+- If $$p(y=1|x) < p(y=-1|x)$$ → predict **-1**
+
+---
+
+## Log-Odds Form
+
+$$
+f^*(x) = \text{sign}\left(
+\log \frac{p(y=1|x)}{p(y=-1|x)}
+\right)
+$$
+
+Interpretation:
+
+- If log-odds > 0 → class +1
+- If log-odds < 0 → class -1
+
+---
+
+## Using Bayes Rule
+
+Posterior:
+
+$$
+p(y|x) = \frac{p(x|y)p(y)}{p(x)}
+$$
+
+Substitute into log-odds:
+
+$$
+f^*(x) =
+\text{sign}\left(
+\log \frac{p(x|y=1)p(y=1)}
+{p(x|y=-1)p(y=-1)}
+\right)
+$$
+
+Since $$p(x)$$ cancels out, we only need:
+
+- Likelihood: $$p(x|y)$$
+- Prior: $$p(y)$$
+
+---
+
+## Key Concepts
+
+- **Risk** = Expected loss
+- **Bayes classifier** = Minimizes expected loss
+- Optimal decision = choose class with largest posterior probability
+- Log-odds converts probability comparison into linear decision rule
+- Bayes rule converts posterior into likelihood × prior
+
+---
+
+## Connection to Logistic Regression
+
+Logistic regression models:
+
+$$
+\log \frac{p(y=1|x)}{p(y=-1|x)} = w^T x + b
+$$
+
+So logistic regression is a **parametric approximation of the Bayes optimal classifier** under a linear log-odds assumption.
+
+
+bayes classifier는 진짜 확률분포를 알고있다는 가정하에 최적의 바운더리를 알게된다
+
+# Classification Strategies → Discriminant Analysis (Gaussian) → 1D Full Derivation + MLE
+
+> Based on the provided slides (Classification Strategies + Discriminant
+> Analysis + 1D expansion + MLE for Gaussian parameters).\
+> All math uses `$$ ... $$` (not `\[` `\]`).
+
+------------------------------------------------------------------------
+
+## 0. Setup and Notation
+
+-   Input: $$x$$ (first treat as **scalar**; later can generalize)
+-   Label: $$y \in \{+1,-1\}$$
+-   Prior:
+    -   $$\alpha = p(y=+1)$$
+    -   $$1-\alpha = p(y=-1)$$
+-   Likelihood model (Gaussian):
+    -   $$p(x\mid y=+1) = \mathcal{N}(x\mid \mu_{1}, \sigma_{1}^{2})$$
+    -   $$p(x\mid y=-1) = \mathcal{N}(x\mid \mu_{-1}, \sigma_{-1}^{2})$$
+
+Gaussian pdf (1D):
+
+$$
+\mathcal{N}(x\mid \mu,\sigma^2)
+= \frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+------------------------------------------------------------------------
+
+## 1. Classification Strategies (Generative vs Discriminative)
+
+We want a classifier that minimizes risk (expected loss):
+
+$$
+f^*=\arg\min_f\;\mathbb{E}_{p(x,y)}[\mathcal{L}(y,f(x))]
+= \arg\min_f\sum_x\sum_y p(x,y)\mathcal{L}(y,f(x))
+$$
+
+But we usually do **not** know $$p(x,y)$$, so we estimate it from
+training data.
+
+### Two strategies to predict $$p(y\mid x)$$
+
+**(A) Generative classifier** - Estimate $$p(x\mid y)$$ and $$p(y)$$
+from data (often via MLE) - Then compute posterior via Bayes rule:
+
+$$
+p(y\mid x)=\frac{p(x\mid y)p(y)}{p(x)}
+$$
+
+Example: Bayes classifier / Discriminant Analysis (LDA/QDA).
+
+**(B) Discriminative classifier** - Directly estimate $$p(y\mid x)$$
+without Bayes rule
+
+Example: Logistic regression.
+
+------------------------------------------------------------------------
+
+## 2. Discriminant Analysis: Bayes Decision Rule
+
+Bayes classifier (0--1 loss) predicts the class with largest posterior:
+
+$$
+f^*(x)=\arg\max_{y\in\{+1,-1\}} p(y\mid x)
+$$
+
+Using Bayes rule and cancelling $$p(x)$$, this becomes:
+
+$$
+f^*(x)=\arg\max_{y\in\{+1,-1\}} p(x\mid y)p(y)
+$$
+
+Equivalently, in **log-likelihood ratio** form:
+
+$$
+f^*(x)
+= \text{sign}\left(
+\log\frac{p(x\mid y=+1)p(y=+1)}{p(x\mid y=-1)p(y=-1)}
+\right)
+$$
+
+Substitute priors:
+
+$$
+f^*(x)
+= \text{sign}\left(
+\log\frac{p(x\mid y=+1)\alpha}{p(x\mid y=-1)(1-\alpha)}
+\right)
+$$
+
+If the expression inside `sign( )` is \> 0 → predict +1, otherwise -1.
+
+------------------------------------------------------------------------
+
+## 3. Plugging in Gaussian Likelihoods (1D)
+
+Assume Gaussian likelihoods:
+
+$$
+p(x\mid y=+1)=\mathcal{N}(x\mid \mu_1,\sigma_1^2),\quad
+p(x\mid y=-1)=\mathcal{N}(x\mid \mu_{-1},\sigma_{-1}^2)
+$$
+
+Then:
+
+$$
+f^*(x)
+= \text{sign}\left(
+\log
+\frac{\mathcal{N}(x\mid \mu_1,\sigma_1^2)\alpha}
+{\mathcal{N}(x\mid \mu_{-1},\sigma_{-1}^2)(1-\alpha)}
+\right)
+$$
+
+Now expand the Gaussian ratio step-by-step.
+
+### 3.1 Write the ratio explicitly
+
+$$
+\frac{\mathcal{N}(x\mid \mu_1,\sigma_1^2)}
+{\mathcal{N}(x\mid \mu_{-1},\sigma_{-1}^2)}
+=
+\frac{\frac{1}{\sqrt{2\pi\sigma_1^2}}\exp\left(-\frac{(x-\mu_1)^2}{2\sigma_1^2}\right)}
+{\frac{1}{\sqrt{2\pi\sigma_{-1}^2}}\exp\left(-\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}\right)}
+$$
+
+Cancel $$\sqrt{2\pi}$$:
+
+$$
+=
+\frac{\frac{1}{\sqrt{\sigma_1^2}}\exp\left(-\frac{(x-\mu_1)^2}{2\sigma_1^2}\right)}
+{\frac{1}{\sqrt{\sigma_{-1}^2}}\exp\left(-\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}\right)}
+=
+\frac{\sqrt{\sigma_{-1}^2}}{\sqrt{\sigma_1^2}}
+\cdot
+\exp\left(
+-\frac{(x-\mu_1)^2}{2\sigma_1^2}
++
+\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}
+\right)
+$$
+
+### 3.2 Take log and include priors
+
+Define discriminant value:
+
+$$
+g(x)
+=
+\log
+\frac{\mathcal{N}(x\mid \mu_1,\sigma_1^2)\alpha}
+{\mathcal{N}(x\mid \mu_{-1},\sigma_{-1}^2)(1-\alpha)}
+$$
+
+Then:
+
+$$
+g(x)
+=
+\log\left(\frac{\sqrt{\sigma_{-1}^2}}{\sqrt{\sigma_1^2}}\right)
++
+\left(
+-\frac{(x-\mu_1)^2}{2\sigma_1^2}
++
+\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}
+\right)
++
+\log\left(\frac{\alpha}{1-\alpha}\right)
+$$
+
+Use $$\log(\sqrt{a})=\frac12\log(a)$$:
+
+$$
+\log\left(\frac{\sqrt{\sigma_{-1}^2}}{\sqrt{\sigma_1^2}}\right)
+=
+\frac12\log\left(\frac{\sigma_{-1}^2}{\sigma_1^2}\right)
+=
+-\frac12\log\left(\frac{\sigma_1^2}{\sigma_{-1}^2}\right)
+$$
+
+So an equivalent form (matching the slide style) is:
+
+$$
+g(x)
+=
+-\frac12\log\left(\frac{\sigma_{1}^2}{\sigma_{-1}^2}\right)
+-\frac{(x-\mu_1)^2}{2\sigma_1^2}
++\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}
++
+\log\left(\frac{\alpha}{1-\alpha}\right)
+$$
+
+Decision rule:
+
+$$
+f^*(x)=\text{sign}(g(x))
+$$
+
+> This is the **fully expanded** 1D Gaussian Bayes discriminant (no
+> omission).
+
+------------------------------------------------------------------------
+
+## 4. Maximum Likelihood Estimation (MLE) of Parameters
+
+We are given training set $$\{(x_i,y_i)\}_{i=1}^n$$.
+
+Let: - $$\mathcal{I}_1 = \{i: y_i=+1\}$$, size
+$$n_1 = |\mathcal{I}_1|$$ - $$\mathcal{I}_{-1} = \{i: y_i=-1\}$$, size
+$$n_{-1} = |\mathcal{I}_{-1}|$$ - $$n = n_1 + n_{-1}$$
+
+### 4.1 MLE for prior $$\alpha$$
+
+Likelihood for labels under Bernoulli prior:
+
+$$
+p(\{y_i\}) = \alpha^{n_1}(1-\alpha)^{n_{-1}}
+$$
+
+Log-likelihood:
+
+$$
+\ell(\alpha)= n_1\log\alpha + n_{-1}\log(1-\alpha)
+$$
+
+Differentiate and set to 0:
+
+$$
+\frac{d\ell}{d\alpha} = \frac{n_1}{\alpha} - \frac{n_{-1}}{1-\alpha} = 0
+$$
+
+Solve:
+
+$$
+n_1(1-\alpha)=n_{-1}\alpha
+\Rightarrow n_1 = (n_1+n_{-1})\alpha = n\alpha
+\Rightarrow \hat{\alpha} = \frac{n_1}{n}
+$$
+
+So $$p(y=-1)=1-\hat{\alpha}=\frac{n_{-1}}{n}$$.
+
+------------------------------------------------------------------------
+
+## 4.2 MLE for $$\mu_1$$ (mean of positive class)
+
+For class +1, conditional likelihood:
+
+$$
+\prod_{i\in\mathcal{I}_1}
+\frac{1}{\sqrt{2\pi\sigma_1^2}}
+\exp\left(-\frac{(x_i-\mu_1)^2}{2\sigma_1^2}\right)
+$$
+
+Log-likelihood (dropping constants not depending on $$\mu_1$$):
+
+$$
+\ell(\mu_1) = -\sum_{i\in\mathcal{I}_1}\frac{(x_i-\mu_1)^2}{2\sigma_1^2}
+$$
+
+Differentiate:
+
+$$
+\frac{\partial \ell}{\partial \mu_1}
+=
+-\sum_{i\in\mathcal{I}_1}\frac{1}{2\sigma_1^2}\cdot 2(x_i-\mu_1)(-1)
+=
+\sum_{i\in\mathcal{I}_1}\frac{x_i-\mu_1}{\sigma_1^2}
+$$
+
+Set to 0:
+
+$$
+\sum_{i\in\mathcal{I}_1}(x_i-\mu_1)=0
+\Rightarrow
+\sum_{i\in\mathcal{I}_1}x_i - n_1\mu_1 = 0
+\Rightarrow
+\hat{\mu}_1 = \frac{1}{n_1}\sum_{i\in\mathcal{I}_1}x_i
+$$
+
+> This matches the slide note: the summation is only over examples in
+> the positive class.
+
+Similarly:
+
+$$
+\hat{\mu}_{-1} = \frac{1}{n_{-1}}\sum_{i\in\mathcal{I}_{-1}}x_i
+$$
+
+------------------------------------------------------------------------
+
+## 4.3 MLE for $$\sigma_1^2$$ (variance of positive class)
+
+For class +1, full log-likelihood terms involving $$\sigma_1^2$$:
+
+$$
+\ell(\sigma_1^2)
+=
+\sum_{i\in\mathcal{I}_1}
+\left(
+-\frac12\log(2\pi\sigma_1^2)
+-\frac{(x_i-\mu_1)^2}{2\sigma_1^2}
+\right)
+$$
+
+Differentiate w.r.t. $$\sigma_1^2$$.
+
+First term:
+
+$$
+\frac{\partial}{\partial \sigma_1^2}\left(-\frac12\log(2\pi\sigma_1^2)\right)
+= -\frac12\cdot\frac{1}{\sigma_1^2}
+$$
+
+Second term:
+
+$$
+\frac{\partial}{\partial \sigma_1^2}
+\left(
+-\frac{(x_i-\mu_1)^2}{2\sigma_1^2}
+\right)
+=
+-\frac{(x_i-\mu_1)^2}{2}\cdot \frac{\partial}{\partial \sigma_1^2}(\sigma_1^{-2})
+=
+-\frac{(x_i-\mu_1)^2}{2}\cdot (-1)\sigma_1^{-4}
+=
+\frac{(x_i-\mu_1)^2}{2(\sigma_1^2)^2}
+$$
+
+Combine for all $$i\in\mathcal{I}_1$$:
+
+$$
+\frac{\partial \ell}{\partial \sigma_1^2}
+=
+\sum_{i\in\mathcal{I}_1}
+\left(
+-\frac{1}{2\sigma_1^2}
++
+\frac{(x_i-\mu_1)^2}{2(\sigma_1^2)^2}
+\right)
+$$
+
+Set to 0 and multiply by $$2(\sigma_1^2)^2$$:
+
+$$
+\sum_{i\in\mathcal{I}_1}
+\left(
+-(\sigma_1^2)
++
+(x_i-\mu_1)^2
+\right)=0
+$$
+
+So:
+
+$$
+\sum_{i\in\mathcal{I}_1}(x_i-\mu_1)^2 = n_1\sigma_1^2
+\Rightarrow
+\hat{\sigma}_1^2 = \frac{1}{n_1}\sum_{i\in\mathcal{I}_1}(x_i-\hat{\mu}_1)^2
+$$
+
+Similarly:
+
+$$
+\hat{\sigma}_{-1}^2 = \frac{1}{n_{-1}}\sum_{i\in\mathcal{I}_{-1}}(x_i-\hat{\mu}_{-1})^2
+$$
+
+Note: This is the **MLE** variance 
+dividing by 
+$$n_k$$
+, not
+ $$n_k-1$$
+
+------------------------------------------------------------------------
+
+## 5. Summary (What the slides conclude)
+
+-   $$\hat{\alpha}
+ = \frac{n_1}{n}$$ and
+    $$1-\hat{\alpha}=\frac{n_{-1}}{n}$$
+-   
+ are class-wise sample means $$\hat{\mu}_1,\hat{\mu}_{-1}$$
+-   
+ 
+are class-wise MLE $$\hat{\sigma}_1^2,\hat{\sigma}_{-1}^2$$
+    variances
+-   Plug these into:
+
+$$
+g(x)
+=
+-\frac12\log\left(\frac{\sigma_{1}^2}{\sigma_{-1}^2}\right)
+-\frac{(x-\mu_1)^2}{2\sigma_1^2}
++\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}
++
+\log\left(\frac{\alpha}{1-\alpha}\right)
+$$
+
+and predict:
+
+$$
+f^*(x)=\text{sign}(g(x))
+$$
+
+------------------------------------------------------------------------
+
+# Appendix: Same derivation in "ratio" form (often shown on slides)
+
+Start from:
+
+$$
+f^*(x)=\text{sign}\left(\log\frac{\mathcal{N}(x|\mu_1,\sigma_1^2)\alpha}{\mathcal{N}(x|\mu_{-1},\sigma_{-1}^2)(1-\alpha)}\right)
+$$
+
+Expand the log into sum of logs:
+
+$$
+= \text{sign}\left(
+\log\mathcal{N}(x|\mu_1,\sigma_1^2)
+-\log\mathcal{N}(x|\mu_{-1},\sigma_{-1}^2)
++\log\alpha-\log(1-\alpha)
+\right)
+$$
+
+Then substitute:
+
+$$
+\log\mathcal{N}(x|\mu,\sigma^2)
+=
+-\frac12\log(2\pi\sigma^2)
+-\frac{(x-\mu)^2}{2\sigma^2}
+$$
+
+to obtain exactly the expanded discriminant above.
+
+
+# Linear Discriminant Analysis (LDA) --- Full Algebraic Derivation
+
+This document fully reconstructs the **exact algebraic expansion** shown
+in the slides:
+
+-   Start from Gaussian discriminant
+-   Assume equal variances
+-   Expand quadratic terms
+-   Show cancellation → **linear decision boundary**
+-   Compare with QDA
+
+All formulas use `$$`.
+
+------------------------------------------------------------------------
+
+# 1. Start from Gaussian Bayes Discriminant (1D)
+
+Recall from Gaussian discriminant analysis:
+
+$$
+f^*(x)
+= \text{sign}\left(
+-\frac12\log\frac{\sigma_1^2}{\sigma_{-1}^2}
+-\frac{(x-\mu_1)^2}{2\sigma_1^2}
++\frac{(x-\mu_{-1})^2}{2\sigma_{-1}^2}
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+------------------------------------------------------------------------
+
+# 2. LDA Assumption (Equal Variances)
+
+Linear Discriminant Analysis assumes:
+
+$$
+\sigma_1^2 = \sigma_{-1}^2 = \sigma^2
+$$
+
+Substitute into the discriminant:
+
+$$
+f^*(x)
+= \text{sign}\left(
+-\frac12\log\frac{\sigma^2}{\sigma^2}
+-\frac{(x-\mu_1)^2}{2\sigma^2}
++\frac{(x-\mu_{-1})^2}{2\sigma^2}
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+Since $$\log(\sigma^2/\sigma^2)=\log(1)=0$$:
+
+$$
+f^*(x)
+= \text{sign}\left(
+-\frac{(x-\mu_1)^2}{2\sigma^2}
++\frac{(x-\mu_{-1})^2}{2\sigma^2}
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+Factor $$\frac{1}{2\sigma^2}$$:
+
+$$
+f^*(x)
+= \text{sign}\left(
+\frac{1}{2\sigma^2}\big[(x-\mu_{-1})^2-(x-\mu_1)^2\big]
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+------------------------------------------------------------------------
+
+# 3. Expand the Quadratic Terms
+
+Expand both squares:
+
+$$
+(x-\mu_1)^2 = x^2 - 2\mu_1 x + \mu_1^2
+$$
+
+$$
+(x-\mu_{-1})^2 = x^2 - 2\mu_{-1} x + \mu_{-1}^2
+$$
+
+Substitute into the difference:
+
+$$
+(x-\mu_{-1})^2-(x-\mu_1)^2
+= (x^2 - 2\mu_{-1}x + \mu_{-1}^2) - (x^2 - 2\mu_1x + \mu_1^2)
+$$
+
+Cancel $$x^2$$:
+
+$$
+= -2\mu_{-1}x + \mu_{-1}^2 + 2\mu_1x - \mu_1^2
+$$
+
+Group terms:
+
+$$
+= 2(\mu_1-\mu_{-1})x + (\mu_{-1}^2-\mu_1^2)
+$$
+
+------------------------------------------------------------------------
+
+# 4. Substitute Back into Discriminant
+
+$$
+f^*(x)
+= \text{sign}\left(
+\frac{1}{2\sigma^2}\left[2(\mu_1-\mu_{-1})x + (\mu_{-1}^2-\mu_1^2)\right]
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+Distribute factor:
+
+$$
+= \text{sign}\left(
+\frac{\mu_1-\mu_{-1}}{\sigma^2}x
++ \frac{\mu_{-1}^2-\mu_1^2}{2\sigma^2}
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+Rearrange constant term:
+
+$$
+= \text{sign}\left(
+\frac{\mu_1-\mu_{-1}}{\sigma^2}x
+- \frac{\mu_1^2-\mu_{-1}^2}{2\sigma^2}
++ \log\frac{\alpha}{1-\alpha}
+\right)
+$$
+
+------------------------------------------------------------------------
+
+# 5. Final Linear Form
+
+Define:
+
+$$
+w = \frac{\mu_1-\mu_{-1}}{\sigma^2}
+$$
+
+$$
+b = -\frac{\mu_1^2-\mu_{-1}^2}{2\sigma^2} + \log\frac{\alpha}{1-\alpha}
+$$
+
+Then:
+
+$$
+f^*(x) = \text{sign}(wx + b)
+$$
+
+👉 The decision boundary is **linear**.
+
+------------------------------------------------------------------------
+
+# 6. Linear vs Quadratic Discriminant Analysis
+
+## QDA (Different Variances)
+
+If:
+
+$$
+\sigma_1^2 \neq \sigma_{-1}^2
+$$
+
+Then quadratic terms remain:
+
+$$
+(x-\mu_k)^2
+$$
+
+→ Decision boundary becomes **quadratic polynomial in x**.
+
+------------------------------------------------------------------------
+
+## LDA (Equal Variances)
+
+If:
+
+$$
+\sigma_1^2 = \sigma_{-1}^2
+$$
+
+Quadratic terms cancel → boundary becomes **linear**:
+
+$$
+f^*(x) = \text{sign}(wx+b)
+$$
+
+------------------------------------------------------------------------
+
+# 7. Interpretation
+
+-   LDA assumes **same variance/covariance** across classes
+-   Leads to **linear boundary**
+-   QDA allows different variances → **curved boundary**
+-   LDA is more stable when data small
+-   QDA more flexible but higher variance
+
+------------------------------------------------------------------------
+
+# End
+
+
+# Discriminant Analysis (Multi‑Dimensional, Multi‑Class, Softmax, LDA vs Logistic) --- Full Mathematical Notes
+
+This document reconstructs **all mathematical content** from the slides:
+
+-   Multivariate Gaussian density
+-   Discriminant function in d-dim
+-   Multi‑class LDA derivation
+-   From discriminant scores → probabilities (softmax)
+-   LDA example interpretation
+-   Why discriminant analysis
+-   LDA vs Logistic regression (mathematical connection)
+
+------------------------------------------------------------------------
+
+# 1. Multivariate Gaussian Distribution
+
+For class $$k$$ in $$d$$‑dimensional space:
+
+$$
+p(x \mid y=k) = \mathcal{N}(x \mid \mu_k, \Sigma_k)
+$$
+
+Density:
+
+$$
+\mathcal{N}(x \mid \mu, \Sigma)
+= (2\pi)^{-d/2} |\Sigma|^{-1/2}
+\exp\left(
+-\frac12 (x-\mu)^T \Sigma^{-1} (x-\mu)
+\right)
+$$
+
+Where:
+
+-   $$x \in \mathbb{R}^d$$
+-   mean vector $$\mu_k$$
+-   covariance matrix $$\Sigma_k$$
+
+------------------------------------------------------------------------
+
+# 2. Discriminant Function (Multivariate Case)
+
+Bayes rule with Gaussian likelihood:
+
+$$
+\delta_k(x) = \log p(x \mid y=k) + \log \alpha_k
+$$
+
+Substitute Gaussian density:
+
+$$
+\delta_k(x)
+=
+-\frac12 \log |\Sigma_k|
+-\frac12 (x-\mu_k)^T \Sigma_k^{-1} (x-\mu_k)
++ \log \alpha_k
+$$
+
+------------------------------------------------------------------------
+
+## 2.1 Expand Quadratic Term
+
+$$
+(x-\mu_k)^T \Sigma_k^{-1} (x-\mu_k)
+=
+x^T \Sigma_k^{-1} x
+- 2\mu_k^T \Sigma_k^{-1} x
++ \mu_k^T \Sigma_k^{-1} \mu_k
+$$
+
+Substitute:
+
+$$
+\delta_k(x)
+=
+-\frac12 \log |\Sigma_k|
+-\frac12 x^T \Sigma_k^{-1} x
++ \mu_k^T \Sigma_k^{-1} x
+-\frac12 \mu_k^T \Sigma_k^{-1} \mu_k
++ \log \alpha_k
+$$
+
+------------------------------------------------------------------------
+
+# 3. LDA Assumption (Shared Covariance)
+
+If:
+
+$$
+\Sigma_k = \Sigma
+$$
+
+Then term $$-\frac12 x^T \Sigma^{-1} x$$ is identical for all classes →
+cancels in comparison.
+
+Thus the discriminant simplifies to:
+
+$$
+\delta_k(x)
+=
+x^T \Sigma^{-1} \mu_k
+-\frac12 \mu_k^T \Sigma^{-1} \mu_k
++ \log \alpha_k
+$$
+
+This is **linear in x**.
+
+------------------------------------------------------------------------
+
+# 4. Multi‑Class Classification
+
+For $$K$$ classes:
+
+$$
+\hat{y} = \arg\max_k \delta_k(x)
+$$
+
+Equivalent form (comparing pairwise):
+
+For any classes $$i,j$$:
+
+$$
+\delta_i(x) - \delta_j(x) > 0
+$$
+
+→ choose class $$i$$.
+
+------------------------------------------------------------------------
+
+# 5. From Discriminant Scores → Probabilities (Softmax)
+
+Convert scores into posterior estimates:
+
+$$
+P(Y=k \mid X=x)
+=
+\frac{e^{\delta_k(x)}}
+{\sum_{\ell=1}^{K} e^{\delta_\ell(x)}}
+$$
+
+Prediction:
+
+$$
+\hat{y} = \arg\max_k P(Y=k \mid X=x)
+$$
+
+------------------------------------------------------------------------
+
+# 6. LDA Example Interpretation
+
+Assume:
+
+$$
+\alpha_1 = \alpha_2 = \alpha_3
+$$
+
+Then only the Gaussian term matters.
+
+-   Each ellipse = Gaussian contour
+-   Same covariance → same shape/size ellipses
+-   LDA boundary = linear hyperplanes
+-   True Bayes boundary may be nonlinear
+
+------------------------------------------------------------------------
+
+# 7. Why Discriminant Analysis?
+
+## 7.1 Stability with well‑separated classes
+
+When classes are far apart:
+
+-   Logistic regression parameters unstable
+-   LDA remains stable
+
+Reason: few points near boundary → logistic likelihood flat.
+
+------------------------------------------------------------------------
+
+## 7.2 Small sample size
+
+If $$n$$ small and Gaussian assumption reasonable:
+
+LDA often more stable than logistic regression.
+
+------------------------------------------------------------------------
+
+## 7.3 Multi‑class naturally supported
+
+LDA handles $$K>2$$ easily using discriminant scores.
+
+------------------------------------------------------------------------
+
+# 8. LDA vs Logistic Regression (Mathematical Connection)
+
+For two classes, LDA yields:
+
+$$
+\log \frac{p(y=1 \mid x)}{p(y=-1 \mid x)}
+= w^T x + b
+$$
+
+Same functional form as logistic regression.
+
+Difference:
+
+-   Logistic regression maximizes conditional likelihood:
+
+$$
+\prod_i p(y_i \mid x_i)
+$$
+
+-   LDA maximizes joint likelihood:
+
+$$
+\prod_i p(x_i, y_i)
+$$
+
+Despite different estimation, predictions often similar.
+
+------------------------------------------------------------------------
+
+## 8.1 Logistic Regression can approximate QDA
+
+If quadratic features included:
+
+$$
+x_1^2, x_2^2, x_1x_2
+$$
+
+→ logistic model can produce quadratic boundary similar to QDA.
+
+------------------------------------------------------------------------
+
+# End
+
+# Credit Card Default --- Confusion Matrix, Error Types, Threshold, ROC/AUC (Full Notes)
+
+This note reconstructs and **extends** the slide mathematically:
+
+-   Confusion matrix & misclassification rate
+-   Error types (FP, FN, TP, TN)
+-   Threshold effect on error trade‑off
+-   ROC curve & AUC
+-   Added: precision, recall, F1, balanced error, optimal threshold
+    intuition
+
+All math uses `$$`.
+
+------------------------------------------------------------------------
+
+# 1. Confusion Matrix (Credit Card Default)
+
+             True No   True Yes   Total
+  ---------- --------- ---------- -------
+  Pred No    9644      252        9896
+  Pred Yes   23        81         104
+  Total      9667      333        10000
+
+Definitions:
+
+$$
+TN = 9644,\quad FP = 23,\quad FN = 252,\quad TP = 81
+$$
+
+------------------------------------------------------------------------
+
+# 2. Misclassification Rate
+
+$$
+\text{Error} = \frac{FP + FN}{N}
+= \frac{23 + 252}{10000}
+= 0.0275 = 2.75\%
+$$
+
+------------------------------------------------------------------------
+
+## Baseline (Always predict No)
+
+Errors = number of Yes samples:
+
+$$
+\frac{333}{10000} = 3.33\%
+$$
+
+Thus LDA improves over naive baseline.
+
+------------------------------------------------------------------------
+
+# 3. Error Types
+
+## False Positive Rate (FPR)
+
+$$
+\text{FPR} = \frac{FP}{FP + TN}
+= \frac{23}{9667}
+\approx 0.0024 = 0.24\%
+$$
+
+------------------------------------------------------------------------
+
+## False Negative Rate (FNR)
+
+$$
+\text{FNR} = \frac{FN}{FN + TP}
+= \frac{252}{333}
+\approx 0.757 = 75.7\%
+$$
+
+Interpretation: many defaulters missed.
+
+------------------------------------------------------------------------
+
+## True Positive Rate (Recall / Sensitivity)
+
+$$
+\text{TPR} = \frac{TP}{TP + FN}
+= 1 - \text{FNR}
+$$
+
+------------------------------------------------------------------------
+
+## True Negative Rate (Specificity)
+
+$$
+\text{TNR} = \frac{TN}{TN + FP}
+= 1 - \text{FPR}
+$$
+
+------------------------------------------------------------------------
+
+# 4. Decision Rule via Probability Threshold
+
+Prediction rule:
+
+$$
+\hat y =
+\begin{cases}
+1 & \text{if } P(Default=Yes \mid x) \ge t \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+Default threshold:
+
+$$
+t = 0.5
+$$
+
+Changing $$t$$ trades off FN vs FP.
+
+------------------------------------------------------------------------
+
+# 5. Threshold Trade‑off
+
+Lower threshold:
+
+-   increases TP
+-   decreases FN
+-   increases FP
+
+Higher threshold:
+
+-   decreases FP
+-   increases FN
+
+Thus:
+
+$$
+\text{Cannot minimize FP and FN simultaneously}
+$$
+
+------------------------------------------------------------------------
+
+# 6. Overall Error vs Threshold
+
+Let:
+
+$$
+\text{Error}(t) = \frac{FP(t) + FN(t)}{N}
+$$
+
+Behavior:
+
+-   Small $$t$$ → high FP
+-   Large $$t$$ → high FN
+-   Middle $$t$$ minimizes total error
+
+------------------------------------------------------------------------
+
+# 7. ROC Curve
+
+ROC plots:
+
+$$
+(\text{FPR}(t),\ \text{TPR}(t))
+$$
+
+for all thresholds $$t \in [0,1]$$.
+
+Properties:
+
+-   left‑top corner = perfect classifier
+-   diagonal = random guessing
+
+------------------------------------------------------------------------
+
+## Area Under Curve (AUC)
+
+$$
+\text{AUC} = \int_0^1 \text{TPR}(u)\, d(\text{FPR}(u))
+$$
+
+Interpretation:
+
+$$
+\text{AUC} = P(\text{model ranks positive higher than negative})
+$$
+
+Higher AUC → better model.
+
+------------------------------------------------------------------------
+
+# 8. Additional Metrics (Useful in Practice)
+
+## Precision
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+## Recall
+
+$$
+\text{Recall} = \text{TPR}
+$$
+
+## F1 Score
+
+$$
+F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}
+{\text{Precision} + \text{Recall}}
+$$
+
+------------------------------------------------------------------------
+
+## Balanced Error Rate
+
+$$
+\text{BER} = \frac{\text{FPR} + \text{FNR}}{2}
+$$
+
+Useful for imbalanced data (like default detection).
+
+------------------------------------------------------------------------
+
+# 9. Choosing Optimal Threshold
+
+Common criteria:
+
+### Minimize total error
+
+$$
+t^* = \arg\min_t \text{Error}(t)
+$$
+
+### Maximize F1
+
+$$
+t^* = \arg\max_t F1(t)
+$$
+
+### Cost‑sensitive threshold
+
+If FN more expensive:
+
+choose lower $$t$$.
+
+------------------------------------------------------------------------
+
+# 10. Key Insight
+
+-   Accuracy alone is misleading for imbalanced data
+-   ROC/AUC evaluate ranking ability independent of threshold
+-   Threshold selection depends on application cost
+
+------------------------------------------------------------------------
+
+# End
+
+
+# Naive Bayes --- Full Mathematical Notes (Assumption, Example, Practical Issues)
+
+This document reconstructs and **extends all slides mathematically**:
+
+-   Bayes decision rule
+-   Naive conditional independence assumption
+-   Why Naive Bayes works despite wrong assumption
+-   Full Weather dataset numerical example
+-   Zero‑frequency problem (Laplace smoothing)
+-   Log‑probability trick (numerical stability)
+
+All math uses `$$`.
+
+------------------------------------------------------------------------
+
+# 1. Bayes Optimal Classifier
+
+Bayes risk:
+
+$$
+f^* = \arg\min_f \mathbb{E}_{p(x,y)}[\mathcal{L}(y, f(x))]
+$$
+
+Equivalent:
+
+$$
+f^*(x) = \arg\max_y p(y \mid x)
+$$
+
+Using Bayes rule:
+
+$$
+p(y \mid x) = \frac{p(x \mid y)p(y)}{p(x)}
+$$
+
+Since $$p(x)$$ constant across classes:
+
+$$
+f^*(x) = \arg\max_y p(x \mid y)p(y)
+$$
+
+------------------------------------------------------------------------
+
+# 2. Naive Bayes Assumption
+
+For $$x = (x_1,\dots,x_d)$$:
+
+$$
+p(x \mid y) = \prod_{j=1}^{d} p(x_j \mid y)
+$$
+
+This assumes **conditional independence** given class.
+
+------------------------------------------------------------------------
+
+# 3. Why Naive Bayes Works (Even When False)
+
+Although independence rarely holds:
+
+-   True $$p(x|y)$$ inaccurate
+-   But ranking of classes often preserved:
+
+$$
+p(x|y_1)p(y_1) > p(x|y_2)p(y_2)
+$$
+
+Still correct classification.
+
+This is why Naive Bayes performs surprisingly well.
+
+------------------------------------------------------------------------
+
+# 4. Weather Dataset Example
+
+Goal:
+
+$$
+P(\text{PlayGolf}=yes \mid x)
+\quad vs \quad
+P(\text{PlayGolf}=no \mid x)
+$$
+
+Given:
+
+$$
+x = (\text{Outlook=sunny, Temp=Hot, Humidity=High, Windy=False})
+$$
+
+------------------------------------------------------------------------
+
+## 4.1 Prior Probabilities
+
+From dataset:
+
+$$
+P(yes) = \frac{9}{14}, \quad
+P(no) = \frac{5}{14}
+$$
+
+------------------------------------------------------------------------
+
+## 4.2 Likelihood (Naive Factorization)
+
+### For class = yes
+
+$$
+P(x|yes)
+= P(\text{sunny}|yes)
+P(\text{Hot}|yes)
+P(\text{High}|yes)
+P(\text{False}|yes)
+$$
+
+From counts:
+
+$$
+= \frac{3}{9} \cdot \frac{2}{9} \cdot \frac{3}{9} \cdot \frac{6}{9}
+\approx 0.016
+$$
+
+Posterior (unnormalized):
+
+$$
+P(yes|x) \propto 0.016 \cdot \frac{9}{14}
+$$
+
+------------------------------------------------------------------------
+
+### For class = no
+
+$$
+P(x|no)
+= P(\text{sunny}|no)
+P(\text{Hot}|no)
+P(\text{High}|no)
+P(\text{False}|no)
+$$
+
+From counts:
+
+$$
+= \frac{2}{5} \cdot \frac{2}{5} \cdot \frac{4}{5} \cdot \frac{2}{5}
+\approx 0.051
+$$
+
+Posterior:
+
+$$
+P(no|x) \propto 0.051 \cdot \frac{5}{14}
+$$
+
+------------------------------------------------------------------------
+
+## 4.3 Prediction
+
+Since:
+
+$$
+P(no|x) > P(yes|x)
+$$
+
+Prediction:
+
+$$
+\hat y = no
+$$
+
+------------------------------------------------------------------------
+
+# 5. Zero‑Frequency Problem
+
+If any term:
+
+$$
+p(x_j|y) = 0
+$$
+
+Then:
+
+$$
+p(x|y) = 0
+$$
+
+→ catastrophic failure.
+
+------------------------------------------------------------------------
+
+## 5.1 Laplace Smoothing
+
+Add small constant $$\epsilon$$ (usually 1):
+
+$$
+p(x_j|y) = \frac{count(x_j,y) + \epsilon}{count(y) + \epsilon K}
+$$
+
+Prevents zero probabilities.
+
+------------------------------------------------------------------------
+
+# 6. Numerical Stability (Log Trick)
+
+Product becomes extremely small:
+
+$$
+p(x|y) = \prod_j p(x_j|y)
+$$
+
+Instead compute:
+
+$$
+\log p(x|y) = \sum_j \log p(x_j|y)
+$$
+
+Decision rule unchanged:
+
+$$
+\arg\max_y \log p(x|y) + \log p(y)
+$$
+
+------------------------------------------------------------------------
+
+# 7. Key Insights
+
+-   Naive Bayes assumes independence → rarely true
+-   Still works due to correct class ranking
+-   Laplace smoothing solves zero‑probability issue
+-   Log‑probability avoids underflow
+-   Extremely fast and effective for text classification
+
+------------------------------------------------------------------------
+
+# End
