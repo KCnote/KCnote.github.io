@@ -262,7 +262,3 @@ Equivalent to minimizing **cross‑entropy loss**.
 - 🔹 Decision boundary geometry  
 - 🔹 Gradient / Hessian derivation  
 - 🔹 Newton / IRLS optimization  
-
----
-
-✍️ *Prepared for technical blog use — clean math + intuitive explanation*

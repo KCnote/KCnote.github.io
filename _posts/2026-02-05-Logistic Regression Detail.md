@@ -257,7 +257,3 @@ No MLE / optimization content was added, as requested.
 - 📊 Linear in **log-odds**, not probability  
 - 📐 Decision boundary = linear hyperplane  
 - ✔ No content omitted, only styled for readability  
-
----
-
-✍️ *Blog-ready styled version (content unchanged)*
