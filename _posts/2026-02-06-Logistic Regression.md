@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Entry of Classification"
-date: 2026-02-05 00:00:00 +0900
+title: "Logistic Regression"
+date: 2026-02-06 00:00:00 +0900
 author: kang
 categories: [Machince Learning, Classification]
-tags: [Machince Learning, Overview, ML, Supervised, Regression, Classification]
+tags: [Machince Learning, Mathematics, ML, Supervised, Regression, Classification]
 pin: false
 math: true
 mermaid: true

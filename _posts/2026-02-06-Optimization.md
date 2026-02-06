@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Optimization and Gradient Descent"
-date: 2026-02-05 00:00:00 +0900
+date: 2026-02-06 00:00:00 +0900
 author: kang
 categories: [Machince Learning, Optimization]
 tags: [Machince Learning, Overview, ML, Supervised, Classification, MLE, Optimization, Gradient Descent]

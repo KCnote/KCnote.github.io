@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Logistic vs LDA"
-date: 2026-02-05 00:00:00 +0900
+date: 2026-02-06 00:00:00 +0900
 author: kang
 categories: [Machince Learning, Classification]
 tags: [Machince Learning, Mathematics, ML, Supervised, Regression, Classification, Discriminant, LDA]
