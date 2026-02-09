@@ -3,8 +3,8 @@ layout: post
 title: "Bootstrapping"
 date: 2026-02-09 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Model]
-tags: [Machince Learning, Mathematics, Model, Classification Trees]
+categories: [Machince Learning, Optimization]
+tags: [Machince Learning, Optimization, Mathematics, Bootstrapping]
 pin: false
 math: true
 mermaid: true
