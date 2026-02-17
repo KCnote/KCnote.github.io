@@ -11,9 +11,6 @@ mermaid: true
 ---
 # 🧩 Cramer’s Rule (What Those Images Were Actually About)
 
-You’re right — the last set of images was basically explaining **Cramer’s Rule** using a **geometric determinant interpretation** (area/volume scaling).  
-Below is the missing core content, with the “replace one column” idea and why it works.
-
 ---
 
 # 1️⃣ Problem Setup: Solve $Ax=b$
