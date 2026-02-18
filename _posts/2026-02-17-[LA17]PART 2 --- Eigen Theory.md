@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PART 1 --- Inner Product Geometry"
+title: "PART 2 --- Eigen Theory"
 date: 2026-02-18 00:00:00 +0900
 author: kang
 categories: [Linear Algebra, Temporary]
