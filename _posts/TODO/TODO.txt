@@ -16,3 +16,19 @@ stride로 한것이 성능적인 면에서 어떤효과가있는가
 MCP
 
 이미지 분석기 만들기
+
+linear algebra :
+https://www.youtube.com/watch?v=k0zKoTvngUY&list=PLiiljHvN6z1_o1ztXTKWPrShrMrBLo5P3&index=37
+https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab
+
+컴퓨터 구조
+https://www.youtube.com/watch?v=bls_GjX-4U8&list=PLVsNizTWUw7FCS83JhC1vflK8OcLRG0Hl
+
+운영체제
+https://www.youtube.com/watch?v=bls_GjX-4U8&list=PLVsNizTWUw7FCS83JhC1vflK8OcLRG0Hl
+
+네트워크
+youtube.com/watch?v=c62qssA4hYI&list=PLVsNizTWUw7HfOCgvlfHIDPPo3TE-2iQM
+
+ML/AL Basic
+https://www.youtube.com/watch?v=JpdKTvgrcYQ&list=PL0E_1UqNACXA5u65LBjzFCAVSZ4xuBWqj
