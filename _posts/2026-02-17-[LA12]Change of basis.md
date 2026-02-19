@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cramer's rule"
+title: "Change of basis"
 date: 2026-02-17 00:00:00 +0900
 author: kang
 categories: [Linear Algebra, Intermediate]

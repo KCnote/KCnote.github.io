@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Learning Rate"
+title: "Regularization"
 date: 2026-02-11 00:00:00 +0900
 author: kang
 categories: [Artificial Intelligence, Optimization]
