@@ -10,7 +10,7 @@ math: true
 mermaid: true
 ---
 
-![Current](assets\img\develop\2026-02-19-Current.png)
+![Current](/assets/img/develop/2026-02-19-Current.png)
 
 # Technical Knowledge Index — Current Status
 
