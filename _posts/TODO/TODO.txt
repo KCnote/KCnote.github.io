@@ -14,6 +14,10 @@ conv는 DL에서 곱으로 나타나내는 그 값은 이미지를 제곱해여 
 
 stride로 한것이 성능적인 면에서 어떤효과가있는가
 MCP
+Kullback-Leibler (KL) Divergence
+왜 trianing loss는 들쭉날쭉하게 내려갈까.. -> 전체로하면 내려갈수있으나 subset으로 학습 측정하기 때문에 발생하는 현상이다.
+Domain knowlege를 적용하여 모델을 만드는 예를 생각해보자
+fine tunning, 해보기 공개되어있는 좋은모델 파라미터로
 
 이미지 분석기 만들기
 
