@@ -11,28 +11,41 @@ mermaid: true
 ---
 
 ---
-# Multi-layer Perceptrons
+# <b>Multi-layer Perceptrons</b>
+---
+### <b>Prerequisites</b>
+    1. Linear Classifiers
+<b>Linear Classifiers</b> $ f(x) = Wx $ have a problem that <span style="color:#FFD5D5">FAILS on NON-LINEAR SEPERABLE DATA</span>. 
 
-## Prerequisites
-- Linear Classifiers $ f(x) = Wx $ have a problem that fails on non-linearly separable data. 
+---
+## <b>What is Multi-Layer Perceptrons</b>
 
-## What is Multi-Layer Perceptrons.
-
-
-1. What is Multi-layer Perceptrons(MLP)?
-    - A <span style="color:cyan"><b>Feedforward Neural Network</b></span> composed of multiple fully connected layers with nonlinear activation functions.
+### 1. What is Multi-layer Perceptrons(MLP)?
+- A <span style="color:blue"><b>Feedforward Neural Network</b></span> composed of multiple fully connected layers with nonlinear activation functions.
     
-    - Structure
+- <b>Structure</b>
 
-        $ Input -> FC -> Activation -> FC ... -> Softmax -> Output$
+    $$
+    Input -> FC -> Activation -> FC ... -> Softmax -> Output
+    $$
 
-    - Can express non-linear seperable data like XOR
+- Can express non-linear seperable data like XOR
 
-2. Linear Seperable Data vs Non-Linear Seperable Data
+### 2. Why use Multi-layer Perceptrons(MLP)?
+     Linear/Non-Linear Seperable Data
 
-- Linear Seperable Data
 
-![AND Decision Boundary](/assets/img/develop/AND-Decision-Boundary.png)
+$$
+y = f(w_1x_1+w_2x_2),
+\:\:\:\:\:\:\:\
+\text{f}(x) = 
+\begin{cases} 
+1, & x > 0 \\
+0, & \le 0 
+\end{cases}
+$$
+
+<div style="width:100%;">
 
 | x1 | x2 | y |
 |----|----|---|
@@ -41,15 +54,11 @@ mermaid: true
 | 1  | 0  | 0 |
 | 1  | 1  | 1 |
 
-$ y = f(w_1x_1+w_2x_2) $
+<\div>
 
-$
-\text{Activation}(x) = 
-\begin{cases} 
-1, & x > 0 \\
-0, & \le 0 
-\end{cases}
-$
+![AND Decision Boundary](/assets/img/develop/AND-Decision-Boundary.png)
+
+Seperating is POSSIBLE on linear data.
 
 | x1 | x2 | y |
 |----|----|---|
