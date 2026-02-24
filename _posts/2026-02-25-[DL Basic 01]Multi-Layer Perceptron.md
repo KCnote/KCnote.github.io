@@ -34,6 +34,7 @@ mermaid: true
 ### 2. Why use Multi-layer Perceptrons(MLP)?
      Linear/Non-Linear Seperable Data
 
+About Single Perceptron
 
 $$
 y = f(w_1x_1+w_2x_2),
@@ -54,11 +55,15 @@ $$
 | 1  | 0  | 0 |
 | 1  | 1  | 1 |
 
-<\div>
+</div>
 
 ![AND Decision Boundary](/assets/img/develop/AND-Decision-Boundary.png)
 
-Seperating is POSSIBLE on linear data.
+Seperating is <span style="color:blue">POSSIBLE</span> on linear data.
+
+![XOR Decision Boundary](/assets/img/develop/XOR-Decision-Boundary.png)
+
+<div style="width:100%;">
 
 | x1 | x2 | y |
 |----|----|---|
@@ -67,63 +72,71 @@ Seperating is POSSIBLE on linear data.
 | 1  | 0  | 1 |
 | 1  | 1  | 0 |
 
+</div>
 
+Seperating is <span style="color:red">IMPOSSIBLE</span> on non-linear data.
 
-
-Linear classifiers:
-- Learn one template per class
-- Can only form linear decision boundaries
-- Fail on non-linearly separable data
-
----
-
-## 2. Feature Motivation
+    BUT Change From Single to Multi-layer, it is POSSIBLE.
 
 $$
-x \rightarrow z \rightarrow y
+y = f(w_5f(w_1x_1+w_2x_2) + w_6f(w_3x_1+w_4x_2))
 $$
-
-Mapping to feature space can enable linear separation.
-
----
-
-## 3. Image Features
-
-- Color histogram
-- HOG
-- Bag-of-Words
-
----
-
-## 4. Perceptron
-
-$$
-y = f(w_1 x_1 + w_2 x_2)
-$$
-
-$$
-f(a) =
-\begin{cases}
-1 & a > \theta \\
-0 & a \le \theta
-\end{cases}
-$$
-
----
-
-## 5. Multilayer Perceptron
 
 $$
 h = \sigma(W_1 x), \quad y = W_2 h
 $$
 
----
+![XOR MLP](/assets/img/develop/XOR-MLP.png)
+
+
+### 3. How use Multi-layer Perceptrons(MLP)?
+    Acitivation Functions
+
+<table>
+<tr>
+<td><img src="/assets/img/develop/Activation-Step.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-Sigmoid.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-Tanh.png" width="250"></td>
+</tr>
+
+<tr>
+<td><img src="/assets/img/develop/Activation-ReLU.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-Leaky-ReLU.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-ELU.png" width="250"></td>
+</tr>
+</table>
+
+$$
+\text{Step}(x) =
+\begin{cases}
+1, & x \ge 0 \\
+0, & x < 0
+\end{cases}
+\:\:\:\:
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\:\:\:\:
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+$$
+$$
+\text{ReLU}(x) = \max(0, x)
+$$
+$$
+\text{LeakyReLU}(x) =
+\begin{cases}
+x, & x > 0 \\
+\alpha x, & x \le 0
+\end{cases}
+
+\:\:\:\:
+\text{ELU}(x) =
+\begin{cases}
+x, & x > 0 \\
+\alpha (e^x - 1), & x \le 0
+\end{cases}
+$$
 
 ## 6. Activation Functions
 
-$$
-\sigma(x) = \frac{1}{1 + e^{-x}}, \quad \text{ReLU}(x) = \max(0, x)
-$$
 
 ---
 
