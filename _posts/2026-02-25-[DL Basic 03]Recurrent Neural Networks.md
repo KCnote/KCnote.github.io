@@ -80,16 +80,26 @@ $$
     1. Vanishing Gradient
     2. Exploding Gradient
 
-<b>Repeated multiplication</b>:
+Backpropagation through time produces:
 
 $$
-\frac{\partial \mathcal{L}}{\partial h_0}
+\frac{\partial L}{\partial h_k}
 =
-\left( W_{hh}^T \right)^T
-\cdots
-\left( W_{hh}^T \right)^1
-\frac{\partial \mathcal{L}}{\partial h_T}
+\frac{\partial L}{\partial h_t}
+\prod_{i=k+1}^{t}
+\frac{\partial h_i}{\partial h_{i-1}}
 $$
 
-If eigenvalues < 1 → vanishing  
-If eigenvalues > 1 → exploding  
+And
+
+$$
+\frac{\partial h_t}{\partial h_{t-1}}
+=
+\tanh'(W_{hh} h_{t-1} + W_{xh} x_t) W_{hh}
+$$
+
+### 🎯 Meaning
+
+-   If largest singular value of $W_{hh}$ \> 1 → exploding gradient
+-   If \< 1 → vanishing gradient
+-   $\tanh'$ ≤ 1 almost always → shrinking effect
