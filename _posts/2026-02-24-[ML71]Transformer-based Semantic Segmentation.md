@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Semantic Segmentation"
+title: "Transformer-based Semantic Segmentation"
 date: 2026-02-24 00:00:00 +0900
 author: kang
 categories: [Artificial Intelligence, Model]
