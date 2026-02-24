@@ -45,7 +45,7 @@ instead of connecting everything like FC, looking at local patches
 #### <b>Same filters are applied to ALL LOCATION in the image</b>
 Reuse the same filter across space.
 
-![CNN-Spatial-Locality](/assets/img/develop/CNN-Spatial-Locality.png)
+![CNN-Positional-Invariance](/assets/img/develop/CNN-Positional-Invariance.png)
 
 
 | Aspect | FC | Conv |
