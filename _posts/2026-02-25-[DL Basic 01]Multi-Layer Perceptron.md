@@ -159,22 +159,122 @@ $$
 
     Backpropagation
 
-<b>Minimize Loss Functions</b>
+The main target of backpropgation is <b>Minimize Loss Functions</b>.
 
-Function Example:
-$$
-h = \sigma(W_1 x), \quad y = W_2 h
-$$
-
-Loss: $ \mathcal{L} = (\hat{y} - y)^2 $
-
-Gradients:
-$$
-\frac{\partial \mathcal{L}}{\partial W_2} = 2(\hat{y}-y)h
-$$
+#### Function Example:
 
 $$
-\frac{\partial \mathcal{L}}{\partial W_1} = 2(\hat{y}-y)W_2 h(1-h)x
+\hat{y} = W_2 \sigma(W_1 \mathbf{x} + \mathbf{b}_1) + b_2
 $$
 
-\
+#### Loss(MSE):
+$$
+L = (\hat{y} - y)^2
+$$
+
+### Backpropagation Derivation
+---
+
+$$
+\hat{y} = W_2 \mathbf{h}, \quad
+\frac{\partial L}{\partial \hat{y}} = 2(\hat{y} - y), \quad 
+\frac{\partial \hat{y}}{\partial W_2} = \mathbf{h}
+$$
+
+$$
+\boxed{
+\frac{\partial L}{\partial W_2}
+=====
+\frac{\partial L}{\partial \hat{y}}
+\frac{\partial \hat{y}}{\partial W_2}
+=====
+2(\hat{y} - y)\mathbf{h}
+}
+$$
+
+
+$$
+\boxed{
+\frac{\partial L}{\partial \mathbf{h}}
+=====
+\frac{\partial L}{\partial \hat{y}}
+\frac{\partial \hat{y}}{\partial \mathbf{h}}
+=====
+2(\hat{y}-y) W_2
+}
+$$
+
+---
+
+$$
+\mathbf{z}_1 = W_1 \mathbf{x}, \quad
+\frac{\partial \mathbf{z}_1}{\partial W_1} = \mathbf{x}
+$$
+
+#### If sigmoid:
+
+$$
+\sigma'(z) = \sigma(z)(1-\sigma(z))
+$$
+
+$$
+\boxed{
+\frac{\partial L}{\partial \mathbf{z}_1}
+=====
+\frac{\partial L}{\partial \mathbf{h}}
+\odot
+\sigma'(\mathbf{z}_1)
+=====
+2(\hat{y}-y) W_2
+\odot
+\mathbf{h}(1-\mathbf{h})
+}
+$$
+
+$$
+\boxed{
+\frac{\partial L}{\partial W_1}
+=====
+\frac{\partial L}{\partial \mathbf{z}_1}
+\mathbf{x}^T
+}
+$$
+
+#### Final:
+
+$$
+\boxed{
+\frac{\partial L}{\partial W_1}
+================
+
+2(\hat{y}-y)
+W_2
+\odot
+\mathbf{h}(1-\mathbf{h})
+\mathbf{x}^T
+}
+$$
+
+
+## 🔥 Core Idea
+
+Forward:
+
+$$
+\mathbf{x} \rightarrow \mathbf{z} \rightarrow \mathbf{a} \rightarrow \hat{y}
+$$
+
+Backward:
+
+$$
+\frac{\partial L}{\partial \mathbf{x}}
+====
+\frac{\partial L}{\partial \mathbf{a}}
+\frac{\partial a}{\partial \mathbf{z}}
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}}
+====
+\frac{\partial L}{\partial \mathbf{z}}
+\frac{\partial \mathbf{z}}{\partial \mathbf{x}}
+$$
+
+### Backpropagation = Chain Rule applied in reverse order.
