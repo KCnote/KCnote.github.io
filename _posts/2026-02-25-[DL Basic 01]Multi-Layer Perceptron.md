@@ -26,7 +26,7 @@ mermaid: true
 - <b>Structure</b>
 
     $$
-    Input -> FC -> Activation -> FC ... -> Softmax -> Output
+    Input \rightarrow  FC \rightarrow  Activation \rightarrow  FC ... \rightarrow  Softmax \rightarrow  Output
     $$
 
 - Can express non-linear seperable data like XOR
@@ -90,6 +90,28 @@ $$
 
 
 ### 3. How use Multi-layer Perceptrons(MLP)?
+    Fully-Connected Layer
+$$\mathbf{y} = W\mathbf{x} + \mathbf{b}$$
+
+* $ \mathbf{x} \in \mathbb{R}^{n} $ : input vector
+* $ W \in \mathbb{R}^{m \times n} $ : weight matrix
+* $ \mathbf{b} \in \mathbb{R}^{m} $ : bias vector
+* $ \mathbf{y} \in \mathbb{R}^{m} $ : output vector
+
+<b>Affine transformation</b> on the input vector, where every input neuron is connected to every output neuron.
+
+$$ y_i = \sum_{j=1}^{n} w_{ij} x_j + b_i $$
+
+Each output unit is connected to **all input units**.
+
+<span style="color:blue"><b>Concept of Space Transformation</b></span>:
+
+An FC layer linearly transforms the input feature space into another space:
+
+$$
+\mathbf{x} \rightarrow \text{feature transformation} \rightarrow \mathbf{y}
+$$
+
     Acitivation Functions
 
 <table>
@@ -135,17 +157,16 @@ x, & x > 0 \\
 \end{cases}
 $$
 
-## 6. Activation Functions
+    Backpropagation
 
+<b>Minimize Loss Functions</b>
 
----
-
-## 7. Backpropagation
-
-Loss:
+Function Example:
 $$
-\mathcal{L} = (\hat{y} - y)^2
+h = \sigma(W_1 x), \quad y = W_2 h
 $$
+
+Loss: $ \mathcal{L} = (\hat{y} - y)^2 $
 
 Gradients:
 $$
@@ -156,8 +177,4 @@ $$
 \frac{\partial \mathcal{L}}{\partial W_1} = 2(\hat{y}-y)W_2 h(1-h)x
 $$
 
----
-
-## 8. Summary
-
-Linear → Features → Perceptrons → MLP → Backprop
+\
