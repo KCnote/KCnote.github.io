@@ -9,9 +9,10 @@ pin: false
 math: true
 mermaid: true
 
-
-------------------------------------------------------------------------
+---
 # 🎯 Semantic Segmentation, FCN, Deconvolution & U-Net
+---
+
 
 # 1️⃣ Computer Vision Tasks Overview
 
