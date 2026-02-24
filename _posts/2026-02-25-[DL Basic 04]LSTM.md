@@ -39,7 +39,7 @@ mermaid: true
 Create a <b>cell state highway</b> allowing gradient to flow with minimal
 decay.
 
-### 3. How use Recurrent Neural Network(RNN)?
+### 3. How use Long Short Term Memory (LSTM)?
     Hidden State + cell state
 
 ![LSTM-inner](/assets/img/develop/LSTM-inner.png)
@@ -68,7 +68,7 @@ Then memory is preserved almost perfectly.
 ![RNN-process](/assets/img/develop/RNN-process.png)
 
 
-### 4. What is <span style="color:red">FEW</span> PROBLEM of Recurrent Neural Network(RNN)?
+### 4. What is <span style="color:red">FEW</span> PROBLEM of Long Short Term Memory (LSTM)?
     1. Vanishing Gradient
     2. Exploding Gradient
 
