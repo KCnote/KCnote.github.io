@@ -4763,3 +4763,2498 @@ $$
 ------------------------------------------------------------------------
 
 # End
+-----------
+--------------
+----------------
+----------------
+-----------------
+-----------------
+-----------------
+[ML/DL] Lecture 7. Overfitting & Regularization
+
+# Training vs Validation Curves
+
+## 1. Overview
+
+Training and validation curves are fundamental tools to understand how a machine learning model learns over time.
+
+They help diagnose:
+
+- Underfitting
+- Overfitting
+- Training bugs
+- Optimization issues
+
+Typically we monitor **loss vs training step (or epoch)**.
+
+---
+
+## 2. Typical Behavior
+
+### Training Curve
+
+- Training loss should **consistently decrease** as training progresses.
+- This indicates the model is successfully fitting the training data.
+- Small fluctuations are normal, but **overall downward trend is required**.
+
+### Validation Curve
+
+- Validation loss usually:
+  1. Decreases at early stage
+  2. Reaches a minimum
+  3. Starts increasing again
+
+This happens because the model begins to **overfit** the training data.
+
+---
+
+## 3. Overfitting Pattern
+
+Typical pattern:
+
+- Training loss → keeps decreasing
+- Validation loss → decreases then increases
+
+This means:
+
+> Model memorizes training data instead of learning general patterns.
+
+Solution approaches:
+
+- Early stopping
+- Regularization (L2, dropout)
+- More data
+- Simpler model
+
+---
+
+## 4. If Training Loss Does NOT Decrease
+
+If training loss:
+
+- stays flat
+- oscillates randomly
+- increases
+
+Then **something is wrong**.
+
+### Possible Causes (Bug / Setup Issue)
+
+1. Learning rate too high → divergence
+2. Learning rate too low → no learning
+3. Gradient not flowing (e.g. wrong graph / detach)
+4. Loss not connected to model parameters
+5. Wrong label / data mismatch
+6. Data normalization problem
+7. Model stuck in saturation (e.g. sigmoid overflow)
+8. Optimizer not updating (zero grad missing, wrong step order)
+
+### Important Rule
+
+> If training loss does not decrease over time, **assume there is a bug until proven otherwise**.
+
+A correctly implemented model **must reduce training loss** unless:
+
+- Data is pure noise
+- Model capacity is too small
+
+---
+
+## 5. Ideal Training Scenario
+
+Good training behavior:
+
+- Training loss ↓ steadily
+- Validation loss ↓ then stable or slightly ↑
+- Gap between train and val not too large
+
+Bad signs:
+
+- Train ↓ but Val ↑ fast → Overfitting
+- Train not decreasing → Bug / Optimization failure
+- Both high → Underfitting
+
+---
+
+## 6. Practical Debug Checklist
+
+If training loss not decreasing:
+
+- Check gradient magnitude
+- Print loss each step
+- Try very small dataset (overfit test)
+- Reduce learning rate
+- Verify labels
+- Disable regularization temporarily
+- Check optimizer step order
+
+---
+
+## 7. Key Takeaway
+
+- Training loss **must go down**
+- Validation loss **indicates generalization**
+- If training loss doesn't decrease → **debug first, tune later**
+
+# Overfitting and High-Dimensional Data
+
+## 1. Goal of Machine Learning
+
+The goal is **not to perform well only on training data**, but to perform well **in general**.
+
+We care about:
+
+> Performance on unseen test data (generalization)
+
+---
+
+## 2. Why Does Evaluation Loss Get Worse?
+
+During early training:
+
+- The model learns **important and general patterns**
+- Training loss ↓
+- Validation (evaluation) loss ↓
+
+After some point:
+
+- The model begins to learn **noise specific to the training data**
+- Training loss ↓ further
+- Evaluation loss ↑
+
+This phenomenon is called:
+
+> **Overfitting**
+
+---
+
+## 3. What is Overfitting?
+
+Overfitting occurs when:
+
+- The model learns **not only the general trend**
+- But also the **noise in the training data**
+
+Behavior:
+
+- Training performance → keeps improving
+- Evaluation performance → gets worse
+
+This means the model is **memorizing**, not generalizing.
+
+---
+
+## 4. Loss Curve Interpretation
+
+| Phase | Training Loss | Eval Loss | Meaning |
+|------|--------------|-----------|---------|
+| Early | ↓ | ↓ | Learning useful patterns |
+| Optimal | Low | Lowest | Best generalization |
+| Overfitting | ↓ | ↑ | Learning noise |
+
+---
+
+## 5. Overfitting is Worse in High-Dimensional Data
+
+Overfitting becomes more severe when:
+
+- Feature dimension is high
+- Data contains noise
+- Dataset is small
+
+---
+
+## 6. What Does "High-Dimensional" Really Mean?
+
+High-dimensional means:
+
+> The number of features (dimension) is large.
+
+Example:
+
+- 2D → 2 features
+- 100D → 100 features
+- 1000D → extremely high dimensional
+
+---
+
+## 7. Curse of Dimensionality
+
+As dimension increases:
+
+- The input space grows **exponentially**
+- Data becomes sparse
+- The model needs **exponentially more data**
+
+### Key Insight
+
+If dimension increases by **n times**,  
+the required dataset size must grow approximately:
+
+> **Exponential in n**
+
+Example intuition:
+
+- 1D → need 100 samples
+- 10D → need ~10^10 scale coverage (conceptually)
+- 100D → practically impossible without huge data
+
+This is known as:
+
+> **Curse of Dimensionality**
+
+---
+
+## 8. Why High-Dimensional Data Causes Overfitting
+
+When dimension is high but data is limited:
+
+- The model can easily fit noise
+- Many different models explain training data equally well
+- Generalization becomes poor
+
+Result:
+
+- Training loss ↓
+- Eval loss ↑
+
+Classic overfitting pattern.
+
+---
+
+## 9. Practical Implication
+
+High-dimensional models require:
+
+- Much larger dataset
+- Strong regularization
+- Feature selection / dimensionality reduction
+- Careful validation
+
+---
+
+## 10. How to Reduce Overfitting
+
+- Early stopping
+- L2 regularization
+- Dropout
+- More data
+- Simpler model
+- Feature selection
+- PCA / dimensionality reduction
+
+---
+
+## 11. Core Takeaway
+
+- Overfitting = learning noise instead of signal
+- Happens when model is too flexible or data is insufficient
+- High dimension requires **exponentially more data**
+- Always monitor validation loss
+
+> Stop training at the point where evaluation loss is minimal.
+
+
+# Model Capacity, Overfitting, and Underfitting
+
+## 1. Overfitting and Model Capacity
+
+Overfitting is **strongly related to model capacity**.
+
+- If a model is **too complex**, it tends to overfit.
+- If a model is **too simple**, it underfits.
+
+---
+
+## 2. What is Model Capacity?
+
+Model capacity refers to:
+
+> How complex patterns a model can represent.
+
+Examples:
+
+- Linear model → Low capacity
+- Polynomial model → Medium capacity
+- Deep neural network → Very high capacity
+
+Higher capacity → More flexible → Can fit more complex data  
+But also → Can memorize noise → Overfitting risk
+
+---
+
+## 3. Overfitting (High Capacity)
+
+When the model is **unnecessarily complex**:
+
+- It has enough capacity to **memorize noise**
+- Training loss becomes very low
+- But generalization becomes poor
+
+Behavior:
+
+- Fits training data perfectly
+- Decision boundary becomes highly irregular
+- Captures noise instead of true structure
+
+---
+
+## 4. Underfitting (Low Capacity)
+
+When the model has **insufficient capacity**:
+
+- Cannot learn even the general pattern
+- Training loss remains high
+- Validation loss also high
+
+Behavior:
+
+- Model too simple
+- Misses important structure in data
+- Poor performance everywhere
+
+---
+
+## 5. Capacity vs Fit Visualization (Concept)
+
+### Low Capacity → Underfitting
+- Linear boundary
+- Cannot separate classes well
+- High bias
+
+### Proper Capacity → Good Fit
+- Smooth boundary
+- Captures real pattern
+- Best generalization
+
+### High Capacity → Overfitting
+- Very complex boundary
+- Fits noise and outliers
+- High variance
+
+---
+
+## 6. Mathematical Perspective
+
+Increasing model complexity:
+
+----
+
+# 📘 Full Notes — Regularization, Overfitting, Ridge & Lasso
+
+---
+
+## 🎯 Goal of Learning — Generalization
+
+The objective of machine learning is **not to minimize training error**, but to **generalize well to unseen data**.
+
+Typical behavior:
+
+$$
+\text{Training loss} \downarrow,\quad \text{Validation loss} \uparrow
+$$
+
+⚠️ This indicates **Overfitting** — the model starts memorizing noise instead of learning true patterns.
+
+---
+
+## 📉 Small Data Problem (e.g., Video Summarization)
+
+Some problems have extremely limited data:
+
+- 🎬 Video summarization  
+- 🧬 Medical / rare events  
+- 💸 Expensive labeling  
+
+Even collecting **30 samples** can be costly.
+
+### Risks
+- Cross‑validation may become **misleading**
+- Overfitting is hard to detect
+- High variance in evaluation
+
+### Practical Strategy
+- ✔ Strict validation  
+- ✔ Train **multiple capacity models**  
+- ✔ Estimate overfitting onset  
+- ✔ Avoid trusting a single run  
+
+---
+
+## ⏹️ Early Stopping
+
+Under i.i.d. assumption, overfitting tends to begin at similar times across splits.
+
+$$
+\text{Stop at } \arg\min_{\text{epoch}} \text{Validation Metric}
+$$
+
+⚠️ Notes:
+
+- Surrogate loss ≠ true metric  
+- Metrics may overfit at different points  
+- Use **most important real metric**  
+
+---
+
+## 🧠 Model Capacity
+
+| Capacity | Behavior |
+|----------|----------|
+| 🔹 Low | Underfitting |
+| ⭐ Optimal | Best Generalization |
+| 🔺 High | Overfitting |
+
+Bias–Variance:
+
+| Capacity | Bias | Variance |
+|----------|------|----------|
+| Low | High | Low |
+| Optimal | Balanced | Balanced |
+| High | Low | High |
+
+---
+
+## 📏 Regularization / Shrinkage
+
+General form:
+
+$$
+\min_{\beta} RSS + \lambda \cdot \text{Penalty}(\beta)
+$$
+
+Goal:
+
+$$
+\text{Reduce variance by shrinking coefficients } \beta
+$$
+
+---
+
+## 🔵 Ridge Regression (L2)
+
+Objective:
+
+$$
+\hat{\beta} = \arg\min_\beta \sum_{i=1}^{n}(y_i - x_i^T\beta)^2 + \lambda \|\beta\|_2^2
+$$
+
+Matrix solution:
+
+$$
+\hat{\beta} = (X^T X + \lambda I)^{-1} X^T Y
+$$
+
+### Properties
+- Shrinks coefficients toward 0  
+- Rarely exactly 0  
+- Keeps all features  
+- Variance ↓, Bias ↑  
+
+Limits:
+
+$$
+\lambda = 0 \Rightarrow \text{OLS}
+$$
+
+$$
+\lambda \to \infty \Rightarrow \beta \to 0
+$$
+
+---
+
+## ⚖️ Scaling of Predictors (Critical)
+
+Ridge is **scale sensitive**, therefore predictors must be standardized:
+
+$$
+\tilde{x}_{ij} = \frac{x_{ij} - \bar{x}_j}{\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_{ij}-\bar{x}_j)^2}}
+$$
+
+Why?
+
+Penalty term:
+
+$$
+\lambda \sum_{j=1}^{p} \beta_j^2
+$$
+
+- Large‑scale feature → Larger penalty ❌  
+- Small‑scale feature → Smaller penalty ❌  
+
+✔ Scaling ensures **fair regularization**.
+
+---
+
+## 📊 Bias–Variance (Ridge Insight)
+
+$$
+\text{MSE} = \text{Bias}^2 + \text{Variance} + \sigma^2
+$$
+
+As $$\lambda$$ increases:
+
+- Variance ↓  
+- Bias ↑  
+- Optimal $$\lambda$$ exists ⭐  
+
+---
+
+## 🔶 Lasso (L1)
+
+Objective:
+
+$$
+\hat{\beta} = \arg\min_\beta \sum_{i=1}^{n}(y_i - x_i^T\beta)^2 + \lambda \|\beta\|_1
+$$
+
+$$
+\|\beta\|_1 = \sum_{j=1}^{p} |\beta_j|
+$$
+
+### Properties
+- Some coefficients become **exactly 0**  
+- Produces **Sparse Model**  
+- Performs feature selection  
+
+---
+
+## 💎 Why Lasso Produces Zeros
+
+Constraint:
+
+$$
+\|\beta\|_1 \le t
+$$
+
+Diamond geometry → solutions at corners:
+
+$$
+\beta_j = 0
+$$
+
+✔ Natural feature selection
+
+---
+
+## 🌐 High‑Dimensional Effect
+
+Higher dimension → more corners → more zeros → **sparser model**
+
+---
+
+## ⚔️ Ridge vs Lasso
+
+| Property | Ridge 🔵 | Lasso 🔶 |
+|----------|----------|----------|
+| Penalty | $$L_2$$ | $$L_1$$ |
+| Coefficients | Close to 0 | Can be exactly 0 |
+| Feature selection | ❌ | ✔ |
+| Stability | High | Medium |
+| Sparse model | ❌ | ✔ |
+
+---
+
+## 🤔 Which is Better?
+
+No universal winner.
+
+- Sparse truth → Lasso better  
+- Dense truth → Ridge better  
+
+Best practice:
+
+$$
+\text{Choose using Cross Validation}
+$$
+
+---
+
+## 🎛️ Hyperparameter Selection
+
+1. Choose grid of $$\lambda$$  
+2. Compute CV error  
+3. Select minimum  
+4. Refit with all data  
+
+---
+
+## 🧩 Practical Insights
+
+- Small data → CV may deceive ⚠️  
+- Always scale predictors ✔  
+- Ridge → Smooth shrinkage  
+- Lasso → Sparse solution  
+- Capacity tuning critical  
+- Estimate overfitting onset  
+
+---
+
+## 🌟 Final Insight
+
+A good model is **not the one with lowest training loss**,  
+but the one achieving **best generalization with controlled complexity**.
+
+
+-----------
+-------------
+-----------
+-
+-------------
+
+[ML/DL] Lecture 8. Decision Trees
+
+
+# 🌳 Decision Trees — Summary
+
+Decision trees are intuitive, interpretable models that **split the feature space into simple regions**.
+
+---
+
+# 1️⃣ Tree Terminology Review
+
+## 🌲 General Tree Structure
+
+A general tree **T** is partitioned into:
+
+- **Root node** r  
+- A set of **subtrees** attached to the root  
+
+Example structure:
+
+        A (root)
+       / \
+      B   C
+     /|\
+    D E F
+
+---
+
+## 📘 Basic Terminology
+
+| Term | Meaning |
+|------|---------|
+| 🔵 Node (Vertex) | A point in the tree |
+| ➖ Edge | Connection between nodes |
+| 👨 Parent | Node with children |
+| 👶 Child | Node below parent |
+| 👥 Siblings | Nodes with same parent |
+| 🌳 Root | Top node |
+| 🍃 Leaf | Node with no children |
+| ⬆ Ancestor | Any node above |
+| ⬇ Descendant | Any node below |
+| 🌿 Subtree | Tree inside tree |
+
+---
+
+# 2️⃣ Tree-Based Learning
+
+## 🎯 Core Idea
+
+Tree-based learning **segments the predictor space into simple regions**.
+
+✔ Recursive partitioning  
+✔ Forms decision rules  
+✔ Works for both:
+
+- 📈 Regression  
+- 🔎 Classification  
+
+---
+
+## ⚙️ How It Works
+
+1. Choose best feature & split value  
+2. Divide feature space  
+3. Repeat recursively  
+4. Leaf → prediction  
+
+---
+
+## 📊 Interpretation
+
+- Space split into **rectangular regions**
+- Prediction is **constant inside each region**
+- Model behaves like a **step function**
+
+---
+
+# 3️⃣ Introduction to Decision Trees
+
+## ✅ Pros
+
+- 🧠 Easy to interpret
+- 🔍 Transparent decision rules
+- ⚖️ No feature scaling required
+- 🔄 Handles nonlinear relationships
+- 📊 Works with mixed data types
+
+---
+
+## ❌ Cons
+
+- 📉 Often lower prediction accuracy
+- ⚠️ High variance (unstable)
+- 🌪 Prone to overfitting
+
+---
+
+# 4️⃣ Ensemble Methods 🌲🌲🌲
+
+Multiple trees → Stronger model
+
+| Method | Idea |
+|--------|------|
+| 🎲 Bagging | Reduce variance |
+| 🌲 Random Forest | Randomized bagging |
+| 🚀 Boosting | Reduce bias sequentially |
+
+➡ Dramatically improves accuracy
+
+---
+
+# 5️⃣ Model Flexibility vs Interpretability
+
+| Model | Flexibility | Interpretability |
+|-------|------------|------------------|
+| Linear Models | Low | High |
+| Decision Trees | Medium | Medium |
+| Random Forest / Boosting | High | Low |
+| Deep Learning | Very High | Very Low |
+
+---
+
+# 🧠 Key Insights
+
+- Decision trees **partition feature space**
+- Produce **interpretable rules**
+- Single tree → simple but weak
+- Many trees → powerful model
+
+---
+
+# 📌 One-Line Summary
+
+Decision Trees split the feature space into simple regions to form interpretable decision rules 🌳
+
+---
+
+
+
+# 🌳 Decision Trees — Overfitting and Pruning (Complete Reconstruction)
+
+This document reconstructs the provided slides **with minimal summarization**, preserving equations, algorithm flow, and visual interpretation.
+
+---
+
+# 1️⃣ Overfitting in Decision Trees
+
+![Overfitting Illustration](k0.jpg)
+
+A decision tree **can easily overfit**.
+
+Example shown:
+
+- A large region is predicted based on **only one training point**
+- This leads to **very irregular decision regions**
+- The model memorizes noise instead of learning structure
+
+Result:
+
+- Extremely low training error
+- Very poor generalization
+- High variance model
+
+---
+
+# 2️⃣ Model Selection Perspective
+
+![Model Selection](k1.jpg)
+
+To reduce overfitting, we move toward **simpler models**.
+
+Key ideas:
+
+- Fewer splits → smoother boundary
+- Simpler tree → higher bias, lower variance
+- Complex tree → low bias, high variance
+
+Trade-off:
+
+| Property | Small Tree | Large Tree |
+|----------|------------|-----------|
+| Complexity | Low | High |
+| Boundary | Smooth | Irregular |
+| Bias | High | Low |
+| Variance | Low | High |
+| Risk | Underfitting | Overfitting |
+
+---
+
+# 3️⃣ Handling Overfitting
+
+![Handling Overfitting](k2.jpg)
+
+Strategy 1: Build a **smaller tree**
+
+- Fewer regions $$R_1,\dots,R_J$$
+- Reduces variance
+- Slight increase in bias
+- Often improves interpretability
+
+However:
+
+A weak early split might later lead to a strong split.  
+This is due to the **greedy nature** of tree building.
+
+Thus, stopping early may be **short-sighted**.
+
+---
+
+# 4️⃣ Grow Large Tree then Prune
+
+![Cost Complexity Pruning](k3.jpg)
+
+Alternative strategy:
+
+1. Grow a very large tree $$T_0$$
+2. Prune it back to smaller trees
+
+---
+
+## Weakest Link (Cost-Complexity) Pruning
+
+We define a sequence of trees indexed by $$\alpha$$:
+
+$$
+\sum_{m=1}^{|T|} \sum_{x_i \in R_m} (y_i - \hat{y}_{R_m})^2 + \alpha |T|
+$$
+
+Where:
+
+- number of leaf nodes $$|T|$$
+- controls complexity penalty $$\alpha$$
+- Larger  → smaller tree $$\alpha$$
+- Smaller  → larger tree $$\alpha$$
+ 
+Goal:
+
+Find subtree minimizing penalized loss.
+
+Pruning works by:
+
+- Merging leaf nodes
+- Removing weakest split
+
+---
+
+# 5️⃣ Tree Building with Pruning
+
+![Tree Building Process](k4.jpg)
+
+Algorithm:
+
+1. Grow large tree using recursive binary splitting
+2. Apply weakest link pruning to obtain sequence of subtrees
+3. Use K-fold cross-validation to select $$\alpha$$
+4. Choose subtree corresponding to best $$\alpha$$
+
+---
+
+# 6️⃣ Example — Unpruned Tree
+
+![Unpruned Tree](k5.jpg)
+
+A very large regression tree $$T_0$$ is first grown using the training data.
+
+Characteristics:
+
+- Many splits
+- Low training error
+- High risk of overfitting
+
+---
+
+# 7️⃣ Example — Selecting Tree Size
+
+![Validation Curve](k6.jpg)
+
+We evaluate tree size using:
+
+- Training error
+- Cross-validation error
+- Test error
+
+Observation:
+
+Best validation performance occurs at **3 leaf nodes**.
+
+Thus, we prune the large tree down to optimal size.
+
+---
+
+# 📐 Mathematical Summary
+
+## Tree Objective
+
+$$
+\min \sum_{j=1}^{J} \sum_{i \in R_j} (y_i - \hat{y}_{R_j})^2
+$$
+
+## Cost-Complexity Objective
+
+$$
+\min \sum_{m=1}^{|T|} \sum_{x_i \in R_m} (y_i - \hat{y}_{R_m})^2 + \alpha |T|
+$$
+
+---
+
+# 🧠 Key Insights
+
+- Decision trees easily overfit
+- Small tree → high bias, low variance
+- Large tree → low bias, high variance
+- Best approach = grow large tree then prune
+- Cross-validation selects optimal tree size
+
+---
+
+# 🌟 Final Insight
+
+> Optimal decision trees balance fit and complexity using **cost-complexity pruning and cross-validation**.
+
+---
+
+
+# 🌳 Classification Trees — Full Notes
+
+---
+
+## 📘 1. What is a Classification Tree?
+
+A **classification tree** is very similar to a regression tree, except:
+
+- Regression → predicts **continuous value**
+- Classification → predicts **discrete (categorical) class** 🎯
+
+For a classification tree, prediction is:
+
+$$
+\hat{y} = \text{most frequent class in region } R_j
+$$
+
+---
+
+## ⚙️ 2. Decision Tree Algorithm (Classification)
+
+### Step 1 — Partition the Feature Space 🔪
+
+We divide the predictor space into **J disjoint regions**:
+
+$$
+R_1, R_2, ..., R_J
+$$
+
+Using **recursive binary splitting (top‑down greedy)**.
+
+For feature $x_j$ and split point $s$:
+
+$$
+R_1(j,s) = \{x \mid x_j < s\}
+$$
+$$
+R_2(j,s) = \{x \mid x_j \ge s\}
+$$
+
+We choose $(j,s)$ minimizing classification error via impurity:
+
+$$
+\frac{n_1}{n} \, \text{Impurity}(R_1) + \frac{n_2}{n} \, \text{Impurity}(R_2)
+$$
+
+Goal 👉 make regions **as pure as possible** 🧼
+
+---
+
+## 📊 3. Impurity Measures
+
+### Entropy (Cross‑Entropy) 🔥
+
+$$
+\text{Impurity}(R_j) = -\sum_{k=1}^{K} p_{j,k} \log p_{j,k}
+$$
+
+Where:
+
+- $p_{j,k}$ = proportion of class $k$ in region $R_j$
+
+#### Properties
+
+- Pure region → Entropy = **0**
+- Uniform distribution → Entropy = **max = log(K)**
+
+Examples:
+
+$$
+[1,0,0,0] \Rightarrow 0
+$$
+
+$$
+[0.5,0.5] \Rightarrow \log 2
+$$
+
+$$
+[0.2,0.2,0.2,0.2,0.2] \Rightarrow \log 5
+$$
+
+---
+
+## 🎯 4. Prediction in Each Region
+
+### Majority Vote
+
+$$
+\hat{y}_j = \arg\max_k \; p_{j,k}
+$$
+
+Equivalent form:
+
+$$
+\hat{y}_j = \arg\max_k \frac{1}{n_j} \sum_{x_i \in R_j} I(y_i = k)
+$$
+
+Where:
+
+- $n_j$ = number of samples in region
+- $I(\cdot)$ = indicator function
+
+---
+
+## 🧠 5. Decision Boundary Behavior
+
+| Model | Boundary Shape |
+|------|---------------|
+| Linear Model | Straight line 📏 |
+| Decision Tree | Axis‑aligned blocks 🧱 |
+
+Trees create **step‑wise rectangular decision boundaries**.
+
+---
+
+## 👍 6. Pros of Decision Trees
+
+- Very **interpretable** 👀  
+- Graphical structure easy to understand  
+- Mimics **human decision making** 🧠  
+- Handles **categorical features naturally**  
+
+---
+
+## 👎 7. Cons of Decision Trees
+
+- Often **lower predictive accuracy** than advanced models  
+- High **variance / unstable** ⚠️  
+- Small data change → very different tree  
+
+---
+
+## 🧩 8. Summary
+
+- Classification tree partitions space into regions
+- Uses impurity (entropy / Gini) to choose splits
+- Predicts by **majority vote**
+- Produces **rectangular decision boundaries**
+- Easy to interpret but can overfit
+
+---
+
+## 🚀 (Optional Next Topics)
+
+- Gini vs Entropy comparison
+- Information Gain derivation
+- CART algorithm
+- Pruning & Regularization
+- Random Forest / Boosting
+
+----
+----
+----
+----
+[ML/DL] Lecture 9. Ensemble Models and Boosting
+
+
+
+# 🎲 Bootstrapping — Complete Notes
+
+---
+
+## 📌 1. What is Bootstrapping?
+
+Bootstrapping is a **resampling technique** used when we **cannot sample additional data from the true distribution**.
+
+- The true distribution is usually **unknown**
+- Our goal is often to **estimate properties of that distribution**
+
+Instead of collecting new independent data, we:
+
+👉 Repeatedly sample **from the original dataset with replacement**
+
+Each bootstrap dataset:
+
+- Same size as original dataset
+- Some samples appear **multiple times**
+- Some samples **may not appear at all**
+
+---
+
+## 🔁 2. Bootstrap Procedure
+
+Let original dataset be:
+
+$$
+Z = \{(x_1,y_1), (x_2,y_2), ..., (x_n,y_n)\}
+$$
+
+We generate **B bootstrap datasets**:
+
+$$
+Z^{*1}, Z^{*2}, ..., Z^{*B}
+$$
+
+Each created by **sampling with replacement** from $Z$.  
+
+For each dataset, compute estimator:
+
+$$
+\hat{\alpha}^{*b}, \quad b = 1,2,...,B
+$$
+
+### 📏 Bootstrap Standard Error
+
+$$
+SE_B(\hat{\alpha}) =
+\sqrt{
+\frac{1}{B-1}
+\sum_{b=1}^{B}
+\left(\hat{\alpha}^{*b} - \bar{\alpha}^*\right)^2
+}
+$$
+
+where
+
+$$
+\bar{\alpha}^* = \frac{1}{B} \sum_{b=1}^{B} \hat{\alpha}^{*b}
+$$
+
+This estimates the **standard error of the estimator**.
+
+---
+
+## ⚠️ 3. Limitations of Bootstrapping
+
+Bootstrapping assumes:
+
+### i.i.d assumption
+
+Samples must be:
+
+$$
+\text{Independent and Identically Distributed (i.i.d)}
+$$
+
+If NOT true (e.g. **time series data**):
+
+- Sampling individual observations breaks temporal structure
+- Instead use **block bootstrap**
+
+### Block Bootstrap
+
+- Create blocks of consecutive observations
+- Sample blocks with replacement
+- Reconstruct dataset from sampled blocks
+
+Used in:
+
+- Time series
+- Session‑based recommendation systems
+
+---
+
+## 🔍 4. Bootstrapping vs Cross‑Validation
+
+### Can bootstrap estimate prediction error?
+
+**Short answer: ❌ No**
+
+### Reason
+
+#### Cross‑Validation
+
+- No overlap between training and validation sets
+- Independent validation → unbiased estimate
+
+#### Bootstrapping
+
+- Samples drawn **with replacement**
+- Bootstrap datasets **overlap heavily**
+- Not independent → biased estimate
+
+---
+
+## 📊 5. Why does each bootstrap contain ~2/3 of data?
+
+Probability a sample is **NOT selected** in one draw:
+
+$$
+1 - \frac{1}{n}
+$$
+
+Probability it is never selected in $n$ draws:
+
+$$
+\left(1 - \frac{1}{n}\right)^n
+$$
+
+Taking limit:
+
+$$
+\lim_{n \to \infty}
+\left(1 - \frac{1}{n}\right)^n
+= e^{-1} \approx 0.368
+$$
+
+So:
+
+- About **36.8% NOT included**
+- About **63.2% included**
+
+👉 Each bootstrap sample contains **≈ 2/3 of original data**
+
+---
+
+## 🚨 6. Bias of Bootstrap Error
+
+Because bootstrap datasets overlap:
+
+- Bootstrap tends to **underestimate true prediction error**
+- Validation sets are not fully independent
+
+---
+
+## 🧠 7. Summary
+
+- Bootstrapping = sampling **with replacement**
+- Used to estimate **variance, SE, confidence intervals**
+- Requires **i.i.d assumption**
+- Each bootstrap contains ~63% unique samples
+- Cannot reliably estimate prediction error
+- Use **cross‑validation** instead for model evaluation
+
+---
+
+## 🚀 Next Topics
+
+- Bagging (Bootstrap Aggregating)
+- Random Forest
+- Out‑of‑Bag Error
+- Bias‑Variance Decomposition
+
+
+
+# 🌲 Bagging & Ensemble Methods — Complete Mathematical Notes
+
+---
+
+# 🎯 1. What is Bagging (Bootstrap Aggregation)?
+
+Bagging creates **B bootstrap datasets** from the original training data and trains **B separate models**.
+
+Each model:
+
+$$
+\hat{f}^{(b)}(x), \quad b = 1,2,...,B
+$$
+
+Final prediction (Regression):
+
+$$
+\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{(b)}(x)
+$$
+
+Final prediction (Classification):
+
+$$
+\hat{y} = \text{majority vote of } \hat{y}^{(1)},...,\hat{y}^{(B)}
+$$
+
+📌 Bagging averages **predictions**, not parameters → works for ANY model.
+
+---
+
+# 🧠 2. Why Bagging Works (Variance Reduction)
+
+Bagging is similar to **wisdom of crowd**.
+
+If we average independent estimators:
+
+$$
+Var(\bar{Z}) = \frac{\sigma^2}{n}
+$$
+
+Thus averaging reduces variance.
+
+Total error:
+
+$$
+MSE(\hat{\theta}) = Var(\hat{\theta}) + Bias(\hat{\theta})^2
+$$
+
+👉 Bagging **reduces variance without increasing bias**.
+
+Cost: Need to train **B models**.
+
+---
+
+# 📊 3. Mathematical Analysis of Bagging
+
+Let:
+
+$$
+y_b(x) = h(x) + \epsilon_b(x)
+$$
+
+Where:
+
+- $h(x)$ = true function  
+- $\epsilon_b(x)$ = error of model $b$  
+
+### Error of single model
+
+$$
+E_{single} = E_x[(y_b(x) - h(x))^2] = E_x[\epsilon_b(x)^2]
+$$
+
+### Error of combined model
+
+$$
+E_{comb} = E_x\left[\left(\frac{1}{B}\sum_{b=1}^{B} y_b(x) - h(x)\right)^2\right]
+$$
+
+---
+
+## 📌 Theorem 1 — Ensemble never worse
+
+The expected error of ensemble ≤ single model.
+
+Using **Jensen’s inequality**:
+
+$$
+E_{single} \ge E_{comb}
+$$
+
+---
+
+## 📌 Theorem 2 — Error can shrink by 1/B
+
+Expand:
+
+$$
+E_{comb} = E_x\left[\left(\frac{1}{B}\sum_{b=1}^{B}\epsilon_b(x)\right)^2\right]
+$$
+
+$$
+= E_x\left[\frac{1}{B^2}\sum_{b=1}^{B}\epsilon_b(x)^2 + \frac{2}{B^2}\sum_{j\ne k}\epsilon_j(x)\epsilon_k(x)\right]
+$$
+
+If models are **independent**:
+
+$$
+E[\epsilon_j(x)\epsilon_k(x)] = 0
+$$
+
+Then:
+
+$$
+E_{comb} = \frac{1}{B}E_{single}
+$$
+
+📌 If models identical → no gain  
+📌 More independence → better ensemble
+
+---
+
+# 🌐 4. General Ensemble Learning
+
+Ensemble = Combine multiple models to improve prediction.
+
+## Types
+
+### 1. Bagging
+- Parallel models
+- Reduce variance
+- Example: Random Forest 🌲
+
+### 2. Boosting
+- Sequential models
+- Reduce bias + variance
+- Example: AdaBoost / Gradient Boosting ⚡
+
+### 3. Stacking
+- Combine different model types using meta‑model
+
+---
+
+# 🔀 5. Can Different Models Be Ensembled?
+
+## YES — Heterogeneous Ensemble
+
+You can combine:
+
+- Linear model + Tree + Neural Net
+- SVM + Random Forest + Logistic
+- Any models with prediction output
+
+Common combination methods:
+
+### Averaging (Regression)
+
+$$
+\hat{y} = \sum_{m=1}^{M} w_m \hat{y}_m
+$$
+
+### Majority Vote (Classification)
+
+$$
+\hat{y} = \arg\max_k \sum_{m=1}^{M} I(\hat{y}_m = k)
+$$
+
+### Stacking (Meta‑Learning)
+
+Train second model:
+
+$$
+\hat{y} = g(\hat{y}_1, \hat{y}_2, ..., \hat{y}_M)
+$$
+
+---
+
+# 📌 6. When Ensemble Works Best
+
+Ensemble improves when:
+
+1. Models are **accurate**
+2. Models are **diverse (uncorrelated errors)**
+3. Individual models not identical
+
+Key idea:
+
+$$
+Var(\text{ensemble}) = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2
+$$
+
+Where:
+
+- $\rho$ = correlation between models
+- Lower $\rho$ → stronger ensemble
+
+---
+
+# ⚠️ 7. Limitations
+
+- High computation cost
+- Harder to interpret
+- Little gain if models highly correlated
+
+---
+
+# 🚀 8. Summary
+
+- Bagging reduces **variance**
+- Ensemble error ≤ single model
+- Independence between models is critical
+- Can combine **same or different model types**
+- Foundation of Random Forest, Boosting, Stacking
+
+---
+
+# Next Topics
+
+- 🌲 Random Forest (feature randomness + bagging)
+- ⚡ Boosting math derivation
+- 📉 Bias‑Variance decomposition in ensemble
+- 🎯 Out‑of‑Bag error
+
+
+
+# 🌲 Bagged Trees & 🌳 Random Forests — Complete Notes
+
+---
+
+# 🎯 1. Bagged Trees (Bootstrap Aggregation)
+
+Bagging = Train many decision trees on **bootstrap samples** and combine predictions.
+
+## Procedure
+
+1. Sample many bootstrap datasets from original data
+2. Train a decision tree on each dataset
+3. Combine predictions
+
+Regression:
+
+$$
+\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{(b)}(x)
+$$
+
+Classification:
+
+$$
+\hat{y} = \text{majority vote}(\hat{y}^{(1)},...,\hat{y}^{(B)})
+$$
+
+---
+
+## Why Bagging Works — Variance Reduction 📉
+
+Averaging independent estimators reduces variance:
+
+$$
+Var(\bar{Z}) = \frac{\sigma^2}{B}
+$$
+
+Total error:
+
+$$
+MSE = Bias^2 + Variance
+$$
+
+👉 Bagging mainly **reduces variance** (trees are high‑variance models).
+
+---
+
+## Numerical Example 🎲
+
+Suppose a single decision tree has:
+
+- Bias² = 0.04
+- Variance = 0.25
+
+Then:
+
+$$
+MSE_{single} = 0.29
+$$
+
+If we bag **B = 25 independent trees**:
+
+$$
+Variance_{bag} = \frac{0.25}{25} = 0.01
+$$
+
+$$
+MSE_{bag} = 0.04 + 0.01 = 0.05
+$$
+
+➡ Huge improvement from **0.29 → 0.05**
+
+---
+
+# 🌳 2. Random Forest
+
+Random Forest = Bagging + **Feature Randomness**
+
+Key idea: **Decorrelate trees** to improve ensemble.
+
+## How it Works
+
+- Still use bootstrap sampling
+- But when splitting a node:
+  - Instead of using all $p$ features
+  - Randomly choose **m features**
+  - Split using only those m
+
+Typical choice:
+
+$$
+m = \sqrt{p} \quad (\text{classification})
+$$
+
+$$
+m = \frac{p}{3} \quad (\text{regression})
+$$
+
+---
+
+## Why Random Forest Beats Bagging 🧠
+
+If trees are highly correlated → averaging does not reduce variance much.
+
+Variance of ensemble:
+
+$$
+Var_{RF} = \rho\sigma^2 + \frac{1-\rho}{B}\sigma^2
+$$
+
+Where:
+
+- $\rho$ = correlation between trees
+- Smaller $\rho$ → stronger variance reduction
+
+Random feature selection ↓ correlation → ↓ variance → ↓ error.
+
+---
+
+# 📊 3. Random Forest Behavior
+
+As number of trees increases:
+
+- Training error ↓
+- Test error stabilizes
+- Overfitting rarely happens
+
+Because averaging stabilizes prediction.
+
+---
+
+# 🎲 4. Example — Effect of m (Feature Subset)
+
+Suppose:
+
+- p = 100 features
+
+Compare:
+
+| m | Behavior |
+|---|----------|
+| m = 100 (Bagging) | Trees very similar → high correlation |
+| m = 50 | Slight decorrelation |
+| m = √100 = 10 | Strong decorrelation → best performance |
+| m = 1 | Too random → weak trees |
+
+Typical best choice:
+
+$$
+m \approx \sqrt{p}
+$$
+
+---
+
+# 📌 5. Random Forest Advantages 👍
+
+- Strong prediction accuracy
+- Handles nonlinear relationships
+- Works with high‑dimensional data
+- Resistant to overfitting
+- Implicit feature selection
+- Robust to noise
+
+---
+
+# ⚠️ 6. Limitations 👎
+
+- Less interpretable than single tree
+- High computation for many trees
+- Large memory usage
+- Can struggle with very sparse signals
+
+---
+
+# 📈 7. Out‑of‑Bag (OOB) Error
+
+Each tree is trained on ~63% of data (bootstrap).
+
+Remaining ~37% = **Out‑of‑Bag samples**
+
+Use OOB samples as validation → unbiased error estimate.
+
+No need for cross‑validation 👍
+
+---
+
+# 🔍 8. Random Forest vs Bagging
+
+| Method | Key Idea |
+|--------|----------|
+| Bagging | Bootstrap + averaging |
+| Random Forest | Bagging + feature randomness |
+| Goal | Reduce variance |
+| Difference | RF decorrelates trees |
+
+---
+
+# 🧠 9. When Random Forest Works Best
+
+- High variance models (decision trees)
+- Nonlinear data
+- Many features
+- Complex decision boundary
+
+---
+
+# 🚀 10. Summary
+
+- Bagging reduces variance via averaging
+- Random Forest reduces variance **even more** by decorrelating trees
+- More trees → stable performance
+- Feature randomness is key
+- OOB error gives built‑in validation
+
+---
+
+# Next Topics
+
+- 🌲 Feature Importance in Random Forest
+- ⚡ Gradient Boosting vs Random Forest
+- 📉 Bias‑Variance comparison
+- 🎯 Extra Trees (Extremely Randomized Trees)
+
+
+----
+----
+----
+----
+---
+---
+---
+
+svm
+
+
+# 🧠✨ Support Vector Machine (SVM) — Complete Mathematical Derivation
+
+> 🎯 Goal: Find the **maximum-margin hyperplane** that separates two classes.
+
+---
+
+## 📦 1. Problem Setup
+
+Training data:
+
+$$
+\{(x_i, y_i)\}_{i=1}^n,\quad x_i \in \mathbb{R}^p,\quad y_i \in \{-1, +1\}
+$$
+
+Hyperplane:
+
+$$
+\beta^T x + \beta_0 = 0
+$$
+
+Classifier:
+
+$$
+\hat y = \mathrm{sign}(\beta^T x + \beta_0)
+$$
+
+---
+
+## 📐 2. Distance from a Point to a Hyperplane (Full Derivation)
+
+We compute the signed distance from a point $x$ to the hyperplane.
+
+### 🔹 Step 1 — Closest point on the hyperplane
+
+The closest point must lie along the normal vector $\beta$:
+
+$$
+x_\perp = x - t\beta
+$$
+
+for some scalar $t$.
+
+### 🔹 Step 2 — Enforce hyperplane constraint
+
+$$
+\beta^T x_\perp + \beta_0 = 0
+$$
+
+Substitute:
+
+$$
+\beta^T (x - t\beta) + \beta_0 = 0
+$$
+
+$$
+\beta^T x - t\beta^T\beta + \beta_0 = 0
+$$
+
+Solve for $t$:
+
+$$
+t = \frac{\beta^T x + \beta_0}{\|\beta\|^2}
+$$
+
+### 🔹 Step 3 — Distance
+
+$$
+\|x - x_\perp\| = \|t\beta\| = |t| \|\beta\|
+$$
+
+$$
+\|x - x_\perp\| = \frac{|\beta^T x + \beta_0|}{\|\beta\|}
+$$
+
+Signed distance:
+
+$$
+\boxed{
+\mathrm{dist}(x,H) = \frac{\beta^T x + \beta_0}{\|\beta\|}
+}
+$$
+
+---
+
+## 🚀 3. Functional Margin and Geometric Margin
+
+Functional margin:
+
+$$
+y_i(\beta^T x_i + \beta_0)
+$$
+
+Geometric margin:
+
+$$
+\gamma_i = \frac{y_i(\beta^T x_i + \beta_0)}{\|\beta\|}
+$$
+
+Dataset margin:
+
+$$
+\gamma = \min_i \gamma_i
+= \min_i \frac{y_i(\beta^T x_i + \beta_0)}{\|\beta\|}
+$$
+
+🎯 Goal: **maximize margin**.
+
+---
+
+## 🔁 4. Max-Margin Optimization (Full Transformation)
+
+We want:
+
+$$
+\max_{\beta,\beta_0} \gamma
+$$
+
+### 🔹 Scaling invariance
+
+$$
+\gamma(\beta,\beta_0) = \gamma(c\beta, c\beta_0)
+$$
+
+So enforce normalization:
+
+$$
+y_i(\beta^T x_i + \beta_0) \ge 1
+$$
+
+Then:
+
+$$
+\gamma = \frac{1}{\|\beta\|}
+$$
+
+Thus:
+
+$$
+\max \gamma \Longleftrightarrow \min \|\beta\|
+$$
+
+Smooth objective:
+
+$$
+\boxed{
+\min_{\beta,\beta_0} \frac12 \|\beta\|^2
+\quad \text{s.t.} \quad
+y_i(\beta^T x_i + \beta_0) \ge 1
+}
+$$
+
+👉 This is the **Hard-Margin SVM Primal Problem**.
+
+---
+
+## 🧮 5. Lagrangian Formulation
+
+Introduce multipliers $\alpha_i \ge 0$:
+
+$$
+\mathcal{L}(\beta,\beta_0,\alpha)
+=
+\frac12 \|\beta\|^2
++
+\sum_{i=1}^n \alpha_i
+\left(1 - y_i(\beta^T x_i + \beta_0)\right)
+$$
+
+---
+
+## 📉 6. Stationarity Conditions
+
+### 🔹 Derivative w.r.t. $\beta$
+
+$$
+\frac{\partial \mathcal{L}}{\partial \beta}
+= \beta - \sum_{i=1}^n \alpha_i y_i x_i = 0
+$$
+
+$$
+\boxed{
+\beta = \sum_{i=1}^n \alpha_i y_i x_i
+}
+$$
+
+### 🔹 Derivative w.r.t. $\beta_0$
+
+$$
+\frac{\partial \mathcal{L}}{\partial \beta_0}
+= -\sum_{i=1}^n \alpha_i y_i = 0
+$$
+
+$$
+\boxed{
+\sum_{i=1}^n \alpha_i y_i = 0
+}
+$$
+
+---
+
+## 🔄 7. Dual Derivation (No Steps Skipped)
+
+Substitute
+
+$$
+\beta = \sum_{i=1}^n \alpha_i y_i x_i
+$$
+
+into the Lagrangian.
+
+### 🔹 Expand $\|\beta\|^2$
+
+$$
+\|\beta\|^2
+=
+\left(\sum_{i=1}^n \alpha_i y_i x_i\right)^T
+\left(\sum_{j=1}^n \alpha_j y_j x_j\right)
+$$
+
+$$
+=
+\sum_{i=1}^n \sum_{j=1}^n
+\alpha_i \alpha_j y_i y_j x_i^T x_j
+$$
+
+Thus:
+
+$$
+\frac12 \|\beta\|^2
+=
+\frac12 \sum_{i,j}
+\alpha_i \alpha_j y_i y_j x_i^T x_j
+$$
+
+### 🔹 Expand middle term
+
+$$
+\sum_{i=1}^n \alpha_i y_i \beta^T x_i
+=
+\sum_{i=1}^n \sum_{j=1}^n
+\alpha_i \alpha_j y_i y_j x_i^T x_j
+$$
+
+### 🔹 Combine
+
+$$
+\mathcal{L}
+=
+\sum_{i=1}^n \alpha_i
+-
+\frac12 \sum_{i,j}
+\alpha_i \alpha_j y_i y_j x_i^T x_j
+$$
+
+---
+
+## 🎯 8. Dual Optimization
+
+$$
+\boxed{
+\max_{\alpha}
+\sum_{i=1}^n \alpha_i
+-
+\frac12 \sum_{i,j}
+\alpha_i \alpha_j y_i y_j x_i^T x_j
+}
+$$
+
+subject to:
+
+$$
+\alpha_i \ge 0,
+\quad
+\sum_{i=1}^n \alpha_i y_i = 0
+$$
+
+---
+
+## 🧠 9. Final Decision Function
+
+Optimal weight:
+
+$$
+\beta = \sum_{i=1}^n \alpha_i y_i x_i
+$$
+
+Decision function:
+
+$$
+f(x) =
+\sum_{i=1}^n \alpha_i y_i x_i^T x + \beta_0
+$$
+
+Prediction:
+
+$$
+\boxed{\hat y = \mathrm{sign}(f(x))}
+$$
+
+Only $\alpha_i > 0$ matter → **Support Vectors**.
+
+---
+
+## 📌 10. Complementary Slackness
+
+$$
+\alpha_i \left(1 - y_i(\beta^T x_i + \beta_0)\right) = 0
+$$
+
+- If $\alpha_i > 0$ ⇒ point lies on margin  
+- If point outside margin ⇒ $\alpha_i = 0$
+
+Only support vectors determine the boundary.
+
+---
+
+## 🔗 11. Kernel Form
+
+Replace inner product:
+
+$$
+x_i^T x \rightarrow K(x_i, x)
+$$
+
+Decision function:
+
+$$
+f(x)
+=
+\sum_{i=1}^n \alpha_i y_i K(x_i, x) + \beta_0
+$$
+
+---
+
+# ✨ Key Insights
+
+- 🧠 SVM maximizes geometric margin  
+- 📐 Primal minimizes weight norm  
+- 🔎 Dual depends only on inner products  
+- 🧷 Solution is sparse (support vectors)  
+- 🔥 Kernel trick enables nonlinear boundaries
+
+
+----
+---
+---
+----
+---
+---
+layout: post
+title: "Unsupervised Learning"
+date: 2026-02-10 00:00:00 +0900
+author: kang
+categories: [Machince Learning, Unsupervised]
+tags: [Machince Learning, Unsuperviseding, Overview]
+pin: false
+math: true
+mermaid: true
+---
+
+# 🧠 Unsupervised Learning & Clustering
+
+> Lecture-style structured notes with intuition, examples, and math
+
+---
+
+## 📌 Why Unsupervised Learning?
+
+### 🎯 Goal
+Unsupervised learning aims to **discover interesting structure** in data **without labels**.
+
+- 🔍 Discover **subgroups / patterns** among observations or variables
+- 📊 Find informative ways to **visualize high-dimensional data**
+
+### 💡 Why is it important?
+- Unlabeled data is **easier and cheaper** to obtain
+- Labeling requires **human labor & expertise**
+
+### ⚠️ Key Characteristic
+- No single objective like prediction accuracy
+- Results are often **subjective**
+
+---
+
+## 🧩 Clustering Problem
+
+### 📖 Definition
+Finding **natural groupings** among objects.
+
+### ✅ Objective
+- High **intra-cluster similarity**
+- Low **inter-cluster similarity**
+
+---
+
+## 🧪 Clustering Examples
+
+### 🧬 Gene Clustering
+- Microarrays measure gene activity across conditions
+- Similar expression patterns → clustered genes
+- Helps infer **functions of unknown genes**
+
+---
+
+### 👤 User Clustering (Recommendation Systems)
+- Core idea of **collaborative filtering**
+- Users with similar tastes are grouped
+
+> “Users like you also liked …”
+
+---
+
+### 🖼️ Image Compression
+
+Each pixel is a vector:
+$$
+\mathbf{x}_i = [R_i, G_i, B_i]^T
+$$
+
+Cluster centers:
+$$
+\{\mu_1, \mu_2, \dots, \mu_K\}
+$$
+
+Assignment:
+$$
+\arg\min_k \| \mathbf{x}_i - \mu_k \|_2
+$$
+
+Fewer colors → smaller storage size
+
+---
+
+## 🆚 Classification vs Clustering
+
+| Classification | Clustering |
+|---------------|------------|
+| Uses labels | No labels |
+| Predict class | Discover structure |
+| Supervised | Unsupervised |
+
+---
+
+## 🎭 Clustering is Subjective
+
+There is **no single correct clustering**.
+
+Possible groupings:
+- Family-based
+- Gender-based
+- Occupation-based
+
+Depends on **similarity definition**.
+
+---
+
+## 📏 Similarity / Distance Metrics
+
+### L1 Distance
+$$
+L_1(A,B) = \sum_{i,j} |A_{ij} - B_{ij}|
+$$
+
+### L2 Distance
+$$
+L_2(A,B) = \sqrt{ \sum_{i,j} (A_{ij} - B_{ij})^2 }
+$$
+
+### Distance Matrix
+$$
+D =
+\begin{bmatrix}
+0 & d_{12} & d_{13} \\
+d_{21} & 0 & d_{23} \\
+d_{31} & d_{32} & 0
+\end{bmatrix}
+$$
+
+---
+
+## 🧱 Two Types of Clustering
+
+### 🌲 Hierarchical Clustering
+- Bottom-up (agglomerative)
+- Produces a dendrogram
+
+### 📦 Partitional Clustering
+- Top-down
+- Requires number of clusters K
+- Example: K-means
+
+---
+
+## 🧠 Summary
+
+- Unsupervised learning finds structure without labels
+- Clustering is the most common technique
+- Results depend on:
+  - Distance metric
+  - Number of clusters
+  - Interpretation goal
+
+
+---
+layout: post
+title: "K-Means"
+date: 2026-02-10 00:00:00 +0900
+author: kang
+categories: [Machince Learning, Unsupervised]
+tags: [Machince Learning, Unsuperviseding, Clustering, K-Means]
+pin: false
+math: true
+mermaid: true
+---
+
+# 🌳 Hierarchical Clustering & 📦 K-Means
+
+> Unsupervised Learning – Clustering Algorithms (Lecture Notes)
+
+---
+
+## 🌳 Hierarchical Clustering
+
+### 🔁 Agglomerative Clustering (Bottom-Up)
+
+- **Level 0**: Start with singleton clusters  
+  (each data point is its own cluster)
+
+- For level ℓ = 1 to L:
+  - Set a distance threshold $$\tau_\ell$$ (monotonically increasing)
+  - Merge clusters whose distance is within $$\tau_\ell$$
+
+➡️ This process builds a **hierarchical tree (dendrogram)**
+
+---
+
+## 📏 Distance Between Clusters
+
+At level ≥ 1, we need **distance between clusters**, not points.
+
+### Common Linkage Methods
+
+Let clusters be $$C_p, C_q$$
+
+#### 1️⃣ Single-Link (Closest Pair)
+$$
+d_{\text{single}}(C_p, C_q) = \min_{x \in C_p, y \in C_q} \|x - y\|
+$$
+
+- Can cause **chaining problem**
+- Distant points may be grouped together indirectly
+
+---
+
+#### 2️⃣ Complete-Link (Farthest Pair)
+$$
+d_{\text{complete}}(C_p, C_q) = \max_{x \in C_p, y \in C_q} \|x - y\|
+$$
+
+- Produces compact clusters
+- Sensitive to outliers
+
+---
+
+#### 3️⃣ Average-Link
+$$
+d_{\text{avg}}(C_p, C_q) =
+\frac{1}{|C_p||C_q|}
+\sum_{x \in C_p}\sum_{y \in C_q} \|x-y\|
+$$
+
+---
+
+#### 4️⃣ Centroid Distance
+$$
+d(C_p, C_q) = \|\mu_p - \mu_q\|
+$$
+
+where
+$$
+\mu_p = \frac{1}{|C_p|}\sum_{x \in C_p} x
+$$
+
+---
+
+### ⚠️ Important Note
+Different linkage choices → **different clustering behavior**  
+Clustering results are **not unique**.
+
+---
+
+## 📦 K-Means Clustering
+
+### 🔄 Overview
+
+- Iterative
+- Partitional clustering algorithm
+- Requires number of clusters **K**
+
+---
+
+## 🎯 Objective Function
+
+Minimize within-cluster sum of squares:
+
+$$
+J = \sum_{i=1}^{N}\sum_{k=1}^{K} r_{ik} \|x_i - \mu_k\|^2
+$$
+
+Where:
+
+- $x_i \in \mathbb{R}^d$ : data point
+- $\mu_k \in \mathbb{R}^d$ : centroid of cluster k
+- $r_{ik} \in \{0,1\}$ :
+  $$
+  r_{ik} =
+  \begin{cases}
+  1 & \text{if } x_i \text{ assigned to cluster } k \\
+  0 & \text{otherwise}
+  \end{cases}
+  $$
+
+---
+
+## ⚙️ K-Means Algorithm
+
+### Step 1️⃣ Initialization
+Pick K random points as initial centroids:
+$$
+\mu_1, \mu_2, \dots, \mu_K
+$$
+
+---
+
+### Step 2️⃣ Assignment Step (a)
+
+For each data point:
+$$
+r_{ik} =
+\begin{cases}
+1 & k = \arg\min_j \|x_i - \mu_j\|^2 \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+---
+
+### Step 3️⃣ Update Step (b)
+
+Update centroids:
+$$
+\mu_k =
+\frac{\sum_{i=1}^{N} r_{ik} x_i}
+{\sum_{i=1}^{N} r_{ik}}
+$$
+
+---
+
+### Step 4️⃣ Repeat
+Repeat (a) and (b) until assignments do not change.
+
+---
+
+## ✅ Does K-Means Always Terminate?
+
+✔️ **Yes**
+
+Reasons:
+
+- Assignment step does not increase $$J$$
+- Update step minimizes $$J$$ w.r.t. $$\mu_k$$
+- Finite number of possible assignments
+
+➡️ Converges to a **local minimum**
+
+---
+
+## ❌ Does It Always Converge to Same Result?
+
+❌ **No**
+
+- Depends on random initialization
+- Different runs → different local optima
+
+➡️ Use **multiple restarts** or **K-means++**
+
+---
+
+## ⏱️ Time Complexity
+
+Let:
+- N = number of points
+- K = number of clusters
+- T = iterations
+
+### Assignment Step:
+$$
+O(KN)
+$$
+
+### Update Step:
+$$
+O(N)
+$$
+
+### Total:
+$$
+O(TKN)
+$$
+
+Worst case is NP-hard, but in practice T is small.
+
+---
+
+## ❓ How to Choose K
+
+### Problem
+Objective $$J$$ always decreases as K increases.
+
+---
+
+### 🦴 Elbow Method
+
+- Plot $$J$$ vs K
+- Choose K where decrease slows (elbow point)
+
+⚠️ Sometimes elbow is unclear.
+
+---
+
+## 🧠 Summary
+
+- Hierarchical clustering builds a dendrogram
+- K-means optimizes a clear objective
+- Both depend on distance definitions
+- No single “correct” clustering
+
+✨ Clustering is exploratory, not definitive
