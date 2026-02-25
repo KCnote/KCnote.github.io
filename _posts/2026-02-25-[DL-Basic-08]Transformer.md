@@ -96,6 +96,11 @@ $$
 - Self-attention outputs:
   $$z_i=\sum_j \alpha_{ij}v_j,\quad \alpha_{ij}=\text{softmax}(q_i^\top k_j)$$
 
+#### <b>Result of Self-Attention Softmax is matrix of similarity between inputs </b>.
+Softmax Result is $N$ x $N$ matrix. 
+where: $N$ input size.
+
+
 #### <b>Self-Attention main problem is that the mehod <span style="color:red">ignore the order of tokens</span></b>.
 
 >### $Multi-Head\: Attention$
@@ -203,9 +208,12 @@ $$
 
 Same length as input.
 
+![Transformer-Encoder](/assets/img/develop/Transformer-Encoder.png)
+
 
 >### $Masked\: Multi-Head\: Attention$
-Just Decoding Process, There are two type of tokens that already are known and didn't be known owing to future.
-The token of future use $[mask]$ token. 
+When we process decoding process, considering the cheating that the i-th input token can not include on the back of the token. So when i-th token is transformed by block, just using 0 ~ (i-1)-th tokens
+
+
 
 >### $Encoder-Decoder\: Attention$
