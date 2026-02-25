@@ -16,6 +16,7 @@ mermaid: true
 ### <b>Prerequisites</b>
     1. Recurrent Neural Network
     2. Seq2Seq
+
 <b>Recurrent Neural Network</b> have a problem that have <span style="color:#FFD5D5">rough 1:1 aligment</span>. But machine translation breaks these assumptions. input/output lengths differ, different order, a target word may depend on a far-away source word.
 
 <b>Seq2Seq</b> have a problem that have <span style="color:#FFD5D5">bottleneck of encoder</span>. If encoder have long sequences, it is not sufficient. It still suffer from treating extremly long sequences.
@@ -85,7 +86,7 @@ $$
 
 ### "Each encoder state ($h_i$)" is <span style="color:cyan">Key</span>
 
-## Step 3: Softmax → Attention Coefficients
+>## Step 3: Softmax → Attention Coefficients
 
 $$
 \alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_{j=1}^{T} \exp(e_{t,j})}
@@ -93,7 +94,7 @@ $$
 
 where: $ \sum_{i=1}^{T} \alpha_{t,i} = 1 $
 
-## Step 4: Compute Attention Vector
+>## Step 4: Compute Attention Vector
 
 Weighted sum:
 
@@ -106,7 +107,7 @@ This is convex combination of encoder states.
 ### "Each encoder state ($h_i$)" is <span style="color:cyan">Value</span>
 ### "Each encoder state ($a_t$)" is <span style="color:cyan">Attention Value</span>
 
-## Step 5: Combine with Decoder State
+>## Step 5: Combine with Decoder State
 
 Concatenate:
 
