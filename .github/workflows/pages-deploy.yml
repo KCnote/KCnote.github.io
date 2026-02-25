@@ -50,12 +50,27 @@ jobs:
         env:
           JEKYLL_ENV: "production"
 
+      - name: Check in common
+        run: |
+          echo "Check in common setting..."
+
+          for file in _posts/*.md; do
+            echo "Checking $file"
+
+            if ! grep -q "^title:" "$file"; then
+              echo "Missing title in $file"
+              exit 1
+            fi
+          done
+
+          echo "Check in common passed"
+          
       - name: Test site
         run: |
           bundle exec htmlproofer _site \
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
-
+      
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
