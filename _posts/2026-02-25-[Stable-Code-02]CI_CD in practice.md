@@ -1,6 +1,6 @@
 ---
 layout: post
-tit=le: "02. CI & CD in practice"
+title: "02. CI & CD in practice"
 date: 2026-02-25 00:00:00 +0900
 author: kang
 categories: [Stable, CI/CD]
