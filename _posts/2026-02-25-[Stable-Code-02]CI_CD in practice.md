@@ -1,6 +1,6 @@
 ---
 layout: post
-tit=le: "02. CI & CD in practice"
+title: "02. CI & CD in practice"
 date: 2026-02-25 00:00:00 +0900
 author: kang
 categories: [Stable, CI/CD]
@@ -32,7 +32,12 @@ The process is $ Build site \rightarrow Test site $.
 
 So i wanna add new option "check in common"
 
+### <b> Current state </b>.
 ![CICD-Before](/assets/img/develop/CICD-Before.png)
+
+> After
+
+### <b> Now i will <span style="color:cyan">add new option "check in common" between build site and Test site</span></b>.
 
 
 ```yml
@@ -55,11 +60,14 @@ So i wanna add new option "check in common"
 
           echo "Check in common passed"
 
-      - name: Check in common
+      - name: Test site
       ...
 ```
 
+### <b> New state and processing </b>.
 ![CICD-After1](/assets/img/develop/CICD-After1.png)
+
+### <b> Finish the new process </b>.
 ![CICD-After2](/assets/img/develop/CICD-After2.png)
 
 > Change the structure CI pipeline
@@ -68,4 +76,8 @@ So i wanna add new option "check in common"
 
 ### 2. If the "check in common" step have issue from forgetting the title or wrong world
 
+### <b> Intentionally Add typo within "title" </b>.
 ![CICD-Wrong](/asset/img/develop/CICD-Wrong.png)
+
+### <b> CI process fails on "check in common" process and Fail to deploy </b>.
+![CICD-Error](/asset/img/develop/CICD-Error.png)
