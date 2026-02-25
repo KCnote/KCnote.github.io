@@ -71,13 +71,13 @@ So i wanna add new option "check in common"
 ![CICD-After2](/assets/img/develop/CICD-After2.png)
 
 > Change the structure CI pipeline
-![CICD-Change](/asset/img/develop/CICD-Change.png)
+![CICD-Change](/assets/img/develop/CICD-Change.png)
 
 
 ### 2. If the "check in common" step have issue from forgetting the title or wrong world
 
 ### <b> Intentionally Add typo within "title" </b>.
-![CICD-Wrong](/asset/img/develop/CICD-Wrong.png)
+![CICD-Wrong](/assets/img/develop/CICD-Wrong.png)
 
 ### <b> CI process fails on "check in common" process and Fail to deploy </b>.
-![CICD-Error](/asset/img/develop/CICD-Error.png)
+![CICD-Error](/assets/img/develop/CICD-Error.png)
