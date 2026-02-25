@@ -18,6 +18,7 @@ Kullback-Leibler (KL) Divergence
 왜 trianing loss는 들쭉날쭉하게 내려갈까.. -> 전체로하면 내려갈수있으나 subset으로 학습 측정하기 때문에 발생하는 현상이다.
 Domain knowlege를 적용하여 모델을 만드는 예를 생각해보자
 fine tunning, 해보기 공개되어있는 좋은모델 파라미터로
+visualization of DL (CNN etc.)
 
 이미지 분석기 만들기
 
