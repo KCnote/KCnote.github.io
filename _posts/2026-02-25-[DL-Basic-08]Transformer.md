@@ -212,8 +212,10 @@ Same length as input.
 
 
 >### $Masked\: Multi-Head\: Attention$
-When we process decoding process, considering the cheating that the i-th input token can not include on the back of the token. So when i-th token is transformed by block, just using 0 ~ (i-1)-th tokens
+When we process decoding process, considering the cheating that the i-th input token can not include on the back of the token. So when i-th token is transformed by block, just using 0 ~ (i-1)-th tokens.
 
+With a causal mask, ensuring each token attends only to past and current tokens. Attention weights are computed using masked softmax. It can keep the principle of only using past and current tokens with parallel process.
 
+![Transformer-Decoder-1](/assets/img/develop/Transformer-Decoder-1.png)
 
 >### $Encoder-Decoder\: Attention$
