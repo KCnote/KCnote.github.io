@@ -44,9 +44,7 @@ Fortunately(?), I met the problem that jeklly CI/CD occured and i hope to know h
 8. $Post\: Checkout$: Cleanup operations after the checkout step
 9. $Complete\: job$: The workflow finished.
 
-
-
-run: bundle exec jekyll build
+![hierarchical-CI-CD](/assets/img/develop/hierarchical-CI-CD.png)
 
 ### 3. How use Continuous Integration(CI) & Continuous Deployment(CD)?
     Command
@@ -253,6 +251,7 @@ deploy:
 
 ## <b>Another Example</b>
 <b>- Python</b>
+>1. hierarchical structure
 ```
 project/
 project/
@@ -260,6 +259,7 @@ project/
  ├── test_app.py
  └── .github/workflows/ci.yml
 ```
+>2. yml
 ```yml
 name: CI
 
@@ -281,7 +281,7 @@ jobs:
 ```
 
 <b>- C++</b>
-1. hierachical structure
+>1. hierarchical structure
 ```
 project/
  ├── src/
@@ -294,6 +294,7 @@ project/
  └── .github/workflows/ci.yml
 ```
 
+>2. yml
 ```yml
 name: C++ CI
 
@@ -321,6 +322,7 @@ jobs:
         run: ctest --test-dir build
 ```
 
+>3. CMake
 ```cmake
 #CMake
 cmake_minimum_required(VERSION 3.14)
