@@ -116,15 +116,15 @@ $$
 
 <table>
 <tr>
-<td><img src="/assets/img/develop/Activation-Step.png" width="250"></td>
-<td><img src="/assets/img/develop/Activation-Sigmoid.png" width="250"></td>
-<td><img src="/assets/img/develop/Activation-Tanh.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-Step.png" width="250" alt="Step activation function"></td>
+<td><img src="/assets/img/develop/Activation-Sigmoid.png" width="250" alt="Sigmoid activation function"></td>
+<td><img src="/assets/img/develop/Activation-Tanh.png" width="250" alt="Tanh activation function"></td>
 </tr>
 
 <tr>
-<td><img src="/assets/img/develop/Activation-ReLU.png" width="250"></td>
-<td><img src="/assets/img/develop/Activation-Leaky-ReLU.png" width="250"></td>
-<td><img src="/assets/img/develop/Activation-ELU.png" width="250"></td>
+<td><img src="/assets/img/develop/Activation-ReLU.png" width="250" alt="ReLU activation function"></td>
+<td><img src="/assets/img/develop/Activation-Leaky-ReLU.png" width="250" alt="Leaky ReLU activation function"></td>
+<td><img src="/assets/img/develop/Activation-ELU.png" width="250" alt="ELU activation function"></td>
 </tr>
 </table>
 
