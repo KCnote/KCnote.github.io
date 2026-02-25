@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "02. CI & CD in practice"
+tit=le: "02. CI & CD in practice"
 date: 2026-02-25 00:00:00 +0900
 author: kang
 categories: [Stable, CI/CD]
@@ -64,20 +64,23 @@ So i wanna add new option "check in common"
       ...
 ```
 
-### <b> New state and processing </b>.
+### <b> New state and processing </b>
 ![CICD-After1](/assets/img/develop/CICD-After1.png)
 
-### <b> Finish the new process </b>.
+### <b> Finish the new process </b>
 ![CICD-After2](/assets/img/develop/CICD-After2.png)
 
-> Change the structure CI pipeline
+### <b> Change the structure CI pipeline </b>
 ![CICD-Change](/assets/img/develop/CICD-Change.png)
 
 
 ### 2. If the "check in common" step have issue from forgetting the title or wrong world
 
-### <b> Intentionally Add typo within "title" </b>.
+### <b> Intentionally Add typo within "title" </b>
 ![CICD-Wrong](/assets/img/develop/CICD-Wrong.png)
 
-### <b> CI process fails on "check in common" process and Fail to deploy </b>.
+### <b> CI process fails on "check in common" process and Fail to deploy </b>
 ![CICD-Error](/assets/img/develop/CICD-Error.png)
+
+### <b> After correct the name of title, it works </b>
+![CICD-Pass](/assets/img/develop/CICD-Pass.png)
