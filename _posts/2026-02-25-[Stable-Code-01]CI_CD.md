@@ -251,7 +251,9 @@ deploy:
 
 ## <b>Another Example</b>
 <b>- Python</b>
+
 >1. hierarchical structure
+
 ```
 project/
 project/
@@ -259,7 +261,9 @@ project/
  ├── test_app.py
  └── .github/workflows/ci.yml
 ```
+
 >2. yml
+
 ```yml
 name: CI
 
@@ -281,7 +285,9 @@ jobs:
 ```
 
 <b>- C++</b>
+
 >1. hierarchical structure
+
 ```
 project/
  ├── src/
@@ -295,6 +301,7 @@ project/
 ```
 
 >2. yml
+
 ```yml
 name: C++ CI
 
@@ -323,6 +330,7 @@ jobs:
 ```
 
 >3. CMake
+
 ```cmake
 #CMake
 cmake_minimum_required(VERSION 3.14)
