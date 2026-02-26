@@ -62,7 +62,7 @@ Without Positional Encoding, Self-attention have a problem that there's no seque
     7. Masked Multi-Head Attention
     8. Encoder-Decoder Attention
 
->### $Transformer\: Block$
+>### $Transformer\; Block$
 ![Transformer-Block](/assets/img/develop/Transformer-Block.png)
 
 >### $Self-Attention$
@@ -112,7 +112,7 @@ where: $N$ input size.
 
 #### <b>Self-Attention main problem is that the mehod <span style="color:red">ignore the order of tokens</span></b>.
 
->### $Multi-Head\: Attention$
+>### $Multi-Head\; Attention$
 ![Multi-Head-Attention](/assets/img/develop/Multi-Head-Attention.png)
 $$
 head_i = Attention(Q W_Q^i, K W_K^i, V W_V^i) 
@@ -165,7 +165,7 @@ $$
 - Residual helps gradient flow.
 - LayerNorm stabilizes scale.
 
->### $Positional\: Encoding$
+>### $Positional\; Encoding$
 
 
 Since attention is permutation invariant, we inject position:
@@ -206,7 +206,7 @@ Relative shifts can be represented as linear combinations of sine/cosine pairs.
 
 Thus model can learn relative offsets.
 
->### $Stacking\: Blocks$
+>### $Stacking\; Blocks$
 Repeat above block $L$ times.
 
 Final encoder output:
@@ -220,7 +220,7 @@ Same length as input.
 ![Transformer-Encoder](/assets/img/develop/Transformer-Encoder.png)
 
 
->### $Masked\: Multi-Head\: Attention$
+>### $Masked\; Multi-Head\; Attention$
 When we process decoding process, considering the cheating that the i-th input token can not include on the back of the token. So when i-th token is transformed by block, just using 0 ~ (i-1)-th tokens.
 
 With a causal mask, ensuring each token attends only to past and current tokens. Attention weights are computed using masked softmax. It can keep the principle of only using past and current tokens with parallel process.
@@ -236,19 +236,19 @@ $$
 
 ![Transformer-Decoder-1](/assets/img/develop/Transformer-Decoder-1.png)
 
->### $Encoder-Decoder\: Attention (Cross\: Attention)$
+>### $Encoder-Decoder\; Attention (Cross\; Attention)$
 
 This part is very similiar with encoder transformer block. The only one  difference thing is Query input is from decoder previous output, Key Value input is from encoder previous output.
 
 And this part is not needed to use mask on attention weight, because already the output of previous decoder is adapted.
 
-$Decoder\: Queries:$
+$Decoder\; Queries:$
 
 $$
 Q = R_{\text{decoder}} W_Q
 $$
 
-$Encoder\: Keys/Values:$
+$Encoder\; Keys/Values:$
 
 $$
 K = Z^{(L)} W_K
@@ -261,7 +261,7 @@ $$
 ![Transformer-Decoder-2](/assets/img/develop/Transformer-Decoder-2.png)
 
 
->### $Linear\: Output\: Layer and SoftMax$
+>### $Linear\; Output\; Layer and SoftMax$
 
 Map to vocabulary logits:
 
@@ -282,7 +282,7 @@ $$
 
 ![Transformer-Decoder-3](/assets/img/develop/Transformer-Decoder-3.png)
 
->### $Cross-Entropy\: Loss\: and\: MLE$
+>### $Cross-Entropy\; Loss\; and\; MLE$
 
 For one-hot target:
 
@@ -321,7 +321,7 @@ $$
 
 Beam search keeps top-k sequences.
 
->### <b>$Classification\: Variant$</b>
+>### <b>$Classification\; Variant$</b>
 
 Mean pooling:
 
@@ -387,7 +387,7 @@ $
 \text{Std}(QK^T) \approx \sqrt{d_k}
 $
 
-Dividing by ( \sqrt{d_k} ) keeps the variance ≈ 1, preventing scores from becoming too large.
+Dividing by $ \sqrt{d_k} $ keeps the variance ≈ 1, preventing scores from becoming too large.
 
 ### Intuition
 
