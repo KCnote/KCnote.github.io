@@ -41,7 +41,16 @@ mermaid: true
 
 
 ### 2. Why use Transformer?
+    1. Self-Attention
+    2. LayerNorm + Residual
+    3. Positional Encoding
 
+<b>Self-Attention</b> is the main idea of model. The main problem of previous model(Seq2Seq) is bottleneck of encoder but Thanks to self-attention, the embedding input is to be more contexturalized embedding and there is no bottleneck. Even it is <b><span style="color:red">possible to interpret the relationship of inputs</span></b>.
+The surprise thing for me is almost <b><span style="color:red">solve the vanishing gradient issue on Self-Attention</span></b> with scaling softmax.
+
+With Residual, it is also great part for vanishing gradient. That's why from various device, we can stack a number of transformer block.
+
+Without Positional Encoding, Self-attention have a problem that there's no sequences information. But Additional information from positional encoding can reflect the position info.
 
 ### 3. How use Transformer?
     1. Transformer Block
@@ -216,6 +225,179 @@ When we process decoding process, considering the cheating that the i-th input t
 
 With a causal mask, ensuring each token attends only to past and current tokens. Attention weights are computed using masked softmax. It can keep the principle of only using past and current tokens with parallel process.
 
+$$
+S' =
+\frac{QK^\top}{\sqrt{d_k}} + M
+$$
+
+$$
+A = \text{softmax}(S')
+$$
+
 ![Transformer-Decoder-1](/assets/img/develop/Transformer-Decoder-1.png)
 
->### $Encoder-Decoder\: Attention$
+>### $Encoder-Decoder\: Attention (Cross\: Attention)$
+
+This part is very similiar with encoder transformer block. The only one  difference thing is Query input is from decoder previous output, Key Value input is from encoder previous output.
+
+And this part is not needed to use mask on attention weight, because already the output of previous decoder is adapted.
+
+$Decoder\: Queries:$
+
+$$
+Q = R_{\text{decoder}} W_Q
+$$
+
+$Encoder\: Keys/Values:$
+
+$$
+K = Z^{(L)} W_K
+$$
+
+$$
+V = Z^{(L)} W_V
+$$
+
+![Transformer-Decoder-2](/assets/img/develop/Transformer-Decoder-2.png)
+
+
+>### $Linear\: Output\: Layer and SoftMax$
+
+Map to vocabulary logits:
+
+$$
+o_t = W_o z_t + b_o
+$$
+
+$$
+W_o \in \mathbb{R}^{|V|\times d_{\text{model}}}
+$$
+
+$$
+p(y_t=c)
+=
+\frac{e^{(o_t)_c}}
+{\sum_j e^{(o_t)_j}}
+$$
+
+![Transformer-Decoder-3](/assets/img/develop/Transformer-Decoder-3.png)
+
+>### $Cross-Entropy\: Loss\: and\: MLE$
+
+For one-hot target:
+
+$$
+\mathcal{L}_t
+=
+-\sum_c y_{t,c} \log p(y_t=c)
+$$
+
+Sequence loss:
+
+$$
+\mathcal{L}
+=
+\sum_{t=1}^{T} \mathcal{L}_t
+$$
+
+$$
+P(y_1,\dots,y_T)
+=
+\prod_{t=1}^T
+P(y_t \mid y_{<t}, x)
+$$
+
+Minimize negative log likelihood.
+
+>### <b>$Inference$</b>
+
+Greedy decoding:
+
+$$
+\hat{y}_t
+=
+\arg\max_c p(y_t=c)
+$$
+
+Beam search keeps top-k sequences.
+
+>### <b>$Classification\: Variant$</b>
+
+Mean pooling:
+
+$$
+\bar{z}
+=
+\frac{1}{N}
+\sum_{i=1}^N z_i
+$$
+
+CLS token:
+
+Use:
+
+$$
+z_{\text{CLS}}^{(L)}
+$$
+
+>### <b>Extra Information</b>
+
+## <b>Why do we scale by ( \sqrt{d_k} ) in Attention?</b>
+
+### Problem
+
+Attention scores are computed by: $S = QK^T $
+
+Each score is a dot product of two ( d_k )-dimensional vectors: $ s_{ij} = q_i \cdot k_j $
+
+If vector elements have variance ≈ 1, 
+
+then: $\text{Var}(q \cdot k) = d_k, \quad \text{Std} \approx \sqrt{d_k} $
+
+So when ( $d_k$ ) becomes large, attention scores grow large.
+
+### Why is this bad?
+
+Softmax is very sensitive to large values.
+
+Example:
+
+$
+[20, 5, -3] \xrightarrow{\text{softmax}} [0.999999, \approx 0, \approx 0]
+$
+
+This makes the distribution almost <b>one-hot</b>, which causes:
+
+* Gradient ≈ 0 (vanishing)
+* Slow or unstable learning
+* Softmax saturation
+
+### Solution: Scale by ( \sqrt{d_k} )
+
+Transformer uses:
+
+$
+\text{Attention}(Q,K,V) =
+\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$
+
+Since:
+
+$
+\text{Std}(QK^T) \approx \sqrt{d_k}
+$
+
+Dividing by ( \sqrt{d_k} ) keeps the variance ≈ 1, preventing scores from becoming too large.
+
+### Intuition
+
+* Higher dimension → larger dot product naturally
+* Large scores → softmax becomes too sharp
+* Sharp softmax → gradients vanish
+* Scaling keeps softmax in a **stable, non-saturated region**
+
+$
+\boxed{
+\text{Scaling by } \sqrt{d_k} \text{ stabilizes softmax and prevents vanishing gradients.}
+}
+$
