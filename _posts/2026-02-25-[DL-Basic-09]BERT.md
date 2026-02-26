@@ -10,11 +10,10 @@ math: true
 mermaid: true
 ---
 
-wordpiece embedding
 ---
 # <b>BERT</b>
 ---
-### <b>BERT</b>
+### <b>Prerequisites</b>
     1. Transformer
 
 <b>Transformer</b> is very important turning point of model with good performance. But at the moment, the focus of task is just translation.

@@ -13,7 +13,7 @@ mermaid: true
 ---
 # <b>Transformer</b>
 ---
-### <b>Transformer</b>
+### <b>Prerequisites</b>
     1. Multi-layer Perceptron
     2. Convolutional Neural Network
     3. Recurrent Neural Network
