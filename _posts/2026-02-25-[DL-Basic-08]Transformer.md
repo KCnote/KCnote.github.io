@@ -52,6 +52,9 @@ With Residual, it is also great part for vanishing gradient. That's why from var
 
 Without Positional Encoding, Self-attention have a problem that there's no sequences information. But Additional information from positional encoding can reflect the position info.
 
+<b> Encoder: Bidirectional contextualization </b>
+<b> Decoder: Left to right contextualization </b>
+
 ### 3. How use Transformer?
     1. Transformer Block
     2. Self Attention
