@@ -49,9 +49,9 @@ Thanks to Token, OOV issue is almost solved and even though there're typo issue,
 
 >### $Input$
 - $Token\; embedding$: a pre-trained word embedding (WordPiece)
-    - With special token: [CLS], [SEP]
-        - [CLS]: Classificaiton toekn, put always at the beginning. Final hidden state for this token is used as the aggregate sequence representation for classification tasks
-        - [SEP]: Seperator token, used to mark the end of a sentence.
+    - With special token: `[CLS]`, `[SEP]`
+        - `[CLS]`: Classificaiton toekn, put always at the beginning. Final hidden state for this token is used as the aggregate sequence representation for classification tasks
+        - `[SEP]`: Seperator token, used to mark the end of a sentence.
 - $Segment\; embedding$: A learned embedding indicating which sentence each token belongs to
 - $Position\; embedding$: a learned embedding for each position
 
