@@ -1,15 +1,3 @@
----
-layout: post
-title: "History"
-date: 2026-03-01 00:00:00 +0900
-author: kang
-categories: [Linear Algebra, Linear Algebra - Foundations]
-tags: [Linear Algebra, Linear Algebra - Foundations]
-pin: false
-math: true
-mermaid: true
----
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,7 +22,7 @@ mermaid: true
       border:1px solid var(--line);
       border-radius:14px;
       overflow:hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,.06);
+      box-shadow: 0 10px 25px rgba(77, 65, 65, 0.06);
       display:grid;
       grid-template-columns: 1fr 320px;
       min-height: 980px;
@@ -99,6 +87,32 @@ mermaid: true
       .sheet{ border:none; box-shadow:none; border-radius:0; }
       a{ color:inherit; text-decoration:none; }
     }
+        .company-block {
+      background: #f3f6f9;
+      border-left: 4px solid #1e8a8f;
+      padding: 10px 14px;
+      margin: 8px 0 12px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      border-radius: 6px;
+    }
+    .edu-item { margin-top: 12px; }
+    .edu-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:12px;
+    }
+    .edu-school{
+      font-weight:800;
+      letter-spacing:0.02em;
+      text-transform:uppercase;
+    }
+    .edu-dates{
+      color:#6b7280;
+      font-size:13px;
+      white-space:nowrap;
+    }
   </style>
 </head>
 
@@ -112,7 +126,7 @@ mermaid: true
           <p class="summary">
             Computer Vision Engineer with 4+ years of experience in C++ vision library development,
             algorithm optimization, and industrial inspection systems. Specialized in geometric pattern
-            matching, high-density gauging, and 3D vision. Patents and production deployment experience
+            matching, high-density metrology. Patents and production deployment experience
             in semiconductor lines.
           </p>
         </section>
@@ -125,67 +139,123 @@ mermaid: true
               <div class="title">Computer Vision Engineer</div>
               <div class="company">FourthLogic Inc.</div>
             </div>
-            <div class="meta">2021 – Present</div>
+            <div class="meta">Apr 2020 – Aug 2024</div>
           </div>
           <ul>
+
+            <div class="company-block">
+              <strong>FourthLogic Inc.</strong><br>
+              Industrial company specializing in developing 
+              high-performance computer vision library. 
+              As a early employee, contributed to core algorithm development 
+              and production deployment in semiconductor manufacturing.
+              The core algorithm performance is world-best in the industry 
+              beyond Halcon, Cognex and so on aspects of speed, accuracy and robustness.
+              Sucessfully deployed in Hyundai Motor and Samsung Electronics production lines, 
+              improving inspection speed by 30% and reducing false positives rate to near 0%.
+            </div>
             <li>Developed high-performance C++ vision libraries for inspection pipelines.</li>
-            <li>Built geometric pattern matching algorithms and optimized runtime with SIMD/multithreading.</li>
-            <li>Delivered production-ready modules used in manufacturing environments.</li>
+            <li>Built object detection algorithms and optimized runtime with SIMD/multithreading.</li>
+            <li>Optimized performance using SIMD (AVX, SSE), multi-threading (future, OpenMP), and CUDA; refactored serialized structures into efficient parallel architectures.</li>
+            <li>Design clean architectures to ensure scalability and long-term maintainability</li>
+            <li>Design stable algorithms with robust error handling for general-purpose applications</li>
+            <li>Experienced in efficient task and workflow management using DevOps practices.</li>
           </ul>
 
-          <div class="role">
-            <div>
-              <div class="title">Previous Role Title</div>
-              <div class="company">Company Name</div>
-            </div>
-            <div class="meta">2019 – 2021</div>
-          </div>
-          <ul>
-            <li>One strong bullet with impact (speed/accuracy/cost).</li>
-            <li>One bullet about ownership/collaboration.</li>
-          </ul>
-        </section>
 
         <section class="section">
           <h2>Patents</h2>
           <ul>
             <li><b>US 12243286 B2</b> – Pattern Image Detection Method</li>
             <li><b>US 12094183 B2</b> – Geometric Pattern Matching Method and Device</li>
-            <li><b>KR 10-25105810000</b> – Method for Matching Shape Array (Pending)</li>
+            <li><b>KR 10-25079270000</b> – Method For Generating Quadrangle Gauge</li>
           </ul>
-          <p class="summary"><i>*Full list available upon request.</i></p>
+          <p class="summary"><i>*Full list of 9 patents related to vision algorithms available upon request.</i></p>
+        </section>
+
+        <section class="section">
+          <h2>Skill</h2>
+          <ul>
+            <li>Strong proficiency in C++ with extensive real-world experience</li>
+            <li>Specialized in rule-based object detection, including NCC-based, shape-based, and geometric methods</li>
+            <li>Skilled in performance optimization: SIMD (AVX/SSE), multi-threading, CUDA, and memory alignment</li>
+            <li>Without customization, designed general-purpose vision algorithm from scratch</li>
+            <li>Solid foundation in mathematics, statistics, and data analysis</li>
+            <li>Experienced in R, Python, PyTorch, and TensorFlow</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Education</h2>
+          <div class="edu-item">
+            <div class="edu-head">
+              <div class="edu-school"><b>UNIVERSITY OF SEOUL</b></div>
+              <div class="edu-dates">Feb 2013 – Aug 2019</div>
+            </div>
+            <div class="edu-degree">
+              Bachelor of Statistics (Major), Bachelor of Economy (Double Major)
+            </div>
+            <div class="edu-gpa"><b>GPA:</b> 3.87 / 4.5</div>
+            <ul class="edu-bullets">
+              <li>Served as President of the Statistics Student Council, leading student initiatives and coordinating events.</li>
+              <li>Includes 21 months of mandatory military service (Dec 2013 – Sep 2015).</li>
+            </ul>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-head">
+              <div class="edu-school"><b>KOREA UNIVERSITY</b></div>
+              <div class="edu-dates">Sep 2019 – Feb 2020</div>
+            </div>
+            <div class="edu-degree">
+              Master of Aritifical Intelligence
+            </div>
+            <ul class="edu-bullets">
+              <li>Implemented NLP papers in PyTorch and TensorFlow</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>VISA</h2>
+          <ul>
+            <li>Permanent Full working rights in Australia (No sponsorship required)</li>
+          </ul>
         </section>
       </main>
 
       <!-- RIGHT -->
       <aside class="side">
-        <img class="avatar" src="assets/profile.jpg" alt="Profile photo" />
-        <h1 class="name">Cho Kang</h1>
+        <img class="avatar" src="assets/img/develop/profile.png" alt="Profile photo" />
+        <h1 class="name">English Cho</h1>
         <div class="tag">Computer Vision Engineer</div>
 
         <div class="block contact">
           <h3>Contact</h3>
           <div>📍 Perth, WA</div>
-          <div>✉️ <a href="mailto:your@email.com">your@email.com</a></div>
-          <div>🔗 <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></div>
-          <div>💻 <a href="https://github.com/yourgithub">github.com/yourgithub</a></div>
+          <div>✉️ <a href="mailto:dev.kangcho@email.com">dev.kangcho@email.com</a></div>
+          <div>🔗 <a href="https://www.linkedin.com/in/kang-cho-31b49b212/">linkedin Profile</a></div>
+          <div>💻 <a href="https://kcnote.github.io/">KCnote Blog</a></div>
         </div>
 
         <div class="block">
           <h3>Education</h3>
           <ul>
-            <li><b>B.S. in XXXX</b><br/>University Name<br/>2017 – 2021</li>
+            <li><b>B.S. in Statistics, Economics(double)</b><br/>University of Seoul<br/>2013 – 2019</li>
+            <li><b>M.S. in Artificial Intelligence</b><br/>Korea University<br/>2019 – 2020</li>
           </ul>
         </div>
 
         <div class="block">
           <h3>Skills</h3>
+          <span class="pill">Library Developer</span>
           <span class="pill">C++</span>
-          <span class="pill">OpenCV</span>
-          <span class="pill">Eigen</span>
-          <span class="pill">SIMD</span>
+          <span class="pill">Computer Vision</span>
+          <span class="pill">Object Detection</span>
+          <span class="pill">Metrology</span>
           <span class="pill">Multithreading</span>
-          <span class="pill">3D Vision</span>
+          <span class="pill">SIMD</span>
+          <span class="pill">C#</span>
           <span class="pill">Python</span>
           <span class="pill">PyTorch</span>
         </div>
@@ -193,8 +263,8 @@ mermaid: true
         <div class="block">
           <h3>Languages</h3>
           <ul>
-            <li>Korean (Native)</li>
-            <li>English (Professional)</li>
+            <li>Korean (Fluent)</li>
+            <li>English (Intermediate)</li>
           </ul>
         </div>
       </aside>
