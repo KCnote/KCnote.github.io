@@ -24,8 +24,9 @@
       overflow:hidden;
       box-shadow: 0 10px 25px rgba(77, 65, 65, 0.06);
       display:grid;
-      grid-template-columns: 1fr 320px;
+      grid-template-columns: 2fr 1fr;
       min-height: 980px;
+      align-items: stretch;
     }
     /* Left */
     .main{ padding:28px 28px 32px 28px; }
@@ -49,12 +50,165 @@
     ul{ margin:6px 0 0; padding-left:18px; }
     li{ margin:6px 0; color:#374151; line-height:1.45; font-size:14px; }
     .company{ color:var(--muted); font-size:13px; margin-top:2px; }
+      .company-block {
+    background: #f3f6f9;
+    border-left: 4px solid #1e8a8f;
+    padding: 10px 14px;
+    margin: 8px 0 12px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 6px;
+    }
+    .edu-item { margin-top: 12px; }
+    .edu-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:12px;
+    }
+    .edu-school{
+      font-weight:800;
+      letter-spacing:0.02em;
+      text-transform:uppercase;
+    }
+    .edu-dates{
+      color:#6b7280;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .print-btn{
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 999px;
+      background: #111827;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      z-index: 9999;
+    }
+    .print-btn:hover{
+      opacity: .92;
+    }
+
+    /* Project Case Study Block */
+    .proj {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+      margin: 12px 0 14px;
+    }
+
+    .proj-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:12px;
+      margin-bottom: 8px;
+    }
+
+    .proj-title{
+      font-weight:800;
+      font-size:15px;
+    }
+
+    .proj-meta{
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .proj-sub{
+      color:#374151;
+      font-size:13.5px;
+      margin: 0 0 10px;
+    }
+
+    .proj-grid{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap: 8px 12px;
+      margin-top: 8px;
+    }
+
+    .proj-k{
+      font-weight:700;
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .proj-v{
+      font-size: 14px;
+      color:#374151;
+      line-height: 1.45;
+    }
+
+    .proj-v ul{
+      margin: 6px 0 0;
+      padding-left: 18px;
+    }
+
+    .proj-tags{
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .proj-chip{
+      display:inline-block;
+      background: rgba(23,126,137,.10);
+      color: #0f4f55;
+      border: 1px solid rgba(23,126,137,.18);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      margin: 6px 6px 0 0;
+    }
+
+    /* 작은 화면에서 라벨/내용 1열로 */
+    @media (max-width: 520px){
+      .proj-grid{ grid-template-columns: 1fr; }
+    }
+
+    @media print{
+      @page { margin: 12mm; }
+      body{ background:#fff; }
+      .page{ margin:0; max-width:none; padding:0; }
+      .sheet{ border:none; box-shadow:none; border-radius:0; }
+
+      /* PDF에서 배경색/사이드바 색 유지 (Chrome) */
+      *{ -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* 버튼 숨김 */
+      .print-btn{ display:none; }
+
+      /* 컬럼 유지 */
+      .sheet{ grid-template-columns: 1fr !important; }
+
+      /* 섹션/헤더는 잘리지 않게 */
+      .section, .role, .edu-item{ break-inside: avoid; page-break-inside: avoid; }
+
+      /* 긴 본문은 페이지 나눔 허용 (이게 핵심!) */
+      .company-block, ul{ break-inside: auto; page-break-inside: auto; }
+
+      /* print에서 sticky/relative 영향 제거 */
+      .side{ position: static; display:none !important;}
+
+    }
     /* Right */
     .side{
       background:var(--accent);
       color:#fff;
-      padding:26px 22px;
+      padding:20px 18px;
       position:relative;
+      align-self: start; 
     }
     .avatar{
       width:96px; height:96px; border-radius:999px; object-fit:cover;
@@ -77,46 +231,14 @@
     .side p, .side li{ color:#fff; opacity:.92; }
     .side ul{ padding-left:18px; }
     /* Responsive */
-    @media (max-width: 900px){
-      .sheet{ grid-template-columns: 1fr; }
-      .side{ order:-1; }
-    }
-    @media print{
-      body{ background:#fff; }
-      .page{ margin:0; max-width:none; padding:0; }
-      .sheet{ border:none; box-shadow:none; border-radius:0; }
-      a{ color:inherit; text-decoration:none; }
-    }
-        .company-block {
-      background: #f3f6f9;
-      border-left: 4px solid #1e8a8f;
-      padding: 10px 14px;
-      margin: 8px 0 12px 0;
-      font-size: 14px;
-      line-height: 1.5;
-      border-radius: 6px;
-    }
-    .edu-item { margin-top: 12px; }
-    .edu-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap:12px;
-    }
-    .edu-school{
-      font-weight:800;
-      letter-spacing:0.02em;
-      text-transform:uppercase;
-    }
-    .edu-dates{
-      color:#6b7280;
-      font-size:13px;
-      white-space:nowrap;
-    }
+
   </style>
 </head>
 
 <body>
+  <button class="print-btn" onclick="window.print()">
+    <b>PDF</b>
+  </button>
   <div class="page">
     <div class="sheet">
       <!-- LEFT -->
@@ -141,8 +263,6 @@
             </div>
             <div class="meta">Apr 2020 – Aug 2024</div>
           </div>
-          <ul>
-
             <div class="company-block">
               <strong>FourthLogic Inc.</strong><br>
               Industrial company specializing in developing 
@@ -154,14 +274,15 @@
               Sucessfully deployed in Hyundai Motor and Samsung Electronics production lines, 
               improving inspection speed by 30% and reducing false positives rate to near 0%.
             </div>
+          <ul>
             <li>Developed high-performance C++ vision libraries for inspection pipelines.</li>
             <li>Built object detection algorithms and optimized runtime with SIMD/multithreading.</li>
-            <li>Optimized performance using SIMD (AVX, SSE), multi-threading (future, OpenMP), and CUDA; refactored serialized structures into efficient parallel architectures.</li>
+            <li>Optimized performance using SIMD (AVX, SSE), multi-threading (future, OpenMP), and CUDA. refactored serialized structures into efficient parallel architectures.</li>
             <li>Design clean architectures to ensure scalability and long-term maintainability</li>
             <li>Design stable algorithms with robust error handling for general-purpose applications</li>
             <li>Experienced in efficient task and workflow management using DevOps practices.</li>
           </ul>
-
+        </section>
 
         <section class="section">
           <h2>Patents</h2>
@@ -183,6 +304,120 @@
             <li>Solid foundation in mathematics, statistics, and data analysis</li>
             <li>Experienced in R, Python, PyTorch, and TensorFlow</li>
           </ul>
+        </section>
+
+        <section class="section">
+          <h2>Projects</h2>
+          <div class="proj">
+            <div class="proj-head">
+              <div class="proj-title">Geometric Pattern Matching </div>
+              <div class="proj-meta">2021</div>
+            </div>
+
+            <p class="proj-sub">
+              Designed a general-purpose vision pipeline requiring minimal preprocessing across diverse object conditions with high performance and robustness.
+              high-performance beyond industry-leading commercial solutions
+            </p>
+
+            <div class="proj-grid">
+              <div class="proj-k">Problem</div>
+              <div class="proj-v">
+                robustness template match of occculsion handling, light reflection like gradation
+              </div>
+
+              <div class="proj-k">Constraints</div>
+              <div class="proj-v">
+                <b>No customization</b> required, <b>Easy to use</b> without prior domain knowledge for user, robust and general-purpose. using <b>Just one training image</b>
+              </div>
+
+              <div class="proj-k">Approach</div>
+              <div class="proj-v">
+                <ul>
+                  <li>Engineered a general-purpose vision algorithm designed to operate with minimal preprocessing across diverse object conditions.</li>
+                  <li>Proposed a vector-based geometric feature extraction framework for precise and interpretable structural modeling</li>
+                  <li>Improved detection accuracy by incorporating robustness to pixel-level pertubations and preserving geometric topological consistency</li>
+                  <li>Reduced hyperparameter dependency by designing a simplified Learn/Find interface, enabling intuitive and user-friendly operation</li>
+                  <li>Adpoted continuous refactoring and systematic testing practices to minimize maintenance overhead and accelerate feature deployment</li>
+                  <li>Architected independently operable and minimal algorithmic units to streamline debugging and significantly reduce issue diagnosis time</li>
+                  <li>Refactored critical paths with SIMD (AVX/SSE) and multithreading.</li>
+                  <li></li>
+                </ul>
+              </div>
+
+              <div class="proj-k">Validation</div>
+              <div class="proj-v">
+                validated test with 100+ test cases covering various occlusion included partially out of frame and lighting conditions.
+              </div>
+
+              <div class="proj-k">Impact</div>
+              <div class="proj-v">
+                <li>Robust performance was maintained with up to 40% occlusion unlike original template match</li>
+                <li>Stable detection accuracy despite illumination distortion caused by specular reflections and glare</li>
+                <li>Compared with commercial solutions via Halcon(the best performing one ever), achieved 10% performance improvement in detection speed</li>
+                <li>About 2048x2448 detection image and 256x256 learn image, Achieved under 5 ms processing speed</li>
+                <li>Combination of Small, Middle, Large size is also achieved with high performance</li>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="proj-chip">C++</span>
+              <span class="proj-chip">SIMD (AVX/SSE)</span>
+              <span class="proj-chip">Multithreading</span>
+              <span class="proj-chip">OpenCV</span>
+              <span class="proj-chip">Production Deployment</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Projects</h2>
+          <div class="proj">
+            <div class="proj-head">
+              <div class="proj-title">Optimization</div>
+              <div class="proj-meta">2023</div>
+            </div>
+
+            <p class="proj-sub">
+              All of algorithm is optimized with SIMD (AVX/SSE) and multithreading, and refactored serialized structures into efficient parallel architectures, achieving significant performance improvements in real-world production environments.
+            </p>
+
+            <div class="proj-grid">
+              <div class="proj-k">Problem</div>
+              <div class="proj-v">
+                Almost algorithms are optimized with multithreading
+              </div>
+
+              <div class="proj-k">Constraints</div>
+              <div class="proj-v">
+                <b>Automatically</b> finding optimized thread count, <b>Easy to use</b> parallel algorithm without settings for user.
+              </div>
+
+              <div class="proj-k">Approach</div>
+              <div class="proj-v">
+                <ul>
+                  <li>Divide sections for optimization and parallelization</li>
+                  <li>Checked performance bottlenecks and optimized critical paths</li>
+                  <li>Compared with between async and future functions for work units</li>
+                  <li>Refactored code or decomposed large functions into smaller, more manageable units</li>
+                  <li>Test for caches-hit and memory access patterns included stack, heap and allocatation and so on</li>
+                  <li>Efficient test whether SIMD is work or not</li>
+                  <li>Analyzed performance-to-resource efficiency to maximize throughput under limited computational resources.</li>
+                </ul>
+              </div>
+
+              <div class="proj-k">Impact</div>
+              <div class="proj-v">
+                <li>overhead code block convert structure for parallel programming and achieve 100% thread-efficient</li>
+                <li>Almost same efficient just SIMD without multithreading, for resource saving, using SIMD with singlethread</li>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="proj-chip">SIMD (AVX/SSE)</span>
+              <span class="proj-chip">Multithreading</span>
+              <span class="proj-chip">Resoure management</span>
+            </div>
+          </div>
         </section>
 
         <section class="section">
