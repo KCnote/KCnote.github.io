@@ -1,0 +1,204 @@
+---
+layout: post
+title: "History"
+date: 2026-03-01 00:00:00 +0900
+author: kang
+categories: [Linear Algebra, Linear Algebra - Foundations]
+tags: [Linear Algebra, Linear Algebra - Foundations]
+pin: false
+math: true
+mermaid: true
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cho Kang | Resume</title>
+  <style>
+    :root{
+      --ink:#1f2937; --muted:#6b7280; --bg:#f3f4f6;
+      --card:#ffffff; --accent:#177e89; --line:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink); background:var(--bg);
+    }
+    .page{
+      max-width: 980px; margin: 24px auto; padding: 0 14px;
+    }
+    .sheet{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,.06);
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      min-height: 980px;
+    }
+    /* Left */
+    .main{ padding:28px 28px 32px 28px; }
+    .section{ margin: 22px 0 0; padding-top: 18px; border-top:1px solid var(--line);}
+    .section:first-child{ border-top:none; padding-top:0; margin-top:0; }
+    .section h2{
+      margin:0 0 10px; font-size:14px; letter-spacing:.16em;
+      text-transform:uppercase; color:var(--accent);
+      display:flex; align-items:center; gap:10px;
+    }
+    .section h2:before{
+      content:""; width:10px; height:10px; border-radius:999px; background:var(--accent);
+      display:inline-block;
+    }
+    .summary{ color:var(--muted); line-height:1.55; font-size:14px; margin:8px 0 0; }
+    .role{
+      display:flex; justify-content:space-between; gap:16px; margin:12px 0 6px;
+    }
+    .role .title{ font-weight:700; }
+    .role .meta{ color:var(--muted); font-size:13px; white-space:nowrap; }
+    ul{ margin:6px 0 0; padding-left:18px; }
+    li{ margin:6px 0; color:#374151; line-height:1.45; font-size:14px; }
+    .company{ color:var(--muted); font-size:13px; margin-top:2px; }
+    /* Right */
+    .side{
+      background:var(--accent);
+      color:#fff;
+      padding:26px 22px;
+      position:relative;
+    }
+    .avatar{
+      width:96px; height:96px; border-radius:999px; object-fit:cover;
+      border:4px solid rgba(255,255,255,.35);
+      display:block; margin:0 auto 14px;
+      background:#0b4f55;
+    }
+    .name{ text-align:center; font-size:22px; font-weight:800; margin:0; }
+    .tag{ text-align:center; margin:6px 0 18px; font-size:13px; opacity:.9; }
+    .side .block{ margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,.25); }
+    .side h3{
+      margin:0 0 10px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; opacity:.95;
+    }
+    .contact a{ color:#fff; text-decoration:none; }
+    .contact div{ margin:8px 0; font-size:13px; display:flex; gap:8px; align-items:flex-start; }
+    .pill{
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      background:rgba(255,255,255,.16); font-size:12px; margin:6px 6px 0 0;
+    }
+    .side p, .side li{ color:#fff; opacity:.92; }
+    .side ul{ padding-left:18px; }
+    /* Responsive */
+    @media (max-width: 900px){
+      .sheet{ grid-template-columns: 1fr; }
+      .side{ order:-1; }
+    }
+    @media print{
+      body{ background:#fff; }
+      .page{ margin:0; max-width:none; padding:0; }
+      .sheet{ border:none; box-shadow:none; border-radius:0; }
+      a{ color:inherit; text-decoration:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="sheet">
+      <!-- LEFT -->
+      <main class="main">
+        <section class="section">
+          <h2>Career Profile</h2>
+          <p class="summary">
+            Computer Vision Engineer with 4+ years of experience in C++ vision library development,
+            algorithm optimization, and industrial inspection systems. Specialized in geometric pattern
+            matching, high-density gauging, and 3D vision. Patents and production deployment experience
+            in semiconductor lines.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Experiences</h2>
+
+          <div class="role">
+            <div>
+              <div class="title">Computer Vision Engineer</div>
+              <div class="company">FourthLogic Inc.</div>
+            </div>
+            <div class="meta">2021 – Present</div>
+          </div>
+          <ul>
+            <li>Developed high-performance C++ vision libraries for inspection pipelines.</li>
+            <li>Built geometric pattern matching algorithms and optimized runtime with SIMD/multithreading.</li>
+            <li>Delivered production-ready modules used in manufacturing environments.</li>
+          </ul>
+
+          <div class="role">
+            <div>
+              <div class="title">Previous Role Title</div>
+              <div class="company">Company Name</div>
+            </div>
+            <div class="meta">2019 – 2021</div>
+          </div>
+          <ul>
+            <li>One strong bullet with impact (speed/accuracy/cost).</li>
+            <li>One bullet about ownership/collaboration.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>Patents</h2>
+          <ul>
+            <li><b>US 12243286 B2</b> – Pattern Image Detection Method</li>
+            <li><b>US 12094183 B2</b> – Geometric Pattern Matching Method and Device</li>
+            <li><b>KR 10-25105810000</b> – Method for Matching Shape Array (Pending)</li>
+          </ul>
+          <p class="summary"><i>*Full list available upon request.</i></p>
+        </section>
+      </main>
+
+      <!-- RIGHT -->
+      <aside class="side">
+        <img class="avatar" src="assets/profile.jpg" alt="Profile photo" />
+        <h1 class="name">Cho Kang</h1>
+        <div class="tag">Computer Vision Engineer</div>
+
+        <div class="block contact">
+          <h3>Contact</h3>
+          <div>📍 Perth, WA</div>
+          <div>✉️ <a href="mailto:your@email.com">your@email.com</a></div>
+          <div>🔗 <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></div>
+          <div>💻 <a href="https://github.com/yourgithub">github.com/yourgithub</a></div>
+        </div>
+
+        <div class="block">
+          <h3>Education</h3>
+          <ul>
+            <li><b>B.S. in XXXX</b><br/>University Name<br/>2017 – 2021</li>
+          </ul>
+        </div>
+
+        <div class="block">
+          <h3>Skills</h3>
+          <span class="pill">C++</span>
+          <span class="pill">OpenCV</span>
+          <span class="pill">Eigen</span>
+          <span class="pill">SIMD</span>
+          <span class="pill">Multithreading</span>
+          <span class="pill">3D Vision</span>
+          <span class="pill">Python</span>
+          <span class="pill">PyTorch</span>
+        </div>
+
+        <div class="block">
+          <h3>Languages</h3>
+          <ul>
+            <li>Korean (Native)</li>
+            <li>English (Professional)</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
