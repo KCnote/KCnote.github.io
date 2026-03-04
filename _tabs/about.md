@@ -6,7 +6,7 @@ order: 4
 ---
 
 <iframe 
-  src="/assets/resume/resume.html"
+  src="/assets/resume/Resume.html"
   width="100%"
   height="1200px"
   style="border:none;">
