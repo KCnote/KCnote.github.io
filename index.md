@@ -30,6 +30,7 @@ margin-bottom:30px;
 </div>
 
 <img src="/assets/img/develop/profile.png"
+alt="PHOTO"
 style="
 width:110px;
 height:110px;
