@@ -70,7 +70,7 @@ margin-bottom:30px;
 
 <div>
   <h1 style="margin:0;font-size:40px;color:white;font-weight:800;">
-  Carrey Kang
+  Carrey Cho
   </h1>
 
   <p style="margin:8px 0 0 0;font-size:18px;">
