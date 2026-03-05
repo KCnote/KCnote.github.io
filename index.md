@@ -5,68 +5,121 @@ permalink: /
 ---
 
 <div style="
-padding:120px 40px;
-text-align:center;
-background:linear-gradient(135deg,#1f4037,#99f2c8);
+background: linear-gradient(135deg,#177e89,#1f2937);
 color:white;
-border-radius:12px;
+padding:40px 30px;
+border-radius:14px;
+margin-bottom:30px;
 ">
 
-<h1 style="font-size:48px;">Cho Kang</h1>
+<h1 style="margin:0;font-size:38px;color:white;">Carrey Kang</h1>
 
-<p style="font-size:22px;">
+<p style="margin:8px 0 0 0;font-size:18px;opacity:0.95;">
 Computer Vision Engineer
 </p>
 
-<p>
-C++ • Machine Learning • Industrial Vision
+<p style="margin:14px 0 0 0;font-size:14px;opacity:0.85;">
+C++ • Computer Vision • Vision Algorithms • Machine Learning
+</p>
+
+<p style="margin-top:16px;font-size:14px;">
+📍 Perth, Australia &nbsp;&nbsp;
+🔗 <a style="color:white;" href="https://www.linkedin.com/in/carreykangcho/">LinkedIn</a> &nbsp;&nbsp;
+💻 <a style="color:white;" href="dev.kangcho@gmail.com">Email</a>
 </p>
 
 </div>
 
-<div class="hero">
-
-# Cho Kang
-
-### Computer Vision Engineer
-
-C++ | Machine Learning | Industrial Vision | Algorithm Design
-
-</div>
-
----
-
 ## 👋 About Me
 
-Computer vision engineer specializing in high-performance C++ vision libraries and industrial inspection systems.
+I am a computer vision engineer focused on building **high-performance vision algorithms and scalable C++ libraries** for industrial systems.
 
-- Pattern Matching
-- Geometric Vision
-- 3D Vision Systems
-- Algorithm Optimization
+My main interest is designing algorithms that are:
 
-[View Resume](/about)
+- **robust in real-world environments**
+- **efficient enough for production systems**
+- **simple for engineers to use**
+
+I spent several years developing computer vision algorithms used in **industrial inspection systems**, including pattern matching, metrology, and image analysis pipelines.
+
+My work has been deployed in **large-scale production environments**, including semiconductor and manufacturing lines.
+
+### **[Click more about me](/about)**
 
 ---
 
-## 📝 Recent Posts
+## 🔬 What I Work On
 
-<ul>
-{% for post in site.posts limit:5 %}
-<li>
-<a href="{{ post.url }}">{{ post.title }}</a>
-<span style="color:gray"> {{ post.date | date: "%Y-%m-%d" }}</span>
-</li>
+My main areas of interest are:
+
+- **Computer Vision Algorithms**
+- **Pattern Matching / Geometric Detection**
+- **Industrial Vision Systems**
+- **Performance Optimization**
+- **C++ Library Design**
+
+I enjoy solving problems where **mathematics, software engineering, and real-world systems meet**.
+
+---
+
+## 🧠 What You'll Find on This Blog
+
+This blog is my personal knowledge base where I document topics such as:
+
+### Computer Vision
+- Pattern matching
+- geometric vision
+- inspection algorithms
+- image processing
+
+### Machine Learning
+- transformers
+- deep learning fundamentals
+- optimization
+
+### Mathematics
+- linear algebra
+- matrix decomposition
+- probability & statistics
+
+### Engineering
+- C++ performance optimization
+- multithreading
+- SIMD
+- algorithm design
+
+---
+
+## 🚀 Selected Work
+
+Some of the work I have done includes:
+
+- Designing **geometric pattern matching algorithms** robust to occlusion and illumination changes
+- Developing **high-performance C++ vision libraries**
+- Optimizing algorithms using **SIMD (AVX/SSE), multithreading, and CUDA**
+- Deploying inspection algorithms in **large-scale industrial production lines**
+
+Some of this work resulted in **patents related to vision algorithms**.
+
+---
+
+## ✍️ Recent Posts
+
+{% for post in site.posts limit:6 %}
+- **[{{ post.title }}]({{ post.url | relative_url }})**  
+  {{ post.date | date: "%Y-%m-%d" }}
 {% endfor %}
-</ul>
+
+➡️ [View all posts]({{ '/archives/' | relative_url }})
 
 ---
 
-## 📂 Categories
+## 📂 Topics
+
+You can browse posts by topic:
 
 - Linear Algebra
-- Machine Learning
 - Computer Vision
-- C++ Engineering
-
-
+- Machine Learning
+- C++
+- System Design
