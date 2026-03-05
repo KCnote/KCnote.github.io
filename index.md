@@ -5,30 +5,46 @@ permalink: /
 ---
 
 <div style="
+display:flex;
+align-items:center;
+justify-content:space-between;
 background: linear-gradient(135deg,#177e89,#1f2937);
 color:white;
-padding:40px 30px;
+padding:35px 30px;
 border-radius:14px;
 margin-bottom:30px;
 ">
 
-<h1 style="margin:0;font-size:38px;color:white;">Carrey Kang</h1>
+<div>
+  <h1 style="margin:0;font-size:40px;color:white;font-weight:800;">
+  Carrey Kang
+  </h1>
 
-<p style="margin:8px 0 0 0;font-size:18px;opacity:0.95;">
-Computer Vision Engineer
-</p>
+  <p style="margin:8px 0 0 0;font-size:18px;">
+  Computer Vision Engineer
+  </p>
 
-<p style="margin:14px 0 0 0;font-size:14px;opacity:0.85;">
-C++ • Computer Vision • Vision Algorithms • Machine Learning
-</p>
+  <p style="margin-top:12px;font-size:14px;opacity:0.9;">
+  C++ • Computer Vision • Artificial Intelligence
+  </p>
+</div>
 
-<p style="margin-top:16px;font-size:14px;">
-📍 Perth, Australia &nbsp;&nbsp;
-🔗 <a style="color:white;" href="https://www.linkedin.com/in/carreykangcho/">LinkedIn</a> &nbsp;&nbsp;
-💻 <a style="color:white;" href="dev.kangcho@gmail.com">Email</a>
-</p>
+<img src="/assets/img/develop/profile.png"
+style="
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid rgba(255,255,255,0.35);
+">
+
 
 </div>
+<p style="margin-top:32px;font-size:14px;">
+📍 Perth, Australia &nbsp;&nbsp;
+🔗 <a style="color:black;" href="https://www.linkedin.com/in/carreykangcho/">LinkedIn</a> &nbsp;&nbsp;
+💻 <a style="color:black;" href="dev.kangcho@gmail.com">Email</a>
+</p>
 
 ## 👋 About Me
 
