@@ -43,7 +43,7 @@ border:4px solid rgba(255,255,255,0.35);
 <p style="margin-top:32px;font-size:14px;">
 📍 Perth, Australia &nbsp;&nbsp;
 🔗 <a style="color:black;" href="https://www.linkedin.com/in/carreykangcho/">LinkedIn</a> &nbsp;&nbsp;
-💻 <a style="color:black;" href="dev.kangcho@gmail.com">Email</a>
+💻 <a style="color:black;" href="mailto:dev.kangcho@gmail.com">Email</a>
 </p>
 
 ## 👋 About Me
