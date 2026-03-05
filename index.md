@@ -57,8 +57,6 @@ color:#b5b5b5;
 
 </style>
 
-</style>
-
 <div style="
 display:flex;
 align-items:center;
