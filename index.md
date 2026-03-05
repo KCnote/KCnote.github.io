@@ -27,7 +27,7 @@ border-radius:14px;
 background:#1e1e1e;
 border:1px solid rgba(255,255,255,0.08);
 transition:all .25s ease;
-min-height:120px;
+min-height:144px;
 }
 
 .patent-card:hover{
@@ -134,88 +134,89 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
 
 ##### Inventor of multiple patents in geometric pattern matching, industrial inspection, and high-performance computer vision algorithms.
 
+<b><span style="color:#7fd1ff; background:black"> Click a card to view the patent on the official site. </span></b>
 
 <h3 style="margin-top:20px;">United States (USPTO)</h3>
 
 <div class="patent-grid">
 
-<a href="https://patents.google.com/patent/US12243286/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2025</div>
-<div class="patent-title">Pattern Image Detection Method</div>
-<div class="patent-id">US 12,243,286 B2</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/US12243286/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2025</div>
+  <div class="patent-title">Pattern Image Detection Method</div>
+  <div class="patent-id">US 12,243,286 B2</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/US12094183/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2024</div>
-<div class="patent-title">Geometric Pattern Matching Method and Device</div>
-<div class="patent-id">US 12,094,183 B2</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/US12094183/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2024</div>
+  <div class="patent-title">Geometric Pattern Matching Method and Device</div>
+  <div class="patent-id">US 12,094,183 B2</div>
+  </div>
+  </a>
 
 </div>
-<br></br>
+
 <h3 style="margin-top:30px;">Korea (KIPO)</h3>
 
 <div class="patent-grid">
 
-<a href="https://patents.google.com/patent/KR102712862B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2024</div>
-<div class="patent-title">Quadrangle Gauge-based Similar Shape Estimation</div>
-<div class="patent-id">KR 10-27128620000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102712862B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2024</div>
+  <div class="patent-title">Quadrangle Gauge-based Similar Shape Estimation</div>
+  <div class="patent-id">KR 10-27128620000</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR102712861B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2024</div>
-<div class="patent-title">Geometric Pattern Matching (Divisional)</div>
-<div class="patent-id">KR 10-27128610000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102712861B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2024</div>
+  <div class="patent-title">Geometric Pattern Matching (Divisional)</div>
+  <div class="patent-id">KR 10-27128610000</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR102510581B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2023</div>
-<div class="patent-title">Shape Array Matching with Multiple Shape Relation Estimation</div>
-<div class="patent-id">KR 10-25105810000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102510581B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2023</div>
+  <div class="patent-title">Shape Array Matching with Multiple Shape Relation Estimation</div>
+  <div class="patent-id">KR 10-25105810000</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR20240034091A/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2023</div>
-<div class="patent-title">Shape Array Matching Method</div>
-<div class="patent-id">KR 10-20230028477</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR20240034091A/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2023</div>
+  <div class="patent-title">Shape Array Matching Method</div>
+  <div class="patent-id">KR 10-20230028477</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR102507927B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2023</div>
-<div class="patent-title">Quadrangle Gauge Generation</div>
-<div class="patent-id">KR 10-25079270000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102507927B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2023</div>
+  <div class="patent-title">Quadrangle Gauge Generation</div>
+  <div class="patent-id">KR 10-25079270000</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR102378659B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2022</div>
-<div class="patent-title">Pattern Image Detection</div>
-<div class="patent-id">KR 10-23786590000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102378659B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2022</div>
+  <div class="patent-title">Pattern Image Detection</div>
+  <div class="patent-id">KR 10-23786590000</div>
+  </div>
+  </a>
 
-<a href="https://patents.google.com/patent/KR102366364B1/en" target="_blank" class="patent-link">
-<div class="patent-card">
-<div class="patent-year">2022</div>
-<div class="patent-title">Geometric Pattern Matching</div>
-<div class="patent-id">KR 10-23663640000</div>
-</div>
-</a>
+  <a href="https://patents.google.com/patent/KR102366364B1/en" target="_blank" class="patent-link">
+  <div class="patent-card">
+  <div class="patent-year">2022</div>
+  <div class="patent-title">Geometric Pattern Matching</div>
+  <div class="patent-id">KR 10-23663640000</div>
+  </div>
+  </a>
 
 </div>
 
