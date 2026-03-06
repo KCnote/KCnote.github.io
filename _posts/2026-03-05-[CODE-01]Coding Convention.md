@@ -72,7 +72,7 @@ When we distinguish the data type, count of bit and so on. The main point is whe
     typedef int              ptrdiff_t;
     typedef int              intptr_t;
 #endif
-````
+```
 
 | Type      | Prefix | Example       |
 | --------- | ------ | ------------- |
@@ -152,3 +152,13 @@ When we distinguish the data type, count of bit and so on. The main point is whe
 | tensor | `ts`   | `tsFeature`    |
 | matrix | `mat`  | `matTransform` |
 
+### 4. Rules of Coding Convention
+
+> if, while, for
+    
+Braces {} may be omitted when the body of an statement consists of a single line.
+
+```cpp
+if(bTrue)
+    i32Cnt = 10;
+```
