@@ -12,7 +12,7 @@ mermaid: true
 
 # <b>Coding Convention</b>
 ---
-### <b>Coding Convention</b>
+### <b>Prerequites</b>
     Data Type
 
 ---

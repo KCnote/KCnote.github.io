@@ -12,7 +12,7 @@ mermaid: true
 
 # <b>Stable Control Flow</b>
 ---
-### <b>Stable Control Flow</b>
+### <b>Prerequites</b>
     do ~ while
     break
     pointer
