@@ -19,7 +19,7 @@ mermaid: true
 ---
 ## <b>Clean Code</b>
 
-LINK: https://kcnote.github.io/posts/Vision-01-BMP-Format/
+LINK: [BMP Format](https://kcnote.github.io/posts/Vision-01-BMP-Format/)
 
 ```cpp
 #include <iostream>
