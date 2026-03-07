@@ -1,161 +1,25 @@
 ---
 layout: post
-title: "BMP Format"
-date: 2026-03-04 00:00:00 +0900
+title: "Case Study - Clean Code 001"
+date: 2026-03-07 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Computer Vision - Fundamental]
-tags: [Computer Vision, Computer Vision - Fundamental]
+categories: [CODE, CODE - Case Study]
+tags: [CODE, CODE - Case Study]
 pin: false
 math: true
 mermaid: true
 ---
 
-# <b>BMP Format</b>
+# <b>Case Study - Clean Code 001</b>
 ---
 ### <b>Prerequites</b>
-    NOTHING
+    Coding Convention
+    CODE - Pattern Posting
 
 ---
-## <b>What is BMP Format</b>
+## <b>Clean Code</b>
 
-### 1. What is BMP Format?
-
-File has format that depends on extension.
-
-### 1. Sequence of BMP Format?
-
-![BMP](/assets/img/develop/BMPFormat.bmp)
-
-I will analyze above the image.
-
-> 1-1. File Header
-
-14 bytes
-
-```cpp
-42 4D / 62 09 01 00 / 00 00 / 00 00 / 8A 00 00 00
-
-struct BMPFileHeader
-{
-    uint16_t bfType;      // 0x4D42
-    uint32_t bfSize;      // 0x00010962
-    uint16_t bfReserved1; // 0x0000
-    uint16_t bfReserved2; // 0x0000
-    uint32_t bfOffBits;   // 0x0000008A
-};
-```
-
-- First 2 btyes is about extension-type like bmp. jpg. png ...
-- Next 4 btyes is about file size.
-- Next 2 btyes is 
-- Next 2 btyes is 
-- Next 4 btyes is about offest where the first pixel is located on the file.
-
-> 2-2. Info Header
-
-40 bytes
-
-```cpp
-7C 00 00 00 \
-96 00 00 00 \
-96 00 00 00 \
-01 00       \
-18 00       \
-00 00 00 00 \
-D8 08 01 00 \
-00 00 00 00 \
-00 00 00 00 \
-00 00 00 00 \
-00 00 00 00
-
-struct BMPInfoHeader
-{
-    uint32_t biSize;            // 0x0000007C
-    int32_t  biWidth;           // 0x00000096
-    int32_t  biHeight;          // 0x00000096
-    uint16_t biPlanes;          // 0x0001
-    uint16_t biBitCount;        // 0x0018
-    uint32_t biCompression;     // 0x0000
-    uint32_t biSizeImage;       // 0x000108D8
-    int32_t  biXPelsPerMeter;   // 0x00000000
-    int32_t  biYPelsPerMeter;   // 0x00000000
-    uint32_t biClrUsed;         // 0x00000000
-    uint32_t biClrImportant;    // 0x00000000
-};
-```
-
-- First 4 btyes is BITMAPV5HEADER size
-- Next 4 btyes is image width
-- Next 2 btyes is image height
-- Next 2 btyes is 
-- Next 2 btyes is bit count (RGB 3 bytes per pixel)
-- Next 4 btyes is compression
-- Next 4 btyes is size of image
-- Next 4 btyes is usually 0
-- Next 4 btyes is usually 0
-- Next 4 btyes is usually 0
-- Next 4 btyes is usually 0
-
-> 2-3. Color Information (Optional)
-
-```cpp
-// Color Mask
-00 00 FF 00 \
-00 FF 00 00 \
-FF 00 00 00 \
-00 00 00 FF \
-
-// Color Table
-42 47 52 73 \
-8F C2 F5 28 \
-51 B8 1E 15 \
-1E 85 EB 01 \
-33 33 33 13 \
-66 66 66 26 \
-66 66 66 06 \
-99 99 99 09 \
-3D 0A D7 03 \
-28 5C 8F 32 \
-
-// Color Management
-00 00 00 00 \
-00 00 00 00 \
-00 00 00 00 \
-04 00 00 00 \
-00 00 00 00 \
-00 00 00 00 \
-00 00 00 00
-
-struct BMPColorInformation
-{
-    uint32_t bV5RedMask;    // 0x00FF0000
-    uint32_t bV5GreenMask;  // 0x0000FF00
-    uint32_t bV5BlueMask;   // 0x000000FF
-    uint32_t bV5AlphaMask;  // 0xFF000000
-
-    uint32_t bV5CSType;     // 0x73524742
-    int32_t  bV5Endpoints[9]; 
-                            // 0x28F5C28F 0x151EB851 0x01EB851E 0x13333333 
-                            // 0x26666666 0x06666666 0x09999999 0x03D70A3D 0x328F5C28}
-
-    uint32_t bV5GammaRed;       // 0x00000000
-    uint32_t bV5GammaGreen;     // 0x00000000 
-    uint32_t bV5GammaBlue;      // 0x00000000
-    uint32_t bV5Intent;         // 0x00000004
-    uint32_t bV5ProfileData;    // 0x00000000 
-    uint32_t bV5ProfileSize;    // 0x00000000
-    uint32_t bV5Reserved;       // 0x00000000
-}
-```
-
-> 2-4. Pixel Data
-
-[B G R B G R B ....]
-
-
-BMP file is fundamental format. The file do not usually have any compression.
-
-
+LINK: {% raw %}[BMP Format]({% post_url 2026-03-07-Vision-01-BMP-Format %}){% endraw %}
 
 ```cpp
 #include <iostream>
@@ -318,3 +182,11 @@ EFileStatus LoadBMP(const char* filePath, CImage* pImgOutput)
     return eFileProcess;
 }
 ```
+
+1. Keep Coding Convention.
+2. Use curly bracket with semantic units when the local variable is just for updating some variables.
+3. For stable code, write the code of constructor and destructor you should update or check variables.
+4. Use enum or bool when you return value for other user understanding the flow status.
+5. Use do~while and break for check whether problems are happened or not.
+6. Do NOT update the output variables until all operations are confirmed to be successful. Update them at once only after completion is confirmed.
+7. Keep the same scope of variables's allocation and deallocation.
