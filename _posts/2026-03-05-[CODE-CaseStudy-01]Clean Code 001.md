@@ -19,7 +19,7 @@ mermaid: true
 ---
 ## <b>Clean Code</b>
 
-LINK: {% raw %}[BMP Format]({% post_url 2026-03-07-Vision-01-BMP-Format %}){% endraw %}
+LINK: [BMP Format](https://kcnote.github.io/posts/Vision-01-BMP-Format/)
 
 ```cpp
 #include <iostream>

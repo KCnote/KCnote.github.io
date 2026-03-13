@@ -152,6 +152,7 @@ When we distinguish the data type, count of bit and so on. The main point is whe
 | tensor | `ts`   | `tsFeature`    |
 | matrix | `mat`  | `matTransform` |
 
+
 ### 4. Rules of Coding Convention
 
 > if, while, for
@@ -162,3 +163,8 @@ Braces {} may be omitted when the body of an statement consists of a single line
 if(bTrue)
     i32Cnt = 10;
 ```
+
+
+
+global variables : g_
+member variables : m_
