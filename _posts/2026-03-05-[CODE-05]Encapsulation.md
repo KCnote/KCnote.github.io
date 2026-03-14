@@ -3,8 +3,8 @@ layout: post
 title: "Encapsulation"
 date: 2026-03-14 00:00:00 +0900
 author: kang
-categories: [CODE, CODE - Practice]
-tags: [CODE, CODE - Practice]
+categories: [CODE, CODE - Pattern]
+tags: [CODE, CODE - Pattern]
 pin: false
 math: true
 mermaid: true
