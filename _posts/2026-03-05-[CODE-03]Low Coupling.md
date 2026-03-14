@@ -97,3 +97,51 @@ Even though this situation is happend to us
     → Catch B function issued WITHOUT revising A fucntion →  Revise B function
 
 The issue <span style="color:blue">arose from problems derived from the original problem itself</span>, <span style="color:red">NOT from function dependencies</span>.
+
+### 4. Example
+
+Assume to develop add operation between two images.
+maybe we make a algorithm this process.
+
+    Bring Images → Add Images
+
+Very Simple! There's no reason to consider a design of program. But if we extend more functions like another format of image or ROI.
+Most of the developers I've seen check the all of flow and add the function. and sometimes they struggled with a large number of variables introduced earlier without proper consideration for modular indepence. I'm also suffered from this when i was junior.
+
+BUT now i always design the function with decoupling each features.
+If i make the Add Operation of image processing, i will structure the algorithm like this
+
+    Initialize Parameters → Make Region of Interest for add → Operation
+
+```cpp
+bool Process()
+{
+    bool bOK = false;
+
+    do
+    {
+        if(bOk = Init())
+            break;
+
+        SRect sRtVaild;
+        {
+            if(bOk = ValidRegion(&sRtVaild))
+                break;
+        }
+
+        SOptiTable sOptiTable;
+        {
+            if(bOK = CreateOptiTable(&OptiTable))
+                break;
+        }
+
+        if(bOK = Calcuation(&sRtVaild, &OptiTable))
+            break;
+
+        bOK = true;
+    }
+    while(false);
+
+    return bOK;
+}
+```
