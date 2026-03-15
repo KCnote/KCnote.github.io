@@ -101,3 +101,8 @@ bool CArithmetic::Assign(const CArithmetic* pAlg)
     return bOK;
 }
 ```
+
+Constructor and Destructor is related with Clear function. The Clear function is initialization of all of class for clients included in memory deallocation and so on. But sometimes little bit difference between clear and constructor. For example, if we do not initialize member variable of pointer, it has dummy value, not null. So if the clear function contains deallocating pointer, there's deallocation issue. Therefore we should two step for constructor, initial for member variable and call clear function.
+
+operator= and copy constructor is same function with Assign function. So Do not implement same code using copy and paste codes, just call each other. Especially the main implementation is Assign with pointer parameter, not reference parameter. Because someone who misuses the assign function occur from Assign with pointer parameter owing to pass null as the input.
+
