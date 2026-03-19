@@ -166,7 +166,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2024</div>
   <div class="patent-title">Quadrangle Gauge-based Similar Shape Estimation</div>
-  <div class="patent-id">KR 10-27128620000</div>
+  <div class="patent-id">KR 102712862B1</div>
   </div>
   </a>
 
@@ -174,7 +174,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2024</div>
   <div class="patent-title">Geometric Pattern Matching (Divisional)</div>
-  <div class="patent-id">KR 10-27128610000</div>
+  <div class="patent-id">KR 102712861B1</div>
   </div>
   </a>
 
@@ -182,7 +182,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2023</div>
   <div class="patent-title">Shape Array Matching with Multiple Shape Relation Estimation</div>
-  <div class="patent-id">KR 10-25105810000</div>
+  <div class="patent-id">KR 102510581B1</div>
   </div>
   </a>
 
@@ -190,7 +190,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2023</div>
   <div class="patent-title">Shape Array Matching Method</div>
-  <div class="patent-id">KR 10-20230028477</div>
+  <div class="patent-id">KR 20240034091A</div>
   </div>
   </a>
 
@@ -198,7 +198,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2023</div>
   <div class="patent-title">Quadrangle Gauge Generation</div>
-  <div class="patent-id">KR 10-25079270000</div>
+  <div class="patent-id"> KR 102507927B1</div>
   </div>
   </a>
 
@@ -206,7 +206,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
   <div class="patent-card">
   <div class="patent-year">2022</div>
   <div class="patent-title">Pattern Image Detection</div>
-  <div class="patent-id">KR 10-23786590000</div>
+  <div class="patent-id">KR 102378659B1</div>
   </div>
   </a>
 
