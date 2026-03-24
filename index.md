@@ -70,7 +70,7 @@ margin-bottom:30px;
 
 <div>
   <h1 style="margin:0;font-size:40px;color:white;font-weight:800;">
-  Carrey Cho
+  Steve Cho
   </h1>
 
   <p style="margin:8px 0 0 0;font-size:18px;">
@@ -78,7 +78,7 @@ margin-bottom:30px;
   </p>
 
   <p style="margin-top:12px;font-size:14px;opacity:0.9;">
-  C++ • Computer Vision • Artificial Intelligence
+  C++ Developer • Computer Vision • Artificial Intelligence
   </p>
 </div>
 
@@ -87,7 +87,7 @@ alt="PHOTO"
 style="
 width:110px;
 height:110px;
-border-radius:50%;
+border-radius:20px;
 object-fit:cover;
 border:4px solid rgba(255,255,255,0.35);
 ">
@@ -96,25 +96,13 @@ border:4px solid rgba(255,255,255,0.35);
 </div>
 <p style="margin-top:32px;font-size:14px;">
 📍 Perth, Australia &nbsp;&nbsp;
-🔗 <a style="color:black;" href="https://www.linkedin.com/in/carreykangcho/">LinkedIn</a> &nbsp;&nbsp;
+🔗 <a style="color:black;" href="https://www.linkedin.com/in/stevekangcho/">LinkedIn</a> &nbsp;&nbsp;
 💻 <a style="color:black;" href="mailto:dev.kangcho@gmail.com">Email</a>
 </p>
 
 ## 👋 About Me
 
-I am a computer vision engineer focused on building **high-performance vision algorithms and scalable C++ libraries** for industrial systems.
-
-My main interest is designing algorithms that are:
-
-- **robust in real-world environments**
-- **efficient enough for production systems**
-- **simple for engineers to use**
-
-I spent several years developing computer vision algorithms used in **industrial inspection systems**, including pattern matching, metrology, and image analysis pipelines.
-
-My work has been deployed in **large-scale production environments**, including semiconductor and manufacturing lines.
-
-### **[Click more about me](/about)**
+**Computer Vision Software Engineer** with 4+ years of experience developing high-performance **C++ machine vision** systems for industrial inspection. Specialized in **pattern recognition, high-density gauging, and real-time algorithm optimization**, with a strong foundation in **mathematics**, **statistics**, **linear algebra**, and **data analysis**. Developed 6 computer vision projects including **object detection**, **metrology**, and **automation systems**, with the largest deployment supporting a $5M Samsung semiconductor PLC production line. Benchmarked and **optimized algorithms** against leading industry standards, achieving over **20% faster processing** while maintaining high accuracy. Delivered reliable inspection systems operating continuously for more than three years in a **24/7** production environment with zero operational failures and patented technologies deployed in manufacturing lines.
 
 ---
 
@@ -248,6 +236,9 @@ This blog is my personal knowledge base where I document topics such as:
 - SIMD
 - algorithm design
 
+### Others
+- AWS
+
 ---
 
 ## 🚀 Selected Work
@@ -258,6 +249,8 @@ Some of the work I have done includes:
 - Developing **high-performance C++ vision libraries**
 - Optimizing algorithms using **SIMD (AVX/SSE), multithreading, and CUDA**
 - Deploying inspection algorithms in **large-scale industrial production lines**
+- Samsung Semiconductor Automation Vision System
+- AGV Automation Vision System for Samsung Production Lines
 
 Some of this work resulted in **patents related to vision algorithms**.
 
@@ -283,3 +276,4 @@ You can browse posts by topic:
 - Machine Learning
 - C++
 - System Design
+- AWS
