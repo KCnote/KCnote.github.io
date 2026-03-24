@@ -20,7 +20,7 @@ github:
   username: KCnote
   
 social:
-  name: Kang Cho
+  name: Steve Cho
   email: dev.kangcho@gmail.com
   links:
     - https://www.linkedin.com/in/stevekangcho/
@@ -78,7 +78,7 @@ theme_mode: dark # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: /assets/img/develop/profile_cat.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.

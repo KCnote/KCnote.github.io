@@ -96,8 +96,8 @@ border:4px solid rgba(255,255,255,0.35);
 </div>
 <p style="margin-top:32px;font-size:14px;">
 📍 Perth, Australia &nbsp;&nbsp;
-🔗 <a style="color:black;" href="https://www.linkedin.com/in/stevekangcho/">LinkedIn</a> &nbsp;&nbsp;
-💻 <a style="color:black;" href="mailto:dev.kangcho@gmail.com">Email</a>
+🔗 <a style="color:white;" href="https://www.linkedin.com/in/stevekangcho/">LinkedIn</a> &nbsp;&nbsp;
+💻 <a style="color:white;" href="mailto:dev.kangcho@gmail.com">Email</a>
 </p>
 
 ## 👋 About Me
