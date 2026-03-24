@@ -3,7 +3,7 @@ layout: post
 title: "How to use git.bash command?"
 date: 2025-11-28 12:00:00 +0900
 author: kang
-categories: [github, git.bash]
+categories: [github, github - BASH]
 tags: [github, git.bash, command]
 pin: false
 math: true

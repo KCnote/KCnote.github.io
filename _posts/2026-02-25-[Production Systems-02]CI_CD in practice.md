@@ -3,7 +3,7 @@ layout: post
 title: "02. CI & CD in practice"
 date: 2026-02-25 00:00:00 +0900
 author: kang
-categories: [Stable, CI/CD]
+categories: [Production Systems, Production Systems - CI/CD]
 tags: [Stable Code, CI/CD]
 pin: false
 math: true
