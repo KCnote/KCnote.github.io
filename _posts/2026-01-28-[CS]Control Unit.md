@@ -3,7 +3,7 @@ layout: post
 title: "Control Unit"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Components]
+categories: [Computer Structure, Computer Structure - Components]
 tags: [Computer Structure, Components, CPU, Control Unit]
 pin: false
 math: true

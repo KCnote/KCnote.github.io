@@ -3,7 +3,7 @@ layout: post
 title: "Convolution for Smoothing"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing, Convolution]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Convolution, Smoothing, Uniform, Gaussian, Lowpass, Binomial, Noise]
 pin: false
 math: true

@@ -3,7 +3,7 @@ layout: post
 title: "Why Downscaled Images Make Localization Easier (Even If Less Accurate)"
 date: 2026-02-02 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Insights]
+categories: [Computer Vision, Computer Vision - Insights]
 tags: [Computer Vision, Insights, Image Pyramid, Downscaling, Localization, Coarse-to-Fine, Interpretation]
 pin: false
 math: true

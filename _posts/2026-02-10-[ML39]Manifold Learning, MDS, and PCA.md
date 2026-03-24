@@ -3,7 +3,7 @@ layout: post
 title: "Manifold Learning, MDS, and PCA"
 date: 2026-02-10 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Unsupervised]
+categories: [Machince Learning, Machince Learning - Unsupervised]
 tags: [Machince Learning, Unsuperviseding, Clustering, PCA, MDS, Manifold]
 pin: false
 math: true

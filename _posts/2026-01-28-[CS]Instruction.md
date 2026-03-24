@@ -3,7 +3,7 @@ layout: post
 title: "Instruction Cycle, Pipeline, Interrupts, and ISA"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Miscellaneous]
+categories: [Computer Structure, Computer Structure - Miscellaneous]
 tags: [Computer Structure, Miscellaneous, CPU, Instruction, Instruction Cycle, Pipelines, Interrupts, ISA]
 pin: false
 math: true

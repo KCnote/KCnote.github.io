@@ -3,7 +3,7 @@ layout: post
 title: "Bagged Trees & Random Forests"
 date: 2026-02-09 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Optimization]
+categories: [Machince Learning, Machince Learning - Optimization]
 tags: [Machince Learning, Optimization, Mathematics, Bagging, Random Forests]
 pin: false
 math: true

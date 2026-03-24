@@ -3,7 +3,7 @@ layout: post
 title: "Process Management in Operating Systems"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [OS, Process]
+categories: [OS, OS - Process]
 tags: [OS, PCB, PID, States, Context Switching]
 pin: false
 math: true

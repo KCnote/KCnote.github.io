@@ -3,7 +3,7 @@ layout: post
 title: "Comparison Operations in Image Processing"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Comparison, Thresholding, Binary Image]
 pin: false
 math: true

@@ -3,7 +3,7 @@ layout: post
 title: "Why Noise Cancels Out in Regions: A Statistical View"
 date: 2026-02-02 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Insights]
+categories: [Computer Vision, Computer Vision - Insights]
 tags: [Computer Vision, Insights, Noise, Shot Noise, Quantum Noise, Statistics, Match]
 pin: false
 math: true

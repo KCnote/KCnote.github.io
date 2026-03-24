@@ -3,7 +3,7 @@ layout: post
 title: "Interpolation"
 date: 2026-02-02 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Mathematics]
+categories: [Computer Vision, Computer Vision - Mathematics]
 tags: [Computer Vision, Mathematics, Interpolation, Pixel, Nearest Neighbor, Bilinear, Bicubic, Quadratic]
 pin: false
 math: true

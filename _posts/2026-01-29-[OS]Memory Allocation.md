@@ -3,7 +3,7 @@ layout: post
 title: "Contiguous Memory Allocation"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, Memory]
+categories: [OS, OS - Memory]
 tags: [OS, Contiguous, Memory, Allocation,Swapping, Fragmentation, Virtual]
 pin: false
 math: true

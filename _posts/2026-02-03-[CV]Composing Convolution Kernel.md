@@ -3,7 +3,7 @@ layout: post
 title: "Composing Convolution Kernels"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing, Convolution]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Convolution, Smoothing, Composing, Kernel, Sharpening, Edge Detection]
 pin: false
 math: true

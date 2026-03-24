@@ -3,7 +3,7 @@ layout: post
 title: "Why Region-Based Matching Beats Pixel-by-Pixel in Noisy Images"
 date: 2026-02-02 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Insights]
+categories: [Computer Vision, Computer Vision - Insights]
 tags: [Computer Vision, Insights, Pattern Match, Noise Robustness, Match, Performance]
 pin: false
 math: true

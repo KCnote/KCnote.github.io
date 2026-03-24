@@ -3,7 +3,7 @@ layout: post
 title: "Supervised Learning Process"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Supervised]
+categories: [Machince Learning, Machince Learning - Supervised]
 tags: [Machince Learning, ML, Supervised, Model, Error, and Trade-offs]
 pin: false
 math: true

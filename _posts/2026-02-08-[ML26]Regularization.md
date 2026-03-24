@@ -3,7 +3,7 @@ layout: post
 title: "Regularization"
 date: 2026-02-08 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Fitting]
+categories: [Machince Learning, Machince Learning - Fitting]
 tags: [Machince Learning, Mathematics, ML, Supervised, Fitting, Overfitting, Underfitting, Capacity, Regularization, Ridge, Lasso]
 pin: false
 math: true

@@ -3,7 +3,7 @@ layout: post
 title: "Loss Function"
 date: 2026-02-10 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Optimization]
+categories: [Machince Learning, Machince Learning - ptimization]
 tags: [Machince Learning, Optimization, Mathematics, SVM, Margin]
 pin: false
 math: true

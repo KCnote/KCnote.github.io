@@ -3,7 +3,7 @@ layout: post
 title: "Race Condition"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, Parallel]
+categories: [OS, OS - Parallel]
 tags: [OS, Thread, MultiThread, MultiProcessing, Parallel, Race Condition]
 pin: false
 math: true

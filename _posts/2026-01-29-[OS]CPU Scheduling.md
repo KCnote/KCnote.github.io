@@ -3,7 +3,7 @@ layout: post
 title: "CPU Scheduling"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, CPU Scheduling]
+categories: [OS, OS - CPU Scheduling]
 tags: [OS, Queues, Tradeoffs, CPU, Scheduling]
 pin: false
 math: true

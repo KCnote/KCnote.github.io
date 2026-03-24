@@ -3,7 +3,7 @@ layout: post
 title: "Memory Latency"
 date: 2026-01-27 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Memory]
+categories: [Computer Structure, Computer Structure - Memory]
 tags: [Computer Structure, Components, CPU, Latency, SSD, Cache, RAM]
 pin: false
 math: true

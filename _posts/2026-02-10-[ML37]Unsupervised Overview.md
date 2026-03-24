@@ -3,7 +3,7 @@ layout: post
 title: "Unsupervised Learning"
 date: 2026-02-10 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Unsupervised]
+categories: [Machince Learning, Machince Learning - Unsupervised]
 tags: [Machince Learning, Unsuperviseding, Overview]
 pin: false
 math: true

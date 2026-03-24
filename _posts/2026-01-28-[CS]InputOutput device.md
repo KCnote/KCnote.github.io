@@ -3,7 +3,7 @@ layout: post
 title: "I/O Device"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Components]
+categories: [Computer Structure, Computer Structure - Components]
 tags: [Computer Structure, Components, I/O]
 pin: false
 math: true

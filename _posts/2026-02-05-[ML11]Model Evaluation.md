@@ -3,7 +3,7 @@ layout: post
 title: "Model Evaluation"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Overview]
+categories: [Machince Learning, Machince Learning - Overview]
 tags: [Machince Learning, Overview, Cross Validation, K-Fold, Model]
 pin: false
 math: true

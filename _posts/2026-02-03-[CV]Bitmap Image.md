@@ -3,7 +3,7 @@ layout: post
 title: "Bitmap Images in Computer Vision"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image]
+categories: [Computer Vision, Computer Vision - Image]
 tags: [Computer Vision, Image, Bitmap Image, Grayscale, Multi-Channel, RGB, Image Representation]
 pin: false
 math: true

@@ -3,7 +3,7 @@ layout: post
 title: "Arithmetic Operations in Image Processing - Part 1"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing, Arithmetic]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Arithmetic]
 pin: false
 math: true

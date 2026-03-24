@@ -3,7 +3,7 @@ layout: post
 title: "Homography in Computer Vision (4-Point Solution and N-Point Least Squares)"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Geometry]
+categories: [Computer Vision, Computer Vision - Geometry]
 tags: [Homography, Projective Geometry, DLT, Pseudo Inverse, Least Squares]
 pin: false
 math: true

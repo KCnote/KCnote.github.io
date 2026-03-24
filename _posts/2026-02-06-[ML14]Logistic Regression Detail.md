@@ -3,7 +3,7 @@ layout: post
 title: "Logistic Regression Detail"
 date: 2026-02-06 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Classification]
+categories: [Machince Learning, Machince Learning - Classification]
 tags: [Machince Learning, Mathematics, ML, Supervised, Regression, Classification]
 pin: false
 math: true

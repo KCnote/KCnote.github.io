@@ -3,7 +3,7 @@ layout: post
 title: "Limits of Classical Pattern Match"
 date: 2026-02-02 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Insights]
+categories: [Computer Vision, Computer Vision - Insights]
 tags: [Computer Vision, Insights, Pattern Match, NCC, Limitations, Performance]
 pin: false
 math: true

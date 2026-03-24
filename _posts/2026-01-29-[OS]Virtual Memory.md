@@ -3,7 +3,7 @@ layout: post
 title: "Virtual Memory & Paging"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, Memory]
+categories: [OS, OS - Memory]
 tags: [OS, Pages, TLB, Thrashing, Virtual]
 pin: false
 math: true

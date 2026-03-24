@@ -3,7 +3,7 @@ layout: post
 title: "Morphology Insights"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing, Morphology]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Morphology, Region]
 pin: false
 math: true

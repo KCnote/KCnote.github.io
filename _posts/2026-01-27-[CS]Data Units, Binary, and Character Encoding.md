@@ -3,7 +3,7 @@ layout: post
 title: "Data Units, Binary, and Character Encoding"
 date: 2026-01-27 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Miscellaneous]
+categories: [Computer Structure, Computer Structure - Miscellaneous]
 tags: [Computer Structure, Miscellaneous, Data Units, Binary, Character Encoding, UTF, Decimal, ASCII, Byte Order]
 pin: false
 math: true

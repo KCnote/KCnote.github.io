@@ -3,7 +3,7 @@ layout: post
 title: "Secondary Storage"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Components]
+categories: [Computer Structure, Computer Structure - Components]
 tags: [Computer Structure, Components, Secondary Storage, HDD, SSD, Flash Memory]
 pin: false
 math: true

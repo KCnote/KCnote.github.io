@@ -3,7 +3,7 @@ layout: post
 title: "Statistical Interpret for MLE"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Mathematics]
+categories: [Machince Learning, Machince Learning - Mathematics]
 tags: [Machince Learning, Mathematics, Bias, Variance, Likelihood, MLE, Linear Regression, Statistics]
 pin: false
 math: true

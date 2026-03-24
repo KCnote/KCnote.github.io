@@ -3,7 +3,7 @@ layout: post
 title: "Image Array Layout & Memory Structure"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image]
+categories: [Computer Vision, Computer Vision - Image]
 tags: [Computer Vision, Image Layout, Stride, Padding, Bitmap, Memory Alignment]
 pin: false
 math: false

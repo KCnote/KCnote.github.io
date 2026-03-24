@@ -3,7 +3,7 @@ layout: post
 title: "Hough Line Transform with example"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Image Processing]
+categories: [Computer Vision, Computer Vision - Image Processing]
 tags: [Computer Vision, Image Processing, Hough Transform, Line Detection, Accumulator, Voting]
 pin: false
 math: true

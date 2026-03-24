@@ -3,7 +3,7 @@ layout: post
 title: "Least Squares Method (LSM) Explained Step by Step with Examples"
 date: 2026-02-03 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Mathematics]
+categories: [Computer Vision, Computer Vision - Mathematics]
 tags: [Computer Vision, Mathematics, Least Squares, LSM, Linear Algebra, Optimization]
 pin: false
 math: true
