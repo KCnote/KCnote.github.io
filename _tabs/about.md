@@ -3,6 +3,7 @@ layout: page
 title: About
 icon: fas fa-user
 order: 4
+hidden: true
 ---
 
 <iframe 

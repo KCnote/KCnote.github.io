@@ -85,8 +85,8 @@ margin-bottom:30px;
 <img src="/assets/img/develop/profile.png"
 alt="PHOTO"
 style="
-width:110px;
-height:110px;
+width:168px;
+height:168px;
 border-radius:20px;
 object-fit:cover;
 border:4px solid rgba(255,255,255,0.35);
