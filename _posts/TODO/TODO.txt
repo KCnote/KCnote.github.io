@@ -1,3 +1,10 @@
+1.내가할수있는 범위 내의 C++ 최적화 C++17이상기준에서 확고히하기
+2.Docker 기본적인 이해하기
+3.AWS 강의 및 자격증
+4.CMake하기
+5. CI/CD하기
+5.파이썬, AI돌리기
+
 ASCII
 Data Padding
 Data alignment
