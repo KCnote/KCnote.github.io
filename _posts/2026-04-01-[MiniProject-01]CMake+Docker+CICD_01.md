@@ -120,11 +120,13 @@ CI/CD: To ensure a stable program, we need to validate various aspects befor dep
 
 ### <b>2-5. Add CI/CD</b>
 
+> C++ Project + CMake + Docker + CI/CD
+
 ```yml
 /Project:
   - "/.github:"         # Github CI/CD
     - "/workflows:"     # Github CI/CD
-      - "ci.yml"        # Github CI/CD
+      - "cmake_ci.yml"  # Github CI/CD
       - "docker_ci.yml" # Github CI/CD
   - Dockerfile
   - .dockerignore
