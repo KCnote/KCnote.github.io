@@ -132,6 +132,7 @@ cmake --build build --target install
 ```
 
 Install takes build outputs and organizes them based on rules defined in `CMakeLists.txt`.
+When we process install, it calls cmake_install.cmake files
 
 Typical structure:
 
