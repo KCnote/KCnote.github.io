@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mini.Project 01-02. Deploy: Integrated CMake, Docker and CI/CD"
+title: "Mini.Project 01-03. Deploy: Integrated CMake, Docker and CI/CD"
 date: 2026-04-01 00:00:00 +0900
 author: kang
 categories: [Mini-Project, Mini-Project - Deployment]
