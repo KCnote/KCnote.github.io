@@ -34,6 +34,8 @@ docker rm <container_id>
 docker rm -f $(docker ps -aq)
 docker rm -f $(docker ps -q)
 docker cp <container_id>:<path> <host_path>
+docker commit <container_id> <new_image_name>
+docker rmi <image>
 ```
 
 #### <b>2-1. Run Container</b>
