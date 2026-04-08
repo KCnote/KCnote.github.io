@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "01. What is AWS - Understanding Cloud Infrastructure"
-date: 2026-04-02 00:00:00 +0900
+date: 2026-04-08 00:00:00 +0900
 author: kang
 categories: [AWS, AWS - Fundamental]
 tags: [AWS, AWS - Fundamental]
