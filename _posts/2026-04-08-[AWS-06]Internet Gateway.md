@@ -91,7 +91,7 @@ Example:
 * Port 22 (SSH)
 * Port 80 (HTTP)
 
-## <b>3. How to create Subnet</b>
+## <b>3. How to create IGW</b>
 
 #### <b>3-1. Search VPC</b>
 
@@ -108,6 +108,11 @@ Example:
 #### <b>3-4. Internet gateway settings</b>
 
 !["aws-igw3"](/assets/img/develop/aws-igw3.png)
+
+#### <b>3-5. Attach VPC</b>
+
+!["aws-igw4"](/assets/img/develop/aws-igw4.png)
+!["aws-igw5"](/assets/img/develop/aws-igw5.png)
 
 ## <b>4. Related Concepts</b>
 
