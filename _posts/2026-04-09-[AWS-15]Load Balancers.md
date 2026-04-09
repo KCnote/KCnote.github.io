@@ -175,7 +175,15 @@ Client → GWLB → Firewall (EC2) → GWLB → Destination
 !["aws-lb6"](/assets/img/develop/aws-lb6.png)
 !["aws-lb7"](/assets/img/develop/aws-lb7.png)
 
-## <b>4. Related Concepts</b>
+### <b>4. OPTIONAL</b>
+
+#### <b>4-1. Edit Listner</b>
+
+!["aws-lb8"](/assets/img/develop/aws-lb8.png)
+!["aws-lb9"](/assets/img/develop/aws-lb9.png)
+!["aws-lb10"](/assets/img/develop/aws-lb10.png)
+
+## <b>5. Related Concepts</b>
 
 - Components
     - Target Groups
