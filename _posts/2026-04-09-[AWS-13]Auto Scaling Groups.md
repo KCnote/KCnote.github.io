@@ -151,12 +151,18 @@ AZ-c → EC2
 !["aws-asg5"](/assets/img/develop/aws-aws-asg5.png)
 !["aws-asg6"](/assets/img/develop/aws-aws-asg6.png)
 
-#### <b>3-7. Step 5. Add notifications - optional </b>
+#### <b>3-7. Step 5. Add notifications - optional</b>
 
+!["aws-asg7"](/assets/img/develop/aws-aws-asg7.png)
 
-#### <b>3-7. Launch Instance</b>
+#### <b>3-8. Step 6. Add tags - optional</b>
 
-!["aws-temp6"](/assets/img/develop/aws-temp6.png)
+!["aws-asg8"](/assets/img/develop/aws-aws-asg8.png)
+
+#### <b>3-9. Check Activity and Current status</b>
+
+!["aws-asg9"](/assets/img/develop/aws-aws-asg9.png)
+!["aws-asg10"](/assets/img/develop/aws-aws-asg10.png)
 
 ## <b>4. Related Concepts</b>
 
