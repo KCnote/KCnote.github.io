@@ -125,44 +125,44 @@ AZ-c → EC2
 
 #### <b>3-2. Click Navigation pane → "Auto Scaling Groups"</b>
 
-!["aws-asg0"](/assets/img/develop/aws-aws-asg0.png)
+!["aws-asg0"](/assets/img/develop/aws-asg0.png)
 
 #### <b>3-3. Click Button → "Create Auto Scaling group"</b>
 
-!["aws-asg1"](/assets/img/develop/aws-aws-asg1.png)
+!["aws-asg1"](/assets/img/develop/aws-asg1.png)
 
 #### <b>3-4. Step 1. Choose launch template</b>
 
-!["aws-asg2"](/assets/img/develop/aws-aws-asg2.png)
+!["aws-asg2"](/assets/img/develop/aws-asg2.png)
 
 #### <b>3-5. Step 2. Choose instance launch options </b>
 
-!["aws-asg3"](/assets/img/develop/aws-aws-asg3.png)
+!["aws-asg3"](/assets/img/develop/aws-asg3.png)
 
 #### <b>3-6. Step 3. Integrate with other services - optional</b>
 
-!["aws-asg4"](/assets/img/develop/aws-aws-asg4.png)
+!["aws-asg4"](/assets/img/develop/aws-asg4.png)
 
 1. Load balancing: When we want to apply.
 2. Health Check grace period: Standard of normal or not.
 
 #### <b>3-7. Step 4. Configure group size and scaling - optional</b>
 
-!["aws-asg5"](/assets/img/develop/aws-aws-asg5.png)
-!["aws-asg6"](/assets/img/develop/aws-aws-asg6.png)
+!["aws-asg5"](/assets/img/develop/aws-asg5.png)
+!["aws-asg6"](/assets/img/develop/aws-asg6.png)
 
 #### <b>3-7. Step 5. Add notifications - optional</b>
 
-!["aws-asg7"](/assets/img/develop/aws-aws-asg7.png)
+!["aws-asg7"](/assets/img/develop/aws-asg7.png)
 
 #### <b>3-8. Step 6. Add tags - optional</b>
 
-!["aws-asg8"](/assets/img/develop/aws-aws-asg8.png)
+!["aws-asg8"](/assets/img/develop/aws-asg8.png)
 
 #### <b>3-9. Check Activity and Current status</b>
 
-!["aws-asg9"](/assets/img/develop/aws-aws-asg9.png)
-!["aws-asg10"](/assets/img/develop/aws-aws-asg10.png)
+!["aws-asg9"](/assets/img/develop/aws-asg9.png)
+!["aws-asg10"](/assets/img/develop/aws-asg10.png)
 
 ## <b>4. Related Concepts</b>
 
