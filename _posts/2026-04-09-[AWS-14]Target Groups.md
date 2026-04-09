@@ -154,4 +154,3 @@ GET /health
 - Components
     - Load Balancing
     - Auto Scaling Groups
-    - Target Groups
