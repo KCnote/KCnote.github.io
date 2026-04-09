@@ -109,4 +109,4 @@ EC2 Instances (multiple)
 
 - Components
     - Auto scaling
-    - Snapshots
+    - AMI
