@@ -97,6 +97,8 @@ EC2 Instances (multiple)
 
 !["aws-temp4"](/assets/img/develop/aws-temp4.png)
 
+1. Subnet, AZ, Firewall is optional
+
 #### <b>3-6. Step 3. Set Environments (Storage)</b>
 
 !["aws-temp5"](/assets/img/develop/aws-temp5.png)
