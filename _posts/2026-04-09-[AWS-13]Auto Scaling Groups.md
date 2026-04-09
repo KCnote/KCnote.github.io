@@ -164,7 +164,44 @@ AZ-c → EC2
 !["aws-asg9"](/assets/img/develop/aws-asg9.png)
 !["aws-asg10"](/assets/img/develop/aws-asg10.png)
 
-## <b>4. Related Concepts</b>
+### <b>4. OPTIONAL</b>
+
+---
+
+#### <b>4-1. Load Balancer Integrations</b>
+
+!["aws-asg11"](/assets/img/develop/aws-asg11.png)
+!["aws-asg12"](/assets/img/develop/aws-asg12.png)
+
+#### <b>4-2. Approach DNS with Load Balancing</b>
+
+!["aws-asg13"](/assets/img/develop/aws-asg13.png)
+
+---
+
+#### <b>4-1. Health Check on ASG</b>
+
+!["aws-asg14"](/assets/img/develop/aws-asg14.png)
+!["aws-asg15"](/assets/img/develop/aws-asg15.png)
+
+1. Turn on Elastic Load Balancing health checks (Recommended)
+
+Instead of only checking whether the EC2 instance is running, it verifies whether the instance is actually capable of handling incoming traffic.
+
+For example, an EC2 instance may be in a running state, but if the application on it has crashed or is not responding, it will be marked as unhealthy. In this case, the Auto Scaling Group (ASG) will automatically terminate and replace the instance.
+
+Therefore, enabling Elastic Load Balancing health checks is considered a best practice in most production environments.
+
+---
+
+#### <b>4-2. Instance Management</b>
+
+!["aws-asg16"](/assets/img/develop/aws-asg16.png)
+!["aws-asg17"](/assets/img/develop/aws-asg17.png)
+
+If the instance become unhealthy, not directly deregistration. According to target groups's deregistration management, few times later it become deregistration.
+
+## <b>5. Related Concepts</b>
 
 - Components
     - Load Balancing
