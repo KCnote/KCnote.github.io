@@ -21,7 +21,7 @@ mermaid: true
 
 ## <b>1. Auto Scaling Groups</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 Auto Scaling Group is a core service for building scalable systems in AWS. It enables **Automatic scaling and self-healing of EC2 instances**
 
@@ -121,7 +121,7 @@ AZ-c → EC2
 
 #### <b>3-1. Search EC2</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 #### <b>3-2. Click Navigation pane → "Auto Scaling Groups"</b>
 

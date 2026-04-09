@@ -21,7 +21,7 @@ mermaid: true
 
 ## <b>1. Target Groups</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 Target Group is a core component used with Load Balancers. It defines **Where incoming traffic should be sent**
 
@@ -130,7 +130,7 @@ GET /health
 
 #### <b>3-1. Search EC2</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 #### <b>3-2. Click Navigation pane → "Target Groups"</b>
 

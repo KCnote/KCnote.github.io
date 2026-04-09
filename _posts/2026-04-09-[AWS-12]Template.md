@@ -21,7 +21,7 @@ mermaid: true
 
 ## <b>1. Template</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 Launch Template is a key component for managing EC2 instances at scale. It defines **How EC2 instances should be launched**
 
@@ -78,7 +78,7 @@ EC2 Instances (multiple)
 
 #### <b>3-1. Search EC2</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 #### <b>3-2. Click Navigation pane → "Launch Templates"</b>
 

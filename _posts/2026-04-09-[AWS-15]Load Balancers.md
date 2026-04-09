@@ -21,7 +21,7 @@ mermaid: true
 
 ## <b>1. Load Balancers</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 Load Balancer is a core component of modern cloud architecture. It provides **Traffic distribution across multiple servers**
 
@@ -144,7 +144,7 @@ Client → GWLB → Firewall (EC2) → GWLB → Destination
 
 #### <b>3-1. Search EC2</b>
 
-!["aws-ec0"](/assets/img/develop/aws-ec0.png)
+!["aws-ec2-0"](/assets/img/develop/aws-ec2-0.png)
 
 #### <b>3-2. Click Navigation pane → "Load Balancers"</b>
 
