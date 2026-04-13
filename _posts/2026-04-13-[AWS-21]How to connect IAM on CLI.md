@@ -30,7 +30,7 @@ mermaid: true
 
 #### <b> Step 2 — Enter configure on bash  </b>
 
-!["aws-connect05"](/assets/img/develop/aws-connect05.png)
+!["aws-connect04"](/assets/img/develop/aws-connect04.png)
 
 ```bash
 aws configure
