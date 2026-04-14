@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Mistake Coding"
+title: "Mistake Coding - Reference and Copy"
 date: 2026-03-07 00:00:00 +0900
 author: kang
-categories: [CODE, CODE - Practice]
-tags: [CODE, CODE - Practice]
+categories: [CODE, CODE - Case Study]
+tags: [CODE, CODE - Case Study]
 pin: false
 math: true
 mermaid: true

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Case Study - Clean Code 001"
+title: "Clean Code Example 001"
 date: 2026-03-07 00:00:00 +0900
 author: kang
 categories: [CODE, CODE - Case Study]

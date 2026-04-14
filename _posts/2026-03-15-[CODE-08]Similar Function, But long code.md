@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Similar Function, But long code"
+title: "Similar Function, But long code with Macro"
 date: 2026-03-15 00:00:00 +0900
 author: kang
 categories: [CODE, CODE - Pattern]
