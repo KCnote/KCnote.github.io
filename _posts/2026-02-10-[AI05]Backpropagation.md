@@ -3,8 +3,8 @@ layout: post
 title: "Backpropagation"
 date: 2026-02-10 00:00:00 +0900
 author: kang
-categories: [Artificial Intelligence, Artificial Intelligence - MLP]
-tags: [Artificial Intelligence, MLP]
+categories: [Artificial Intelligence, Artificial Intelligence - Foundations]
+tags: [Artificial Intelligence, Backpropagation]
 pin: false
 math: true
 mermaid: true

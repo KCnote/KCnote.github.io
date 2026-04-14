@@ -3,8 +3,8 @@ layout: post
 title: "BMP Format"
 date: 2026-03-04 00:00:00 +0900
 author: kang
-categories: [Computer Vision, Computer Vision - Fundamental]
-tags: [Computer Vision, Computer Vision - Fundamental]
+categories: [Computer Vision, Computer Vision - Image]
+tags: [Computer Vision, Computer Vision - Image]
 pin: false
 math: true
 mermaid: true

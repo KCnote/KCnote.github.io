@@ -3,8 +3,8 @@ layout: post
 title: "Pseudo-Inverse Matrix"
 date: 2026-03-04 00:00:00 +0900
 author: kang
-categories: [Linear Algebra, Linear Algebra - Foundations]
-tags: [Linear Algebra, Linear Algebra - Foundations]
+categories: [Mathematics, Mathematics - Linear Algebra]
+tags: [Mathematics, Mathematics - Linear Algebra]
 pin: false
 math: true
 mermaid: true

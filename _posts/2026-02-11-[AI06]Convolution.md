@@ -3,7 +3,7 @@ layout: post
 title: "Convolution"
 date: 2026-02-11 00:00:00 +0900
 author: kang
-categories: [Artificial Intelligence, Artificial Intelligence - CNN]
+categories: [Artificial Intelligence, Artificial Intelligence - Model]
 tags: [Artificial Intelligence, CNN]
 pin: false
 math: true
