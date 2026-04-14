@@ -3,8 +3,8 @@ layout: post
 title: "How to use git.bash command?"
 date: 2025-11-28 12:00:00 +0900
 author: kang
-categories: [github, github - BASH]
-tags: [github, git.bash, command]
+categories: [Deploy, Deploy - git]
+tags: [Deploy, Deploy - git]
 pin: false
 math: true
 mermaid: true

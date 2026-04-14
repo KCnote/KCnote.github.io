@@ -3,8 +3,8 @@ layout: post
 title: "Automatically Set Environment"
 date: 2026-02-25 00:00:00 +0900
 author: kang
-categories: [Develop, Environment]
-tags: [Develop, Environment, bat]
+categories: [Miscellaneous, Miscellaneous - bat]
+tags: [Miscellaneous, Miscellaneous - bat]
 pin: false
 math: true
 mermaid: true

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "CMake Step-by-Step Guide"
+title: "07. CMake Step-by-Step Guide"
 date: 2026-03-31 00:00:00 +0900
 author: kang
-categories: [CMake, CMake - Fundamental]
-tags: [CMake, CMake - Fundamental]
+categories: [Deploy, Deploy - CMake]
+tags: [Deploy, Deploy - CMake]
 pin: false
 math: true
 mermaid: true

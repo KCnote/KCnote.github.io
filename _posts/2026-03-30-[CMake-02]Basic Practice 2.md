@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "CMake Tutorial, Multi-File C++"
+title: "02. CMake Tutorial, Multi-File C++"
 date: 2026-03-30 00:00:00 +0900
 author: kang
-categories: [CMake, CMake - Fundamental]
-tags: [CMake, CMake - Fundamental]
+categories: [Deploy, Deploy - CMake]
+tags: [Deploy, Deploy - CMake]
 pin: false
 math: true
 mermaid: true

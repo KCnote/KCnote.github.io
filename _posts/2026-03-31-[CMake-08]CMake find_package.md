@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "find_package() Works in CMake"
+title: "08. find_package() Works in CMake"
 date: 2026-03-31 00:00:00 +0900
 author: kang
-categories: [CMake, CMake - Fundamental]
-tags: [CMake, CMake - Fundamental]
+categories: [Deploy, Deploy - CMake]
+tags: [Deploy, Deploy - CMake]
 pin: false
 math: true
 mermaid: true
