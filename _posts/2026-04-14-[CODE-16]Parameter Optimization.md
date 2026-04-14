@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Branch Optimization"
+title: "Parameter Optimization"
 date: 2026-04-14 00:00:00 +0900
 author: kang
 categories: [CODE, CODE - Optimization]
@@ -79,8 +79,6 @@ void process(User user);
 // ✔ Better
 void process(const User& user);
 ```
-
----
 
 ##### ✔ Avoid unnecessary temporaries
 
