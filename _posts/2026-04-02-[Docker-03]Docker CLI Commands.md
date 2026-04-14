@@ -3,8 +3,8 @@ layout: post
 title: "03. Docker CLI Commands"
 date: 2026-04-02 00:00:00 +0900
 author: kang
-categories: [Docker, Docker - Fundamental]
-tags: [Docker, Docker - Fundamental]
+categories: [Deploy, Deploy - Docker]
+tags: [Deploy, Deploy - Docker]
 pin: false
 math: true
 mermaid: true

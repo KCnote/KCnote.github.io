@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "CPU Scheduling"
+title: "CPU Scheduling - CPU Scheduling"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, OS - CPU Scheduling]
+categories: [CS Fundamentals, CS Fundamentals - OS]
 tags: [OS, Queues, Tradeoffs, CPU, Scheduling]
 pin: false
 math: true

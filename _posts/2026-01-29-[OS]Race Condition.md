@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Race Condition"
+title: "Parallel - Race Condition"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, OS - Parallel]
+categories: [CS Fundamentals, CS Fundamentals - OS]
 tags: [OS, Thread, MultiThread, MultiProcessing, Parallel, Race Condition]
 pin: false
 math: true

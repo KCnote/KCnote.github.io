@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Virtual Memory & Paging"
+title: "Memory - Virtual Memory & Paging"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, OS - Memory]
+categories: [CS Fundamentals, CS Fundamentals - OS]
 tags: [OS, Pages, TLB, Thrashing, Virtual]
 pin: false
 math: true

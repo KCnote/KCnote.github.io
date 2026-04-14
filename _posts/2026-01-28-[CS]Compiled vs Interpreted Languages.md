@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Compiled And Interpreted Languages"
+title: "Miscellaneous - Compiled And Interpreted Languages"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Computer Structure - Miscellaneous]
+categories: [CS Fundamentals, CS Fundamentals - Computer Structure]
 tags: [Computer Structure, Miscellaneous, Compile, Interpret, Languages, Assembly, Linker]
 pin: false
 math: true

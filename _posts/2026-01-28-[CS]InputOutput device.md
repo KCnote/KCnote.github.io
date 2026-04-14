@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "I/O Device"
+title: "Components - I/O Device"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Computer Structure - Components]
+categories: [CS Fundamentals, CS Fundamentals - Computer Structure]
 tags: [Computer Structure, Components, I/O]
 pin: false
 math: true

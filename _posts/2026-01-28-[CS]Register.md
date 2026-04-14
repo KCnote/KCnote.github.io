@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "CPU Registers"
+title: "Components - CPU Registers"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Computer Structure - Components]
+categories: [CS Fundamentals, CS Fundamentals - Computer Structure]
 tags: [Computer Structure, Components, CPU, Registers]
 pin: false
 math: true

@@ -3,8 +3,8 @@ layout: post
 title: "04. Accessing Docker Containers & Using Volumes"
 date: 2026-04-02 00:00:00 +0900
 author: kang
-categories: [Deployment, Deployment - Docker]
-tags: [Deployment, Deployment - Docker]
+categories: [Deploy, Deploy - Docker]
+tags: [Deploy, Deploy - Docker]
 pin: false
 math: true
 mermaid: true

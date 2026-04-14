@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Instruction Structure & Addressing Modes"
+title: "Miscellaneous - Instruction Structure & Addressing Modes"
 date: 2026-01-28 00:00:00 +0900
 author: kang
-categories: [Computer Structure, Computer Structure - Miscellaneous]
+categories: [CS Fundamentals, CS Fundamentals - Computer Structure]
 tags: [Computer Structure, Miscellaneous, Instruction, Addressing Modes]
 pin: false
 math: true

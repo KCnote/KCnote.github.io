@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Process Synchronization"
+title: "Parallel - Process Synchronization"
 date: 2026-01-29 00:00:00 +0900
 author: kang
-categories: [OS, OS - Parallel]
+categories: [CS Fundamentals, CS Fundamentals - OS]
 tags: [OS, Thread, MultiThread, MultiProcessing, Parallel, CPU, Process, Synchronization,Mutex, Semaphores, Monitors, Deadlock]
 pin: false
 math: true
