@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Allocation Cost in C++:"
+title: "Allocation Cost"
 date: 2026-04-14 00:00:00 +0900
 author: kang
 categories: [CODE, CODE - Optimization]
@@ -10,7 +10,7 @@ math: true
 mermaid: true
 ---
 
-# <b>Parameter Optimization</b>
+# <b>Allocation Cost</b>
 
 ---
 
