@@ -161,6 +161,18 @@ matches shortest possible
 a123b456b → a [123] b
 ```
 
+#### meta characters
+
+```
+.  *  +  ?  ^  $  ( )  [ ]  { }  |  \
+```
+
+escape('\\') must need
+
+```
+\w+ → \\w+
+```
+
 ## <b>6. Related functions in C++</b>
 
 | Function | Description |
