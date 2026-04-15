@@ -22,7 +22,7 @@ mermaid: true
 
 An iterator is a **generalized pointer** that allows you to access elements inside a container.
 
-## <b>2. Iterators</b>
+## <b>2. Iterators Core</b>
 
 ##### Iteration
 
@@ -70,7 +70,7 @@ Iterators unify access across containers:
 - `set`
 - `map`
 
-##### Iterator Adapters
+## <b>3. Iterator Adapters</b>
 
 **Adapters modify iterator behavior**
 
@@ -129,7 +129,7 @@ std::copy(
 
 Moves elements instead of copying
 
-## <b>3. Iterator Utilities</b>
+## <b>4. Iterator Utilities</b>
 
 **Utilities simplify iterator movement**
 
@@ -164,7 +164,7 @@ Moves iterator in-place
 | `prev` | returns new iterator |
 | `advance` | modifies existing iterator |
 
-## <b>4. Check</b>
+## <b>5. Check</b>
 
 ##### ❌ Not all iterators support backward movement
 
