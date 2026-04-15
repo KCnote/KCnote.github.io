@@ -80,7 +80,7 @@ abc   → matches "abc"
 a.*b     → a___b
 ```
 
-#### Character Classes
+#### ✔️ Character Classes
 
 ```text
 [abc]    → a or b or c
@@ -90,14 +90,14 @@ a.*b     → a___b
 [0-9]    → digits
 ```
 
-#### Anchors
+#### ✔️ Anchors
 
 ```text
 ^   → start of string
 $   → end of string
 ```
 
-#### ✔️ Example
+#### Example
 
 ```text
 ^abc   → starts with "abc"
@@ -129,15 +129,13 @@ age=30
 
 ## <b>5. Miscellaneous</b>
 
-#### Alternation
+#### ✔️ Alternation
 
 ```text
 cat|dog
 ```
 
 matches "cat" or "dog"
-
-#### Greedy vs Lazy
 
 ##### ✔️ Greedy (default)
 
