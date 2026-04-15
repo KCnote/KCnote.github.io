@@ -19,7 +19,7 @@ mermaid: true
 
 ---
 
-## <b>1. `std::pair`?</b>
+## <b>1. `std::pair`</b>
 
 `std::pair` is a simple container that holds **exactly two values**.
 
@@ -75,7 +75,7 @@ if (a < b)
 - Compare `.first`
 - If equal → compare `.second`
 
-## <b>2. `std::tuple`?</b>
+## <b>2. `std::tuple`</b>
 
 `std::tuple` is a container that can hold **multiple values (more than two)**.
 
