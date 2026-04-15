@@ -100,13 +100,13 @@ border:4px solid rgba(255,255,255,0.35);
 💻 <a style="color:white;" href="mailto:dev.kangcho@gmail.com">Email</a>
 </p>
 
-## 👋 About Me
+## About Me
 
 **Computer Vision Software Engineer** with 4+ years of experience developing high-performance **C++ machine vision** systems for industrial inspection. Specialized in **pattern recognition, high-density gauging, and real-time algorithm optimization**, with a strong foundation in **mathematics**, **statistics**, **linear algebra**, and **data analysis**. Developed 6 computer vision projects including **object detection**, **metrology**, and **automation systems**, with the largest deployment supporting a $5M Samsung semiconductor PLC production line. Benchmarked and **optimized algorithms** against leading industry standards, achieving over **20% faster processing** while maintaining high accuracy. Delivered reliable inspection systems operating continuously for more than three years in a **24/7** production environment with zero operational failures and patented technologies deployed in manufacturing lines.
 
 ---
 
-## 🔬 What I Work On
+## What I Work On
 
 My main areas of interest are:
 
@@ -118,7 +118,7 @@ My main areas of interest are:
 
 I enjoy solving problems where **mathematics, software engineering, and real-world systems meet**.
 
-## 🔬 Patent
+## Patent
 
 ##### Inventor of multiple patents in geometric pattern matching, industrial inspection, and high-performance computer vision algorithms.
 
@@ -210,7 +210,7 @@ I enjoy solving problems where **mathematics, software engineering, and real-wor
 
 ---
 
-## 🧠 What You'll Find on This Blog
+## What You'll Find on This Blog
 
 This blog is my personal knowledge base where I document topics such as:
 
@@ -241,7 +241,7 @@ This blog is my personal knowledge base where I document topics such as:
 
 ---
 
-## 🚀 Selected Work
+## Selected Work
 
 Some of the work I have done includes:
 
@@ -256,7 +256,7 @@ Some of this work resulted in **patents related to vision algorithms**.
 
 ---
 
-## ✍️ Recent Posts
+## Recent Posts
 
 {% for post in site.posts limit:6 %}
 - **[{{ post.title }}]({{ post.url | relative_url }})**  
@@ -267,7 +267,7 @@ Some of this work resulted in **patents related to vision algorithms**.
 
 ---
 
-## 📂 Topics
+## Topics
 
 You can browse posts by topic:
 
