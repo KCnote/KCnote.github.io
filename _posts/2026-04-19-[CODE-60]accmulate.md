@@ -10,7 +10,7 @@ math: true
 mermaid: true
 ---
 
-# <b>`std::inclusive_scan`</b>
+# <b>`std::accumulate`</b>
 
 ---
 
