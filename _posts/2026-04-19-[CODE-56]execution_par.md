@@ -10,7 +10,7 @@ math: true
 mermaid: true
 ---
 
-# <b>`std::for_each`</b>
+# <b>`std::execution::par`</b>
 
 ---
 
