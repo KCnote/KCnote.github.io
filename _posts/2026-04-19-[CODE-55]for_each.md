@@ -18,7 +18,7 @@ mermaid: true
 
 ---
 
-## <b>1. What is `for_each`?</b>
+## <b>1. What is `std::for_each`?</b>
 
 `std::for_each` is an algorithm that applies a function to each element in a range.
 
