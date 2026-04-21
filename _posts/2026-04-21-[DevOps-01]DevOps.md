@@ -47,6 +47,8 @@ DevOps unifies the entire lifecycle:
 Code → Build → Test → Deploy → Operate → Monitor → Code
 ```
 
+!["DevOps"](assets/img/develop/DevOps.png)
+
 The key is **automation across the entire pipeline**
 
 ##### ✅ Faster Delivery
