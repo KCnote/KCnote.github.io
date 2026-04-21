@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "02. DevOps about Code"
+title: "03. DevOps about Code"
 date: 2026-04-21 00:00:00 +0900
 author: kang
 categories: [Deploy, Deploy - DevOps]
