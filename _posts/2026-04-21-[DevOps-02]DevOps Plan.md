@@ -65,7 +65,7 @@ What are we solving?
 * Input: raw camera frames
 * Output: processed images for downstream vision algorithms
 
-#### <b>4-2. Define the Problem</b>
+#### <b>4-2. Define Requirements</b>
 
 #### Functional Requirements
 
