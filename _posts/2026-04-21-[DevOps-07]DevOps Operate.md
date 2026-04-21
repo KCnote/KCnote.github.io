@@ -16,9 +16,6 @@ mermaid: true
 
 ### <b>Prerequisites</b>
 
-      - Docker
-      - C++
-
 ---
 
 ## <b>1. What is `Operate` in DevOps?</b>
