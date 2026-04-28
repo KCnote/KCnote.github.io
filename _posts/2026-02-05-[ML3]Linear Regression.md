@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Supervised Learning Process"
+title: "Linear Regression"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Linear Regression]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, ML, Supervised, Linear Regression, RSS, Correlation]
 pin: false
 math: true

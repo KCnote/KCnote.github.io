@@ -3,7 +3,7 @@ layout: post
 title: "Entry of Machine Learning"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Overview]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Overview, ML, AL, Supervised, Unsupervised, Parametric, Non-Parametric]
 pin: false
 math: true

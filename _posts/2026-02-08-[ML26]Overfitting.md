@@ -3,7 +3,7 @@ layout: post
 title: "Overfitting"
 date: 2026-02-08 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Fitting]
+categories: [Machince Learning, Machince Learning - Optimization]
 tags: [Machince Learning, Mathematics, ML, Supervised, Fitting, Overfitting, Underfitting, Capacity]
 pin: false
 math: true

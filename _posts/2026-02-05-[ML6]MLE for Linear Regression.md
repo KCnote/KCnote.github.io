@@ -3,7 +3,7 @@ layout: post
 title: "MLE for Linear Regression"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Linear Regression]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Mathematics, Likelihood, MLE, Linear Regression]
 pin: false
 math: true

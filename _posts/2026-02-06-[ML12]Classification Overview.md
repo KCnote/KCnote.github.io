@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Entry of Classification"
+title: "Entry of Classification, Linear Regression vs Logistic Regression"
 date: 2026-02-06 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Classification]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Overview, ML, Supervised, Regression, Classification]
 pin: false
 math: true

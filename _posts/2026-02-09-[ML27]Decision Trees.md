@@ -3,7 +3,7 @@ layout: post
 title: "Decision Trees"
 date: 2026-02-09 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Model]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Mathematics, Model, Decision Trees]
 pin: false
 math: true

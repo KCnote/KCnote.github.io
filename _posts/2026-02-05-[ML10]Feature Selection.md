@@ -3,7 +3,7 @@ layout: post
 title: "Feature Selection"
 date: 2026-02-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Mathematics]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Mathematics, Variable, Linear Regression, Statistics, Model]
 pin: false
 math: true

@@ -3,7 +3,7 @@ layout: post
 title: "MLE for Logistic Regression"
 date: 2026-02-06 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Classification]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Overview, ML, Supervised, Regression, Classification, MLE]
 pin: false
 math: true
@@ -229,10 +229,6 @@ These methods iteratively update $\boldsymbol{\beta}$ to maximize the log‑like
 
 ---
 
-# End
-
-
----
 
 ## 🧠 Visual Key Points
 
