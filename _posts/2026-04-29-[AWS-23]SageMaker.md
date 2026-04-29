@@ -138,11 +138,11 @@ Internet
 
 ----------------------------
 
-- How to build VPC    :  [VPC](2026-04-08-[AWS-04]VPC.md)
-- How to build Subnet :  [Subnet](2026-04-08-[AWS-05]Subnet.md)
-- How to build IGW    :  [Internet Gateway](<2026-04-08-[AWS-06]Internet Gateway.md>)
-- How to build Route  :  [Route Table](<2026-04-08-[AWS-07]Route Table.md>)
-- How to build NAT    :  [NAT Gateway](<2026-04-08-[AWS-08]NAT Gateway.md>)
+- How to build VPC    :  https://kcnote.github.io/posts/AWS-04-VPC/
+- How to build Subnet :  https://kcnote.github.io/posts/AWS-05-Subnet/
+- How to build IGW    :  https://kcnote.github.io/posts/AWS-06-Internet-Gateway/
+- How to build Route  :  https://kcnote.github.io/posts/AWS-07-Route-Table/
+- How to build NAT    :  https://kcnote.github.io/posts/AWS-08-NAT-Gateway/
 
 ----------------------------
 
