@@ -89,83 +89,287 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-# 🔥 설정
 REGION = "ap-southeast-2"
 ENDPOINT_NAME = "mnist-cnn-endpoint"
 
 runtime = boto3.client("sagemaker-runtime", region_name=REGION)
 
-
-# 🔥 이미지 전처리 (MNIST)
 def preprocess_image(image_bytes):
     image = Image.open(io.BytesIO(image_bytes)).convert("L")
     image = image.resize((28, 28))
 
     array = np.array(image).astype("float32") / 255.0
     array = (array - 0.1307) / 0.3081
-
     array = array.reshape(1, 1, 28, 28)
 
     return array
 
 
-# 🔥 UI 페이지
 @app.get("/", response_class=HTMLResponse)
 def home():
     return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>MNIST Classifier</title>
-    </head>
-    <body>
-        <h1>MNIST CNN Classifier</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MNIST Classifier</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+        }
 
-        <input type="file" id="fileInput" accept="image/*">
-        <button onclick="predict()">Predict</button>
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+        }
 
-        <h2 id="result"></h2>
+        .card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
 
-        <script>
-            async function predict() {
-                const fileInput = document.getElementById("fileInput");
-                const file = fileInput.files[0];
+        h1 {
+            margin-top: 0;
+            color: #f9fafb;
+            font-size: 34px;
+        }
 
-                if (!file) {
-                    alert("Please select an image.");
-                    return;
-                }
+        p {
+            color: #9ca3af;
+        }
 
-                const formData = new FormData();
-                formData.append("file", file);
+        .upload-box {
+            margin-top: 25px;
+            padding: 25px;
+            border: 2px dashed #374151;
+            border-radius: 16px;
+            text-align: center;
+            background: #020617;
+        }
 
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .file-label:hover {
+            background: #1d4ed8;
+        }
+
+        #preview {
+            display: none;
+            margin: 25px auto 10px;
+            max-width: 320px;
+            max-height: 320px;
+            border-radius: 14px;
+            border: 1px solid #374151;
+            background: white;
+            padding: 10px;
+        }
+
+        .button-row {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 13px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .predict-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .predict-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .clear-btn {
+            background: #374151;
+            color: #e5e7eb;
+        }
+
+        .clear-btn:hover {
+            background: #4b5563;
+        }
+
+        .result-panel {
+            margin-top: 30px;
+            background: #020617;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .result-header {
+            background: #1f2937;
+            padding: 12px 16px;
+            color: #93c5fd;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        .result-body {
+            padding: 20px;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+            white-space: pre-wrap;
+            color: #d1d5db;
+            min-height: 80px;
+        }
+
+        .prediction {
+            color: #60a5fa;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .loading {
+            color: #facc15;
+        }
+
+        .error {
+            color: #f87171;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>MNIST CNN Classifier</h1>
+            <p>Upload a handwritten digit image and classify it using a SageMaker endpoint.</p>
+
+            <div class="upload-box">
+                <label for="fileInput" class="file-label">Upload Image</label>
+                <input type="file" id="fileInput" accept="image/*">
+
+                <br>
+                <img id="preview" />
+            </div>
+
+            <div class="button-row">
+                <button class="predict-btn" onclick="predict()">Predict</button>
+                <button class="clear-btn" onclick="clearImage()">Clear</button>
+            </div>
+
+            <div class="result-panel">
+                <div class="result-header">prediction_result.json</div>
+                <div id="result" class="result-body">
+Waiting for image...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const preview = document.getElementById("preview");
+        const result = document.getElementById("result");
+
+        fileInput.addEventListener("change", () => {
+            const file = fileInput.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+                result.className = "result-body";
+                result.innerText = "Image loaded. Ready to predict.";
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        async function predict() {
+            const file = fileInput.files[0];
+
+            if (!file) {
+                result.className = "result-body error";
+                result.innerText = "Error: Please upload an image first.";
+                return;
+            }
+
+            result.className = "result-body loading";
+            result.innerText = "Calling SageMaker endpoint...";
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
                 const response = await fetch("/predict", {
                     method: "POST",
                     body: formData
                 });
 
+                if (!response.ok) {
+                    throw new Error("Prediction request failed.");
+                }
+
                 const data = await response.json();
 
-                document.getElementById("result").innerText =
-                    "Prediction: " + data.prediction[0];
+                result.className = "result-body";
+                result.innerHTML =
+                    "{\\n" +
+                    '  "prediction": <span class="prediction">' + data.prediction[0] + "</span>,\\n" +
+                    '  "probabilities": ' + JSON.stringify(data.probabilities[0], null, 2) + "\\n" +
+                    "}";
+
+            } catch (err) {
+                result.className = "result-body error";
+                result.innerText = "Error: " + err.message;
             }
-        </script>
-    </body>
-    </html>
-    """
+        }
+
+        function clearImage() {
+            fileInput.value = "";
+            preview.src = "";
+            preview.style.display = "none";
+            result.className = "result-body";
+            result.innerText = "Waiting for image...";
+        }
+    </script>
+</body>
+</html>
+"""
 
 
-# 🔥 헬스 체크
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 
-# 🔥 예측 API
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     image_bytes = await file.read()
-
     image_array = preprocess_image(image_bytes)
 
     payload = {
