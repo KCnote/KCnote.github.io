@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "AI Model from deploy to EC2 Server with SageMaker"
+title: "26. AI Model from deploy to EC2 Server with SageMaker"
 date: 2026-04-30 00:00:00 +0900
 author: kang
 categories: [AWS, AWS - Fundamental]

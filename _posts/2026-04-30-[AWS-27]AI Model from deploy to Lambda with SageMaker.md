@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "AI Model from deploy to Lambda + S3 with SageMaker"
+title: "27. AI Model from deploy to Lambda + S3 with SageMaker"
 date: 2026-04-30 00:00:00 +0900
 author: kang
 categories: [AWS, AWS - Fundamental]
@@ -563,3 +563,28 @@ const API_URL = "https://eolipx2is8.execute-api.ap-southeast-2.amazonaws.com/cnn
 If you fail predict button, on the s3 index.html website, press F12 and check console
 
 !["aws-sa04"](../assets/img/develop/aws-sa05-04.png)
+
+#### CORS
+
+CORS (Cross-Origin Resource Sharing) is a security mechanism used by browsers to control requests between different origins (domains, ports, or protocols). It ensures that a web application can only access resources from another origin if that server explicitly allows it.
+
+What happens if CORS is enabled
+
+The server includes headers like:
+
+Access-Control-Allow-Origin
+The browser allows the frontend (e.g., your S3 website) to read responses from the API (e.g., API Gateway).
+Your app works normally.
+
+What happens if CORS is not enabled
+
+The browser blocks the response, even if the server successfully processed the request.
+
+You will see errors like:
+
+blocked by CORS policy
+The backend still runs, but the frontend cannot access the result.
+
+In short
+
+CORS is required to allow your frontend to safely communicate with a backend on a different origin. Without it, the browser blocks the response for security reasons.
