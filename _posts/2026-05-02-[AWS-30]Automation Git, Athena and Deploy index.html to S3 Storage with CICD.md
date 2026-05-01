@@ -351,6 +351,8 @@ WHERE bedrooms <= 5
 ORDER BY postcode;
 ```
 
+To better reflect properties that are commonly targeted by average home buyers, the data was preprocessed with several practical constraints. The selection was limited to houses with no more than five bedrooms, three bathrooms, and two garage spaces, which align with typical family housing standards. Furthermore, properties with land areas between 400 and 800 square meters were chosen to exclude outliers such as very small lots or large estates. Finally, only properties sold within the past five years were included to ensure that the analysis captures recent market conditions.
+
 #### <b>3-3. execute python for call sql</b>
 
 > run_athena_query.py
