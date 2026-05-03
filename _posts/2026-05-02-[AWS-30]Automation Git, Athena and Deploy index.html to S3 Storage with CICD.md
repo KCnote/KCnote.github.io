@@ -801,3 +801,9 @@ So when i revised the code `upload_to_s3` and working:
     "Metadata": {}
 }
 ```
+
+or:
+
+```bash
+aws s3 cp index.html s3://personal-wa-property-server-xxxxxxx-ap-southeast-2-an/index.html --content-type "text/html; charset=utf-8" --cache-control "no-cache"
+```
