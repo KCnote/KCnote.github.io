@@ -3,7 +3,7 @@ layout: post
 title: "Hands-on 01. KMeans"
 date: 2026-05-05 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Foundation]
+categories: [Machince Learning, Machince Learning - Hands on]
 tags: [Machince Learning, Unsuperviseding, Clustering, PCA, MDS, Manifold]
 pin: false
 math: true
