@@ -3,7 +3,7 @@ layout: post
 title: "Support Vector Machine (SVM) — Soft Margin with Slack Variables"
 date: 2026-02-10 00:00:00 +0900
 author: kang
-categories: [Machince Learning, Machince Learning - Model]
+categories: [Machince Learning, Machince Learning - Foundation]
 tags: [Machince Learning, Model, Mathematics, SVM, Margin]
 pin: false
 math: true
