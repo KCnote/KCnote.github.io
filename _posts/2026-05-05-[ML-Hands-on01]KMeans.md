@@ -94,3 +94,6 @@ df = add_kmeans_cluster(df, n_clusters=6)
    5. Update the centroids slightly based on this batch.
    6. Repeat with the next batch.
 4. Update Cluster information to data
+
+
+!["ml-ho-kmeans01"](../assets/img/develop/ml-ho-kmeans01.png)
