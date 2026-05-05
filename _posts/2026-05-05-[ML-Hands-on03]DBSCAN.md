@@ -85,7 +85,7 @@ df = add_dbscan_cluster(
 #### <b>1-1. Data</b>
 
 1. Select features you predicts effect the result
-2. Check whether the data is sufficient to calculate KMeans with the given number of clusters.
+2. Check whether the data is sufficient to calculate DBSCAN.
 3. Normalization for similar effect to result
 
 ```
