@@ -4,7 +4,7 @@ title: "Hands-on 04. BallTree"
 date: 2026-05-05 00:00:00 +0900
 author: kang
 categories: [Machince Learning, Machince Learning - Hands on]
-tags: [Machince Learning, Unsuperviseding, Clustering, PCA, MDS, Manifold]
+tags: [Machince Learning]
 pin: false
 math: true
 mermaid: true
@@ -94,9 +94,7 @@ def add_local_price_gap_zones(df, radius_m=500, min_price_gap=250000, max_pairs=
     return df, gap_pairs
 
 
-# 실행
 df = pd.read_csv("data.csv")
-
 df_map, gap_pairs = add_local_price_gap_zones(df)
 ```
 
