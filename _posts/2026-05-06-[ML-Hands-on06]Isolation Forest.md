@@ -265,6 +265,8 @@ print(isolation_summary)
    * Contamination (expected anomaly ratio)
    * Maximum tree depth
 
+#### <b>1-2. Isolation Forest</b>
+
 2. Process as follows:
    1. Create an Isolation Tree
       1. Randomly select a subset of data (no replacement)
@@ -303,7 +305,7 @@ print(isolation_summary)
 
 #### <b>1.3 In real</b>
 
-!["ml-ho-rf01"](../assets/img/develop/ml-ho-rf01.png)
+!["ml-ho-if01"](../assets/img/develop/ml-ho-if01.png)
 
 ## <b>2. How to work Random Forest</b>
 
