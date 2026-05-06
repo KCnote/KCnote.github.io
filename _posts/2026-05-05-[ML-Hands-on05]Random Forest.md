@@ -22,7 +22,7 @@ mermaid: true
 
 ## <b>1. How to implement the real</b>
 
-Random Forest
+Random Forest is ensembling model with various random decision tree. Each trees has different features from being choosed randomly and structure. So when it comes to inference with each trees, combined the each decision and build the result like average, majority vote
 
 ```python
 import pandas as pd
