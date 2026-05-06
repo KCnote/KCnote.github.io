@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "LeetCode 543. Diameter of Binary Tree"
-date: 2026-04-22 00:00:00 +0900
+date: 2026-05-06 00:00:00 +0900
 author: kang
 categories: [CODE, CODE - Practice]
 tags: [CODE]
