@@ -89,6 +89,7 @@ print("DONE")
 
 #### <b>1-3. Add Policy authorized with s3</b>
 
+```json
 {
 	"Version": "2012-10-17",
 	"Statement": [
@@ -106,6 +107,7 @@ print("DONE")
 		}
 	]
 }
+```
 
 #### <b>1-4. Run the job</b>
 
