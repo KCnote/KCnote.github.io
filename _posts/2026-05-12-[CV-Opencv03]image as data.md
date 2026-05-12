@@ -54,7 +54,7 @@ def getDataPath():
     strDir = os.path.join(strRoot, "data")
     return strDir
 
-def getImagePath(path):
+def getDataPathWithFile(path):
     strImage = os.path.join(getDataPath(), path)
     return strImage
 
@@ -66,17 +66,22 @@ def showImage(title, img):
     cv.imshow(title, img)
     cv.waitKey(0)
     cv.destroyAllWindows()
+    
+def writeImage(path, img):
+    cv.imwrite(path, img)
 ```
 
 ##### main.py
 
 ```python
 import cv2 as cv
+import os
 import st_image
 
 if __name__ == "__main__":
-    img = st_image.readImage(st_image.getImagePath("cat.png"))
+    img = st_image.readImage(st_image.getDataPathWithFile("cat.png"))
     st_image.showImage("Cat", img)
+    st_image.writeImage(st_image.getDataPathWithFile("cat_copy.png"), img)
 ```
 
 !["opencv-python-03-01.png"](../assets/img/develop/opencv-python-03-01.png)

@@ -59,6 +59,8 @@ pip install {package}
 
 Other way (recommended)
 
+Current install list regist on `requirements.txt`
+
 ```bash
 pip freeze > requirements.txt
 ```
@@ -71,6 +73,12 @@ opencv-python==4.12.0.88
 open3d==0.19.0
 scipy
 matplotlib
+```
+
+Install package listed
+
+```bash
+pip install -r requirements.txt
 ```
 
 Check current packages installed
