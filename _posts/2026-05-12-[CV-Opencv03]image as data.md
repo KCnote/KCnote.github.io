@@ -78,3 +78,5 @@ if __name__ == "__main__":
     img = st_image.readImage(st_image.getImagePath("cat.png"))
     st_image.showImage("Cat", img)
 ```
+
+!["opencv-python-03-01.png"](../assets/img/develop/opencv-python-03-01.png)
