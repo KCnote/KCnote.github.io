@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Why we use opencv"
+title: "01. Why we use opencv"
 date: 2026-05-12 00:00:00 +0900
 author: kang
 categories: [Computer Vision, Computer Vision - Opencv]
-tags: [Computer Vision, Opencv]
+tags: [Computer Vision, Opencv, Pythons]
 pin: false
 math: true
 mermaid: true
