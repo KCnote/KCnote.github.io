@@ -86,13 +86,16 @@ import cv2 as cv
 import numpy as np
 
 class MultiImageViewer:
-    def __init__(self, image_path1, image_path2, sync_view=True):
-        self.imgs = [cv.imread(image_path1), cv.imread(image_path2)]
+    def __init__(self, imgs, sync_view=True):
+        if len(imgs) != 2:
+            raise ValueError("imgs must contain exactly two images")
+
+        self.imgs = [imgs[0], imgs[1]]
 
         if self.imgs[0] is None:
-            raise FileNotFoundError(image_path1)
+            raise ValueError("First image is None")
         if self.imgs[1] is None:
-            raise FileNotFoundError(image_path2)
+            raise ValueError("Second image is None")
 
         self.win_name = "Multi Pixel Viewer"
 
@@ -133,6 +136,81 @@ class MultiImageViewer:
         cv.namedWindow(self.win_name, cv.WINDOW_NORMAL)
         cv.resizeWindow(self.win_name, self.win_w, self.win_h)
         cv.setMouseCallback(self.win_name, self.on_mouse)
+
+    @classmethod
+    def from_paths(cls, path1, path2, sync_view=True):
+        img1 = cv.imread(path1, cv.IMREAD_UNCHANGED)
+        img2 = cv.imread(path2, cv.IMREAD_UNCHANGED)
+
+        if img1 is None:
+            raise FileNotFoundError(path1)
+        if img2 is None:
+            raise FileNotFoundError(path2)
+
+        return cls([img1, img2], sync_view=sync_view)
+
+    @classmethod
+    def from_images(cls, img1, img2, sync_view=True):
+        return cls([img1, img2], sync_view=sync_view)
+
+    @staticmethod
+    def to_display_bgr(img):
+        """
+        원본 이미지는 바꾸지 않고, OpenCV canvas에 붙이기 위한 표시용 이미지만 만든다.
+
+        지원:
+        - Gray:  (H, W)       -> BGR
+        - BGR:   (H, W, 3)    -> 그대로
+        - BGRA:  (H, W, 4)    -> BGR
+        """
+        if img is None:
+            return None
+
+        if len(img.shape) == 2:
+            return cv.cvtColor(img, cv.COLOR_GRAY2BGR)
+
+        if len(img.shape) == 3:
+            if img.shape[2] == 1:
+                return cv.cvtColor(img, cv.COLOR_GRAY2BGR)
+            if img.shape[2] == 3:
+                return img
+            if img.shape[2] == 4:
+                return cv.cvtColor(img, cv.COLOR_BGRA2BGR)
+
+        raise ValueError(f"Unsupported image shape: {img.shape}")
+
+    @staticmethod
+    def pixel_to_text(pixel):
+        """
+        pixel 값을 이미지 포맷에 맞게 문자열로 변환한다.
+        """
+        if np.isscalar(pixel):
+            return f"Gray={int(pixel)}"
+
+        values = pixel.tolist()
+
+        if len(values) == 1:
+            return f"Gray={int(values[0])}"
+        if len(values) == 3:
+            b, g, r = values
+            return f"BGR=({int(b)},{int(g)},{int(r)})"
+        if len(values) == 4:
+            b, g, r, a = values
+            return f"BGRA=({int(b)},{int(g)},{int(r)},{int(a)})"
+
+        return f"Pixel={values}"
+
+    @staticmethod
+    def pixel_to_value_list(pixel):
+        """
+        확대했을 때 픽셀 안에 표시할 값 목록.
+        Gray면 1줄, BGR이면 3줄, BGRA면 4줄.
+        """
+        if np.isscalar(pixel):
+            return [str(int(pixel))]
+
+        values = pixel.tolist()
+        return [str(int(v)) for v in values]
 
     def get_panel_index(self, sx, sy):
         if sy < self.top_h or sy >= self.top_h + self.panel_h:
@@ -312,12 +390,12 @@ class MultiImageViewer:
                 if sx < 0 or sx >= self.panel_w:
                     continue
 
-                b, g, r = img[iy, ix]
-                values = [str(b), str(g), str(r)]
+                pixel = img[iy, ix]
+                values = self.pixel_to_value_list(pixel)
 
                 scale = 0.32
-                line_gap = int(zoom * 0.22)
-                total_height = line_gap * 2
+                line_gap = max(10, int(zoom * 0.22))
+                total_height = line_gap * (len(values) - 1)
                 start_y = sy + int((zoom - total_height) / 2)
 
                 for i, value in enumerate(values):
@@ -366,6 +444,10 @@ class MultiImageViewer:
         interp = cv.INTER_NEAREST if zoom >= 1 else cv.INTER_AREA
         resized = cv.resize(patch, (dst_w, dst_h), interpolation=interp)
 
+        # canvas는 3채널 BGR이므로, 표시할 때만 변환한다.
+        # self.imgs 안의 원본 이미지는 Gray/BGR/BGRA 그대로 유지된다.
+        resized_display = self.to_display_bgr(resized)
+
         dst_x1 = dst_x0 + dst_w
         dst_y1 = dst_y0 + dst_h
 
@@ -380,7 +462,7 @@ class MultiImageViewer:
             rx1 = rx0 + (cx1 - cx0)
             ry1 = ry0 + (cy1 - cy0)
 
-            panel[cy0:cy1, cx0:cx1] = resized[ry0:ry1, rx0:rx1]
+            panel[cy0:cy1, cx0:cx1] = resized_display[ry0:ry1, rx0:rx1]
 
         self.draw_grid_and_values(
             panel,
@@ -435,12 +517,13 @@ class MultiImageViewer:
             if 0 <= img_x < w and 0 <= img_y < h:
                 ix = int(img_x)
                 iy = int(img_y)
-                b, g, r = img[iy, ix]
+                pixel = img[iy, ix]
+                pixel_text = self.pixel_to_text(pixel)
 
                 text = (
                     f"panel={'A' if panel_idx == 0 else 'B'} | "
                     f"x={ix}, y={iy} | "
-                    f"BGR=({b},{g},{r}) | "
+                    f"{pixel_text} | "
                     f"zoom={self.zoom[panel_idx]:.2f}x | "
                     f"sync={'ON' if self.sync_view else 'OFF'}"
                 )
@@ -493,6 +576,8 @@ class MultiImageViewer:
         )
 
     def draw(self):
+        # 창 전체 canvas는 OpenCV imshow용으로 3채널 BGR 고정.
+        # 각 이미지 원본 포맷은 self.imgs에 그대로 유지된다.
         canvas = np.full((self.win_h, self.win_w, 3), 40, dtype=np.uint8)
 
         self.draw_one_panel(canvas, 0)
@@ -528,11 +613,8 @@ class MultiImageViewer:
 
             if key == 25:  # Ctrl + Y
                 if self.sync_view:
-                    # sync OFF
                     self.sync_view = False
-
                 else:
-                    # 현재 마우스 올라간 패널 기준 sync ON
                     panel_idx = self.get_panel_index(self.mouse_x, self.mouse_y)
 
                     if panel_idx is None:
