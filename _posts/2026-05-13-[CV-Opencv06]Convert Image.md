@@ -26,7 +26,7 @@ Image havs several feature like width, height. And format per pixel has byte typ
 
 On production lines, there need high performance, so they use gray scale but mobile app and photo and so on, are needing the RGB format because there's colorful for customer.
 
-## <b>2. Video Code</b>
+## <b>2. Image Convert Code</b>
 
 ```python
 def convertColorSpace(img, colorCode = cv.COLOR_BGR2GRAY):
