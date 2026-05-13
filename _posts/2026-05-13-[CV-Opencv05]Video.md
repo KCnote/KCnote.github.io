@@ -109,6 +109,7 @@ def videoFromFile(name, folder = 'output'):
 import cv2 as cv
 import os
 import ImageUtils
+import VideoUtils
 import MultiImageViewer as view
 
 if __name__ == "__main__":
