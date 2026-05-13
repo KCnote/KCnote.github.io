@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "16. Harris Corner"
+title: "17. SIFT"
 date: 2026-05-13 00:00:00 +0900
 author: kang
 categories: [Computer Vision, Computer Vision - Opencv]
@@ -57,4 +57,4 @@ if __name__ == "__main__":
 
 The right image is rescaling pixel value on harris corner result map.
 
-!["opencv-python-16-01.png"](../assets/img/develop/opencv-python-16-01.png)
+!["opencv-python-16-01.png"](../assets/img/develop/opencv-python-11-01.png)
