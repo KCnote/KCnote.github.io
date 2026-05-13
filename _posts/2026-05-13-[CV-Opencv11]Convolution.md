@@ -46,7 +46,7 @@ class KernelType(Enum):
 def convolution3x3(img, kernel_type):
     if kernel_type == KernelType.GAUSSIAN_BLUR:
         kernel_1d = cv.getGaussianKernel(3, 0)
-        kernel = kernel_1d @ kernel_1d.T
+        kernel = kernel_1d @ kernel_1d.T # np.outer(kernel_1d, kernel_1d)
     elif kernel_type == KernelType.UNIFORM_BLUR:
         kernel = np.ones((3, 3), dtype=np.float32)
         kernel /= 9
