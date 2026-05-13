@@ -60,7 +60,7 @@ def histogram(img):
 
 ```python
 import ImageProcessing as ip
-
+dddd
 if __name__ == "__main__":
     img = ImageUtils.readImage(ImageUtils.getDataPathWithFile("cat.png"))
     ip.histogram(img)
