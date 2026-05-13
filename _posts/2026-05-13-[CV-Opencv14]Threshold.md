@@ -25,6 +25,8 @@ mermaid: true
 Thresholding is one of the most fundamental techniques in image processing used to separate objects from the background. The basic idea is to compare each pixel value with a threshold value and decide whether the pixel should become black or white. 
 Thresholding is commonly used for segmentation, object detection, contour extraction, and preprocessing in computer vision systems. More advanced methods such as adaptive thresholding and Otsu’s thresholding automatically determine local or optimal threshold values under varying lighting conditions.
 
+We already see histogram. As mentioned earlier, threshold seperate object and background. Therefore we should find the value that can be seperating it. In this case, the historgram is suitable.
+
 ## <b>2. Threshold Code</b>
 
 ```python
