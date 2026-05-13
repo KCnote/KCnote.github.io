@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "07. Channel Integrator and Extractor"
+title: "08. Channel Integrator and Extractor"
 date: 2026-05-13 00:00:00 +0900
 author: kang
 categories: [Computer Vision, Computer Vision - Opencv]
