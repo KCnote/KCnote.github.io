@@ -198,3 +198,5 @@ def pose_estimation_webcam():
 if __name__ == "__main__":
     pose_estimation_webcam()
 ```
+
+!["opencv-python-20-01.png"](../assets/img/develop/opencv-python-20-01.png)

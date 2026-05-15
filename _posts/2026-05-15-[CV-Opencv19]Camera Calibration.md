@@ -165,3 +165,8 @@ if __name__ == "__main__":
     cap.release()
     cv.destroyAllWindows()
 ```
+
+!["opencv-python-19-01.png"](../assets/img/develop/opencv-python-19-01.png)
+!["opencv-python-19-02.png"](../assets/img/develop/opencv-python-19-02.png)
+!["opencv-python-19-03.png"](../assets/img/develop/opencv-python-19-03.png)
+!["opencv-python-19-04.png"](../assets/img/develop/opencv-python-19-04.png)
