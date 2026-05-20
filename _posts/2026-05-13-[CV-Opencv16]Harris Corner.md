@@ -58,3 +58,4 @@ if __name__ == "__main__":
 The right image is rescaling pixel value on harris corner result map.
 
 !["opencv-python-16-01.png"](../assets/img/develop/opencv-python-16-01.png)
+!["opencv-python-16-01.gif"](../assets/img/develop/opencv-python-16-01.gif)

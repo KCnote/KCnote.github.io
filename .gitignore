@@ -10,6 +10,7 @@ _site
 
 # RubyGems
 *.gem
+backup.patch
 
 # NPM dependencies
 node_modules
